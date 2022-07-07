@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +29,14 @@ public class CategoryResource {
 		
 		return ResponseEntity.ok().body(list); //Retorna a lista no corpo da resposta HTTP dessa requisição. Para Instanciar o ResponseEntity utilizando os builders dele
 	}
+	
+	//Segundo EndPoint que vai responder uma categoria por ID
+	@GetMapping(value = "/{id}") //Vai acrescentar o "id" na frente da ROTA BÁSICA definida acima "/categories" ficando então "categories/id
+	public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) { //O Annotation @PathVariable faz com que o id passado como parâmetro case com o id passado na rota
+		CategoryDTO dto = service.findById(id);
+		return ResponseEntity.ok().body(dto); 
+	}
+	
 }
 /*
 **************PRIMEIRO RECURSO REST DA APLICAÇÃO****************
