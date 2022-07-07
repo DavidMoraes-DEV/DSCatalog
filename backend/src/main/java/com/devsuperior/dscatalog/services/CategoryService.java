@@ -1,11 +1,14 @@
 package com.devsuperior.dscatalog.services;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.repositories.CategoryRepository;
 
@@ -22,9 +25,16 @@ public class CategoryService {
 	private CategoryRepository repository;
 	
 	@Transactional(readOnly = true) //Garante a integridade da transação, pois o Framework envolve tuda a operação em uma transação. E readOnly = true evita que faça o lock no banco de dados, ou seja não precisa travar o banco apenas para fazer uma leitura
-	public List<Category> findAll() {
+	public List<CategoryDTO> findAll() {
 		//Após colocar o Annotation @Autowired na dependencia para injetar automaticamente esse dependencia é possível acessar os métodos do repository
-		return repository.findAll();
+		List<Category> list = repository.findAll();
+		
+		//Converte o tipo Category em um novo tipo CategoryDTO
+		List<CategoryDTO> listDto = list.stream()
+				.map(x -> new CategoryDTO(x))
+				.collect(Collectors.toList());
+		
+		return listDto;
 	}
 	
 }

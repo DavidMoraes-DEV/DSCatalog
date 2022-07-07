@@ -1,4 +1,4 @@
-package com.devsuperior.dscatalog;
+package com.devsuperior.dscatalog.entities;
 
 public class ConceitosImportantes {
 }

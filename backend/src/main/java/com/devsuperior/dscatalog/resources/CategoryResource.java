@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devsuperior.dscatalog.entities.Category;
+import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.services.CategoryService;
 
 @RestController
@@ -21,10 +21,10 @@ public class CategoryResource {
 	
 	//Primeiro EndPoint, ou seja, a primeira rota que responderá alguma coisa
 	@GetMapping
-	public ResponseEntity<List<Category>> findAll() { //findAll -> Busca todas as categorias
+	public ResponseEntity<List<CategoryDTO>> findAll() { //findAll -> Busca todas as categorias
 		
 		//Aqui chama o SERVICE que chama o REPOSITORY e ele vai la no banco de dados e traz os objetos, intancia todos eles traz pra ca e guarda nessa lista que é retornada pelo método
-		List<Category> list = service.findAll();
+		List<CategoryDTO> list = service.findAll();
 		
 		return ResponseEntity.ok().body(list); //Retorna a lista no corpo da resposta HTTP dessa requisição. Para Instanciar o ResponseEntity utilizando os builders dele
 	}
