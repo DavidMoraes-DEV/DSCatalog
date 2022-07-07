@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.repositories.CategoryRepository;
+import com.devsuperior.dscatalog.services.exceptions.EntityNotFoundException;
 
 @Service 
 public class CategoryService {
@@ -41,9 +42,8 @@ public class CategoryService {
 	public CategoryDTO findById(Long id) {
 		//Optional é uma abordagem para evitar trabalhar com valor NULO
 		Optional<Category> obj = repository.findById(id);
-		Category entity = obj.get(); //O método . get() do Optional obtem o objeto que esta dentro do Optional
-		
+		//Category entity = obj.get(); //O método . get() do Optional obtem o objeto que esta dentro do Optional
+		Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found")); //Para conseguir tratar a excessão caso o ID buscado não exista e de o erro 500 no banco de dados para não mostrar o erro 500 utilizamos o orElseThrow
 		return new CategoryDTO(entity);
-	}
-	
+	}	
 }
