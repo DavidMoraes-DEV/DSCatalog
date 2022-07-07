@@ -1,25 +1,30 @@
 package com.devsuperior.dscatalog.resources;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devsuperior.dscatalog.entities.Category;
+import com.devsuperior.dscatalog.services.CategoryService;
 
 @RestController
 @RequestMapping(value = "/categories") // -> Podemos colocar qual a rota REST do recurso. Adotar padrão do recurso no plural
 public class CategoryResource { 
 	
+	//Cria uma DEPENDENCIA com o CategoryService
+	@Autowired
+	private CategoryService service;
+	
 	//Primeiro EndPoint, ou seja, a primeira rota que responderá alguma coisa
 	@GetMapping
-	public ResponseEntity<List<Category>> findAll() { //findAll -> Buscal todas as categorias
-		List<Category> list = new ArrayList<>();
-		list.add(new Category(1L, "Books"));
-		list.add(new Category(2L, "Eletronics"));
+	public ResponseEntity<List<Category>> findAll() { //findAll -> Busca todas as categorias
+		
+		//Aqui chama o SERVICE que chama o REPOSITORY e ele vai la no banco de dados e traz os objetos, intancia todos eles traz pra ca e guarda nessa lista que é retornada pelo método
+		List<Category> list = service.findAll();
 		
 		return ResponseEntity.ok().body(list); //Retorna a lista no corpo da resposta HTTP dessa requisição. Para Instanciar o ResponseEntity utilizando os builders dele
 	}
@@ -56,7 +61,7 @@ public class CategoryResource {
 	- Por exemplo:
 		- Nesse recurso /categories teremos várias rotas EndPoint como:
 			- Salvar uma categoria
-			- Editar um categoria
+			- Editar uma categoria
 			- Buscar uma categoria
 			- etc...
 
@@ -76,7 +81,9 @@ public class CategoryResource {
  	- Para configurar que o método findAll é um WEB SERVICE/ENDPOINT da classe CATEGORY:
 		- Devemos utilizar outro annotation:
 			- @GetMapping
-* Por fim nessa aula ir no postman e realizar uma requisição GET: http://localhost:8080/categories com a aplicação executando.
+			
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* PARTE I: Por fim nessa aula ir no postman e realizar uma requisição GET: http://localhost:8080/categories com a aplicação executando.
 	- No postman terá que aparecer ao executar a requisição as duas categorias que já irá aparecer em formato JSON:
 	[
     	{
@@ -88,4 +95,10 @@ public class CategoryResource {
         	"name": "Eletronics"
     	}
 	]
+			
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+* Integrando o banco de dados H2
+ - Será o banco de dados de TESTE que será utilizado nesse projeto inicial do SpringBoot
+	
 */
