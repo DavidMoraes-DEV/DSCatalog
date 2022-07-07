@@ -31,8 +31,28 @@ public class ConceitosImportantes {
 	- Também é um mecanismo de Injeção de dependencia Automatizada
 
 * Annotation @Repository
-* 	- Registra um repositório também para o mecanismo de Injeção de dependencia Automatizada	
+ 	- Registra um repositório também para o mecanismo de Injeção de dependencia Automatizada	
 	
-*	
+* O arquivo application.properties da pasta src/main/resources
+ 	- É o arquivo que tem as configurações do projeto que vão funcionar para todos os PERFIS
+ 
+ 	* O que é um PERFIL?
+ 		- Quando se desenvolve uma aplicação utiliza-se VÁRIOS PERFIS (Pelo menos 3 perfil diferente):
+ 			- Perfil de TEST
+ 				- Esse perfil serve para rodar um banco de dados PROVISÓRIO
+ 				- Toda vez que rodar a aplicação o banco de dados será REINICIADO, ZERADO e colocado no mesmo ESTADO INICIAL
+ 				- Isso é muito importante para teste com um banco de dados bem controlado
+ 				- Nesse estamos utilizando o banco de dados H2 podendo definir uma INSTANCIA INICIAL do banco (seeding) semear o dados do banco com dados iniciais
+ 				
+ 			- Perfil de desenvolvimento para TEST antes da PRODUÇÃO (PERFIL DE DEV)
+ 				- É um perfil que SERÁ CONECTADO igual ao banco de dados de PRODUÇÃO banco que rodará na NUVEM
+ 				- Por exemplo se o banco de PRODUÇÃO for o POSTGREES o perfil de DEV também será configurado para o postgrees na mesma versão
+ 				- Para testar o banco localmente e se der tudo certo viramos a chave para o de produção
+ 				
+ 			- Perfil de PRODUÇÃO
+ 				- Banco que roda na NUVEM
+
+	- spring.profiles.active=test -> no Arquivo application.properties: Indica que o banco atualmente é do perfil do tipo TEST
+
 
 */
