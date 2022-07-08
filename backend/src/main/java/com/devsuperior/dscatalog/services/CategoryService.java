@@ -7,12 +7,15 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.repositories.CategoryRepository;
+import com.devsuperior.dscatalog.services.exceptions.DataBaseException;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 
 @Service 
@@ -27,7 +30,7 @@ public class CategoryService {
 	@Autowired //Responsável por possibilitar que seja injetada automaticamente uma instancia gerenciada pelo Spring
 	private CategoryRepository repository;
 	
-	@Transactional(readOnly = true) //Garante a integridade da transação, pois o Framework envolve tuda a operação em uma transação. E readOnly = true evita que faça o lock no banco de dados, ou seja não precisa travar o banco apenas para fazer uma leitura
+	@Transactional(readOnly = true) //Garante a integridade da transação, pois o Framework envolve toda a operação em uma transação. E readOnly = true evita que faça o lock no banco de dados, ou seja não precisa travar o banco apenas para fazer uma leitura
 	public List<CategoryDTO> findAll() {
 		//Após colocar o Annotation @Autowired na dependencia para injetar automaticamente esse dependencia é possível acessar os métodos do repository
 		List<Category> list = repository.findAll();
@@ -49,7 +52,7 @@ public class CategoryService {
 		return new CategoryDTO(entity);
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public CategoryDTO insert(CategoryDTO dto) {
 		
 		Category entity = new Category();
@@ -59,7 +62,7 @@ public class CategoryService {
 		return new CategoryDTO(entity);
 	}
 	
-	@Transactional(readOnly = true)
+	@Transactional
 	public CategoryDTO update(Long id, CategoryDTO dto) {
 		try {
 			Category entity = repository.getOne(id); //Cria um objeto provisório para evitar acessar o banco duas vezes
@@ -70,5 +73,23 @@ public class CategoryService {
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found" + id);
 		}
-	}	
+	}
+
+	//Para o método DELETE não será preciso colocar o Annotation @Transactional, porque vamos capturar uma exceção que vai vim lá do banco de dados e se colocarmos o annotation não será possível capturar essa exceção
+	public void delete(Long id) {
+		/*
+		 * Alguns problemas da DELEÇÃO:
+		 	- Tentar deletar um objeto que não existe no BANCO irá acarretar um ERRO por isso iremos utilizar o try-catch e não utilizar a annotation Transactional
+			- Problema muito comum em aplicação que acessa banco de dados:
+				- Excluir a CATEGORIA de produtos
+				- Ficando então produtos sem categoria o que causa um problema de INTEGRIDADE REFERENCIAL, pois os produtos dessa aplicação tem que ter uma categoria conforme diagrama do projeto
+		*/
+		try {
+			repository.deleteById(id);	
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataBaseException("Integrity Violation");
+		}
+	}
 }
