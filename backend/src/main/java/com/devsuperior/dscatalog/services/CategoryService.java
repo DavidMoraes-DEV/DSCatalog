@@ -45,5 +45,15 @@ public class CategoryService {
 		//Category entity = obj.get(); //O método . get() do Optional obtem o objeto que esta dentro do Optional
 		Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found")); //Para conseguir tratar a excessão caso o ID buscado não exista e de o erro 500 no banco de dados para não mostrar o erro 500 utilizamos o orElseThrow
 		return new CategoryDTO(entity);
+	}
+
+	@Transactional(readOnly = true)
+	public CategoryDTO insert(CategoryDTO dto) {
+		
+		Category entity = new Category();
+		entity.setName(dto.getName());
+		
+		entity = repository.save(entity); //Por padrão o método . save() retorna uma referência para a entidade salva
+		return new CategoryDTO(entity);
 	}	
 }
