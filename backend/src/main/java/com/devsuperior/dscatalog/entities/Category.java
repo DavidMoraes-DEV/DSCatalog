@@ -19,6 +19,7 @@ public class Category implements Serializable{ //Serializable -> É o padrão do
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //Annotation que define o Id para ser auto-incrementada
 	private Long id;
+	
 	private String name;
 	
 	//Construtores

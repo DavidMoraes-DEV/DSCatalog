@@ -54,5 +54,10 @@ public class ConceitosImportantes {
 
 	- spring.profiles.active=test -> no Arquivo application.properties: Indica que o banco atualmente é do perfil do tipo TEST
 
+* A DIFERENÇA entre o .findById() e o .getOne() é:
+			- O .findById() efetiva o acesso ao banco de dados indo no banco e traz o objeto do id informado
+			- O .getOne() não toca no banco de dados, ele instancia um objeto provisório com os dados e apenas quando mandar SALVAR aí sim ele vai no banco e atualiza os dados:
+			- O .getOne() então evita o acesso desnecessáriode de ir no banco duas vezes com o findById() para buscar o Id e depois atualizar os dados.
+		
 
 */

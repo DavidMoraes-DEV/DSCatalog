@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,9 @@ public class CategoryResource {
 	@Autowired
 	private CategoryService service;
 	
+	//OPERAÇÕES DE CRUD:
+	
+	//Busca
 	//Primeiro EndPoint, ou seja, a primeira rota que responderá alguma coisa
 	@GetMapping
 	public ResponseEntity<List<CategoryDTO>> findAll() { //findAll -> Busca todas as categorias
@@ -39,6 +43,7 @@ public class CategoryResource {
 		return ResponseEntity.ok().body(dto); 
 	}
 	
+	//INSERE
 	@PostMapping //Por padrão no REST para inserir um novo recurso temq ue utilizar o método POST
 	public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto) { //@RequestBody -> Para que o objeto enviado na requisição case com o Objeto declarado no método
 		dto = service.insert(dto);
@@ -49,6 +54,12 @@ public class CategoryResource {
 		return ResponseEntity.created(uri).body(dto); //Código padrão de RECURSO CRIADO COM SUCESSO é o 201
 	}
 	
+	@PutMapping(value = "/{id}") //Para atualizar utiliza o método PUT, sendo ele um método não indepotente, a annotation é a: @PutMapping
+	public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto) { //No caso de atualizar um elemento será uma junção dos métodos de busca e inserção acima, pois tem que BUSCAR o ID do produto que será atualizado e depois INSERIR os novos dados
+		
+		dto = service.update(id, dto);
+		return ResponseEntity.ok().body(dto);
+	}
 }
 /*
 **************PRIMEIRO RECURSO REST DA APLICAÇÃO****************

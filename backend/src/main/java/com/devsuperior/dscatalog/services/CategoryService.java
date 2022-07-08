@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.repositories.CategoryRepository;
-import com.devsuperior.dscatalog.services.exceptions.EntityNotFoundException;
+import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 
 @Service 
 public class CategoryService {
@@ -43,7 +45,7 @@ public class CategoryService {
 		//Optional é uma abordagem para evitar trabalhar com valor NULO
 		Optional<Category> obj = repository.findById(id);
 		//Category entity = obj.get(); //O método . get() do Optional obtem o objeto que esta dentro do Optional
-		Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found")); //Para conseguir tratar a excessão caso o ID buscado não exista e de o erro 500 no banco de dados para não mostrar o erro 500 utilizamos o orElseThrow
+		Category entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found")); //Para conseguir tratar a excessão caso o ID buscado não exista e de o erro 500 no banco de dados para não mostrar o erro 500 utilizamos o orElseThrow
 		return new CategoryDTO(entity);
 	}
 
@@ -55,5 +57,18 @@ public class CategoryService {
 		
 		entity = repository.save(entity); //Por padrão o método . save() retorna uma referência para a entidade salva
 		return new CategoryDTO(entity);
+	}
+	
+	@Transactional(readOnly = true)
+	public CategoryDTO update(Long id, CategoryDTO dto) {
+		try {
+			Category entity = repository.getOne(id); //Cria um objeto provisório para evitar acessar o banco duas vezes
+			entity.setName(dto.getName()); //Atualiza os dados da entidade provisória que esta apenas na memória
+			entity = repository.save(entity); //Salva os dados no banco
+			return new CategoryDTO(entity);
+			
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found" + id);
+		}
 	}	
 }
