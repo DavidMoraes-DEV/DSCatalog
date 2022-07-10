@@ -16,8 +16,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name = "tb_product")
 public class Product implements Serializable{
@@ -33,27 +31,26 @@ public class Product implements Serializable{
 	private Double price;
 	private String imgUrl;
 	
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE") //Define que será armazenado a data no padrão UTC
 	private Instant date;
 	
+	//Mapeamento da associação de PRODUTOS com suas CATEGORIAS
 	@ManyToMany
-	@JoinTable(name = "tb_product_category",
-			joinColumns = @JoinColumn(name = "product_id"),
-			inverseJoinColumns = @JoinColumn(name = "category_id"))
-	private Set<Category> categories = new HashSet<>();
+	@JoinTable(name = "tb_product_category", //Essa Annotation JoinTable cria a tabela que FAZ a associação dos produtos com suas categorias, por meio da CRIAÇÃO de uma outra tabela armezenando o id das duas entidades
+			joinColumns = @JoinColumn(name = "product_id"), //JoinColumns estabele qual a chave estrangeira relacionada com a classe atual PRODUCT
+			inverseJoinColumns = @JoinColumn(name = "category_id")) //inverseJoinColumns estabelece a outra chave estrangeira que faz referencia de muitos para muitos N-N, ela identifica qual a entidade que terá essa associação pelo tipo definido na coleção SET
+	private Set<Category> categories = new HashSet<>(); //Utilizado a coleção SET porque ela não aceita repetições
 
 	public Product() {
 	}
 	
-	public Product(Long id, String name, String description, Double price, String imgUrl, Instant date,
-			Set<Category> categories) {
+	public Product(Long id, String name, String description, Double price, String imgUrl, Instant date) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.imgUrl = imgUrl;
 		this.date = date;
-		this.categories = categories;
 	}
 
 	public Long getId() {
