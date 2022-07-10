@@ -1,9 +1,11 @@
 package com.devsuperior.dscatalog.resources;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -31,10 +34,25 @@ public class CategoryResource {
 	//Busca
 	//Primeiro EndPoint, ou seja, a primeira rota que responderá alguma coisa
 	@GetMapping
-	public ResponseEntity<List<CategoryDTO>> findAll() { //findAll -> Busca todas as categorias
-		//Aqui chama o SERVICE que chama o REPOSITORY e ele vai la no banco de dados e traz os objetos, intancia todos eles traz pra ca e guarda nessa lista que é retornada pelo método
-		List<CategoryDTO> list = service.findAll();
-		return ResponseEntity.ok().body(list); //Retorna a lista no corpo da resposta HTTP dessa requisição. Para Instanciar o ResponseEntity utilizando os builders dele
+	public ResponseEntity<Page<CategoryDTO>> findAll(
+			//Configura o valor do parâmetro com o annotation @RequestParam. E é diferente de @PathVariable, pois é os parâmetros que vai na URL com a barra e serve melhor para dados obrigatórios, já RequestParam é melhor para dados Opcionais na URL.
+			//PAGE = Define o número da página inicial, por padrão começa no 0
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			
+			//LINES_PER_PAGE = Quantidades de Registros por Página
+			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
+			
+			//DIRECTION = Será a ordem de ordenação podendo ser DECRESCENTE = DESC ou ASCENDENTE = ASC.
+			@RequestParam(value = "direction", defaultValue = "DESC") String direction,
+			
+			//ORDER_BY = Nome do atributo no qual será ordenado a busca
+			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy) { //findAll -> Busca todas as categorias
+		
+		//.of() é um método builder para definir os parâmetros de instânciação
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
+		Page<CategoryDTO> list = service.findAllPaged(pageRequest);
+		return ResponseEntity.ok().body(list); 
 	}
 	
 	//Segundo EndPoint que vai responder uma categoria por ID
