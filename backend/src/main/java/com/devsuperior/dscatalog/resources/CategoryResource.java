@@ -125,7 +125,7 @@ public class CategoryResource {
 
 * RESPONSE ENTITY:
 	- É um Objeto do Spring que encapsula uma resposta HTTP
-	- É um tipo Generac
+	- É um tipo Generic
 		- Podendo definir entre <> qual é o tipo de dados que terá no corpo da resposta
 			- Exemplo: ResponseEntity<Category>
 	

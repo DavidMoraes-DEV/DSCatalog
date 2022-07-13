@@ -24,7 +24,7 @@ public class CategoryService {
 	/*
 	* Para que esse método findAll da classe CategoryService consiga acessar o Repository e chamar as categorias lá do banco de dados é preciso primeiramente
 		- Criar uma dependencia com o CategoryRepository
-		- E para injetar a dependência no método é precisa também ir na classe "CategoryRepository" e colocar um annotation de componentização @Repository
+		- E para injetar a dependência no método é preciso também ir na classe "CategoryRepository" e colocar um annotation de componentização @Repository
 			- Para registrar ele como um componente injetável pelo mecanismo de injeção de dependência do Spring
 	*/
 	@Autowired //Responsável por possibilitar que seja injetada automaticamente uma instancia gerenciada pelo Spring

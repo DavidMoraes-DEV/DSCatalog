@@ -15,7 +15,7 @@ public class ConceitosImportantes {
 		- Nesse caso o tipo da entidade é Category e o tipo do ID é long conforme definido na entidade Category
 		- Apenas com essa definição de INTERFACE herdando/extendendo de JpaRepository ja obtemos muitas operações prontas para acessar o banco de dados
 		- Funciona para qualquer banco de dados relacional que tenha implementação da JPA no Spring
-			- ou seja, tudo que for programado aqui pelo banco de dados de teste H2 funcionará oara outros bancos de dados como o MySQL, POSTMAN, ORAGLE e etc
+			- ou seja, tudo que for programado aqui pelo banco de dados de teste H2 funcionará para outros bancos de dados como o MySQL, POSTMAN, ORAGLE e etc
 
 * Para mais informações de PADRÃO CAMADAS assistir o vídeo do prof Nélio: back end, front end, padrão camadas, MVC, REST no Youtube
 
