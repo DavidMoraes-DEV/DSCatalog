@@ -190,4 +190,22 @@ PARTE 2 - TESTES AUTOMATIZADOS
 		- Carrega somente os componentes relacionados ao Spring Data JPA, cada teste é transacional e dá rollback ao final. (teste de unidade: repository)
 		- Podendo testar os repositories, por exemplo testando uma uma consulta com o Spring H2, carregando apenas o que é relacionado ao Spring Data JPA
 		- Sendo cada teste trasacional, ou seja, ele executa o que tem que executar e acessa o banco de dados e no final da um rollBack, sendo utilizado para testar os repositories
+
+* FIXTURES:
+	- É uma forma de organizar melhor o código dos testes e evitar repetições
+	- JUnit 5
+		- @BeforeAll
+			- Preparação antes de todos testes da classe (método estático)
+		
+		- @AfterAll
+			- Preparação depois de todos testes da classe (método estático)
+		
+		- @BeforeEach
+			- Preparação antes de cada teste da classe
+		
+		- @AfterEach
+			- Preparação depois de cada teste da classe
+
+
+
 */

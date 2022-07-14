@@ -3,6 +3,7 @@ package com.devsuperior.dscatalog.repositories;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -16,11 +17,20 @@ public class ProductRepositoryTests {
 	@Autowired
 	private ProductRepository repository;
 	
+	long exintingId;
+	long nonExintingId;
+	
+	//FIXTURES: Evita ter que ficar estanciado a mesma variável em todos os testes repetidamente, é uma maneira de deixar mais organizado o código
+	@BeforeEach
+	void setUp() throws Exception {
+		exintingId = 1L;
+		nonExintingId = 100L;
+	}
+	
 	//Testa se realmente esta deletando no ProductService pelo id QUANDO o id existe
 	@Test
 	public void deleteShouldDeleteObjectWhenIdExists() {
-		
-		long exintingId = 1L; 
+		 
 		
 		repository.deleteById(exintingId); //Deleta o Product pelo id
 		Optional<Product> result = repository.findById(exintingId); //busca pelo id do Product que acabou de ser deletado para testar se realmente foi deletado
@@ -37,7 +47,9 @@ public class ProductRepositoryTests {
 			long nonExintingId = 100L;
 			
 			repository.deleteById(nonExintingId);
-		});
-		
+		});	
 	}
+	
+	
+	
 }
