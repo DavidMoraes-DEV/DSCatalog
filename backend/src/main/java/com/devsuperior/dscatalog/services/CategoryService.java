@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,9 +31,9 @@ public class CategoryService {
 	private CategoryRepository repository;
 	
 	@Transactional(readOnly = true) //Garante a integridade da transação, pois o Framework envolve toda a operação em uma transação. E readOnly = true evita que faça o lock no banco de dados, ou seja não precisa travar o banco apenas para fazer uma leitura
-	public Page<CategoryDTO> findAllPaged(PageRequest pageRequest) {
+	public Page<CategoryDTO> findAllPaged(Pageable pageable) {
 		//Após colocar o Annotation @Autowired na dependencia para injetar automaticamente esse dependencia é possível acessar os métodos do repository
-		Page<Category> list = repository.findAll(pageRequest);
+		Page<Category> list = repository.findAll(pageable);
 		
 		//Converte o tipo Category em um novo tipo CategoryDTO
 		Page<CategoryDTO> listDto = list.map(x -> new CategoryDTO(x));
