@@ -16,6 +16,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.devsuperior.dscatalog.repositories.ProductRepository;
+import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 
 /*
 * Testes de Unidade:
@@ -49,6 +50,17 @@ public class ProductServiceTests {
 		
 		doNothing().when(repository).deleteById(existingId); //Configuração do comportamento do .deleteById() do objeto mockado que criamos que diz que não é para fazer nada ou retornar nada com .doNothing() quando o ID EXISTIR
 		doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(nonExistingId); //Configuração do comportamento do .deleteById() do objeto mockado quando o ID NÃO EXISTIR que será lançado uma exceção do tipo EmptyResult...
+	}
+	
+	//Teste para quando o ID NÃO EXISTIR simulado com o mockito
+	@Test
+	public void deleteShouldThrowResourceNotFoundExceptionWhenIdDoesNotExists() {
+		
+		Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			service.delete(nonExistingId);	
+		});
+		
+		verify(repository, times(1)).deleteById(nonExistingId);
 	}
 	
 	//Teste para quando o ID EXISTIR o metodo .delete() simulado pelo mockito deve nao fazer nada
