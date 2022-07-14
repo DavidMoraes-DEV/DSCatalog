@@ -19,10 +19,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.devsuperior.dscatalog.dto.ProductDTO;
 import com.devsuperior.dscatalog.entities.Product;
 import com.devsuperior.dscatalog.repositories.ProductRepository;
 import com.devsuperior.dscatalog.services.exceptions.DataBaseException;
@@ -75,6 +78,16 @@ public class ProductServiceTests {
 		doNothing().when(repository).deleteById(existingId); //Configuração do comportamento do .deleteById() do objeto mockado que criamos que diz que não é para fazer nada ou retornar nada com .doNothing() quando o ID EXISTIR
 		doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(nonExistingId); //Configuração do comportamento do .deleteById() do objeto mockado quando o ID NÃO EXISTIR que será lançado uma exceção do tipo EmptyResult...
 		doThrow(DataIntegrityViolationException.class).when(repository).deleteById(dependentId); //Configuração do comportamento do .deleteById() quando se tenta deletar um ID que outro objeto depende dele como por exemplo o id de uma categoria de protudos deixando o produto sem categoria e isso não pode ocorrer
+	}
+	
+	@Test
+	public void findAllPagedShouldReturnPage() {
+		
+		Pageable pageable = PageRequest.of(0, 10); //Página 0, com o tamanho 10
+		Page<ProductDTO> result = service.findAllPaged(pageable);
+		
+		Assertions.assertNotNull(result);
+		Mockito.verify(repository, times(1)).findAll(pageable);
 	}
 	
 	//Teste para quando o ID deletado for de um objeto que outro objeto depende simulado com o mockito
