@@ -1,12 +1,17 @@
 package com.devsuperior.dscatalog.services;
 
+//Importes STATICOS do mockito para chamos automaticamente sem precisar digitar o nome da classe POR EXEMPLO: Mockito.doNothing() 
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -42,11 +47,11 @@ public class ProductServiceTests {
 		existingId = 1L;
 		nonExistingId = 100L;
 		
-		Mockito.doNothing().when(repository).deleteById(existingId); //Configuração do comportamento do .deleteById() do objeto mockado que criamos que diz que não é para fazer nada ou retornar nada com .doNothing() quando o ID EXISTIR
-		Mockito.doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(nonExistingId); //Configuração do comportamento do .deleteById() do objeto mockado quando o ID NÃO EXISTIR que será lançado uma exceção do tipo EmptyResult...
+		doNothing().when(repository).deleteById(existingId); //Configuração do comportamento do .deleteById() do objeto mockado que criamos que diz que não é para fazer nada ou retornar nada com .doNothing() quando o ID EXISTIR
+		doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(nonExistingId); //Configuração do comportamento do .deleteById() do objeto mockado quando o ID NÃO EXISTIR que será lançado uma exceção do tipo EmptyResult...
 	}
 	
-	//Teste para quando o ID EXISTIR o objeto mockito deve fazer nada
+	//Teste para quando o ID EXISTIR o metodo .delete() simulado pelo mockito deve nao fazer nada
 	@Test
 	public void deleteShouldDoNothingWhenIdExists() {
 		
@@ -54,7 +59,7 @@ public class ProductServiceTests {
 			service.delete(existingId);	
 		});
 		
-		Mockito.verify(repository, Mockito.times(1)).deleteById(existingId);
+		verify(repository, times(1)).deleteById(existingId);
 	}
 	
 	
