@@ -12,10 +12,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.devsuperior.dscatalog.repositories.ProductRepository;
+import com.devsuperior.dscatalog.services.exceptions.DataBaseException;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 
 /*
@@ -42,14 +44,28 @@ public class ProductServiceTests {
 	
 	private long existingId;
 	private long nonExistingId;
+	private long dependentId;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		existingId = 1L;
 		nonExistingId = 100L;
+		dependentId = 4L;
 		
 		doNothing().when(repository).deleteById(existingId); //Configuração do comportamento do .deleteById() do objeto mockado que criamos que diz que não é para fazer nada ou retornar nada com .doNothing() quando o ID EXISTIR
 		doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(nonExistingId); //Configuração do comportamento do .deleteById() do objeto mockado quando o ID NÃO EXISTIR que será lançado uma exceção do tipo EmptyResult...
+		doThrow(DataIntegrityViolationException.class).when(repository).deleteById(dependentId); //Configuração do comportamento do .deleteById() quando se tenta deletar um ID que outro objeto depende dele como por exemplo o id de uma categoria de protudos deixando o produto sem categoria e isso não pode ocorrer
+	}
+	
+	//Teste para quando o ID deletado for de um objeto que outro objeto depende simulado com o mockito
+	@Test
+	public void deleteShouldThrowDataBaseExceptionWhenWhenDependentId() {
+			
+		Assertions.assertThrows(DataBaseException.class, () -> {
+			service.delete(dependentId);	
+		});
+			
+		verify(repository, times(1)).deleteById(dependentId);
 	}
 	
 	//Teste para quando o ID NÃO EXISTIR simulado com o mockito
