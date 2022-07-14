@@ -6,19 +6,28 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.devsuperior.dscatalog.entities.Product;
 import com.devsuperior.dscatalog.repositories.ProductRepository;
 import com.devsuperior.dscatalog.services.exceptions.DataBaseException;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
+import com.devsuperior.dscatalog.tests.Factory;
 
 /*
 * Testes de Unidade:
@@ -45,12 +54,23 @@ public class ProductServiceTests {
 	private long existingId;
 	private long nonExistingId;
 	private long dependentId;
+	private PageImpl<Product> page;
+	private Product product;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		existingId = 1L;
 		nonExistingId = 100L;
 		dependentId = 4L;
+		product = Factory.createProduct();
+		page = new PageImpl<>(List.of(product)); //É um objeto de pagina do Spring contendo uma lista simples com um produto
+		
+		//Quando o método for VOID primeiro coloca-se a AÇÃO(Exemplo: doNothing()) depois colaca o QUANDO(.when()...)
+		//Quando o método NÃO for VOID ou seja, ele retorna alguma coisa aí é invertido primeiro coloca o QUANDO(when()) e depois colaca a AÇÃO(doNothing())
+		Mockito.when(repository.findAll((Pageable)ArgumentMatchers.any())).thenReturn(page); //Configuração do comportamento do .findAll() sendo que ArgumentMatchers.any() Define que pode ser qualquer objeto depois fazemos um catch para o tipo Pageable falando que retorno o page no .thenReturn(page)
+		Mockito.when(repository.save(ArgumentMatchers.any())).thenReturn(product); //Configuração do .save()
+		Mockito.when(repository.findById(existingId)).thenReturn(Optional.of(product)); //Configurando o .findById() retornando um Optional(product)
+		Mockito.when(repository.findById(nonExistingId)).thenReturn(Optional.empty()); //Configurando o .findById() retornando um Optional VAZIO quando o ID não existir
 		
 		doNothing().when(repository).deleteById(existingId); //Configuração do comportamento do .deleteById() do objeto mockado que criamos que diz que não é para fazer nada ou retornar nada com .doNothing() quando o ID EXISTIR
 		doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(nonExistingId); //Configuração do comportamento do .deleteById() do objeto mockado quando o ID NÃO EXISTIR que será lançado uma exceção do tipo EmptyResult...
