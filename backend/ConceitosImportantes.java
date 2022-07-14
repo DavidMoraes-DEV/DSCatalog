@@ -166,4 +166,28 @@ PARTE 2 - TESTES AUTOMATIZADOS
 	- O objetivo é que todos métodos @Test passem sem falhas
 	- O que vai definir se um método @Test passa ou não são as "assertions" deste método
 	- Se um ou mais falhas ocorrereem, estas são mostradas depois da execução do teste
+	
+* ANNOTATIONS USADAS NAS CLASSES DE TESTE COM SPRING BOOT
+	- @SpringBootTest
+		- Carrega o contexto da aplicão (teste de integração)
+		- É um teste mais lendo pois carrega todo o contexto da aplicação
+	
+	- @SpringBootTest e @AutoConfigureMockMvc
+		- Carrega o contexto da aplicação (teste de integração & web)
+		- Porém trata as requisições sem subir no servidor
+		- Utilizado quando precisa fazer teste de integração na camada web sem precisar subir o TomCat
+	
+	- @WebMvcTest(Classe.class)
+		- Carrega o contexto, porém somente da camada web (teste de unidade: controlador)
+		- Quando precisa testar um controlar da aplicação, um resource ou controller que irá carregar somente o contexto necessário para a camada WEB, não carreg por exemplo os componentes services, repositories.
+		- Deixando o teste mais leve para poder testar as coisas da web sem precisar carregar todo o contexto
+		
+	- @ExtendWith(SpringExtension.class)
+		- Não carrega o contexto, mas permite usar os recursos do Spring com JUnit (teste de unidade: service/component)
+		- Utilizada para testes de forma bem rápida e leve sem carregar o contexto da aplicação com Spring Boot
+		
+	- @DataJpaTest
+		- Carrega somente os componentes relacionados ao Spring Data JPA, cada teste é transacional e dá rollback ao final. (teste de unidade: repository)
+		- Podendo testar os repositories, por exemplo testando uma uma consulta com o Spring H2, carregando apenas o que é relacionado ao Spring Data JPA
+		- Sendo cada teste trasacional, ou seja, ele executa o que tem que executar e acessa o banco de dados e no final da um rollBack, sendo utilizado para testar os repositories
 */

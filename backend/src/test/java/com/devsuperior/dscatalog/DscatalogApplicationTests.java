@@ -11,3 +11,8 @@ class DscatalogApplicationTests {
 	}
 
 }
+/*
+* CONTEXTLOADS
+	- Em uma aplicação Spring contexto corresponde a todos os componentes/estrutura básica do Spring
+
+*/
