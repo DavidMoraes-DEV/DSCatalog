@@ -16,9 +16,11 @@ public class Factory {
 	}
 	
 	//Função da fábrica de objetos que retorna um ProductDTO
-	public static ProductDTO createProductDTO() {
-		Product product = createProduct();
+	public static ProductDTO createProductDTO(Product product) {
 		return new ProductDTO(product, product.getCategories()); //Pois no ProductDTO tem uma sobrecarga do construtor que recebe o objeto completo e as categorias desse objeto
 	}
 	
+	public static Category createCategory() {
+		return new Category(2L, "Eletronics");
+	}
 }

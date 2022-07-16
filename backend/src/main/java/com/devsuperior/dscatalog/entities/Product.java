@@ -34,8 +34,7 @@ public class Product implements Serializable{
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE") //Define que será armazenado a data no padrão UTC
 	private Instant date;
 	
-	//Mapeamento da associação de PRODUTOS com suas CATEGORIAS
-	@ManyToMany
+	@ManyToMany //Mapeamento da associação de PRODUTOS com suas CATEGORIAS muitos para muitos N-N se fosse muitos para um N-1 Utilizaria a Annotations ManyToOne e a configuraç~~ao da chave estrangeira seria @JoinColumn(name = "nome da coluna que sera a chave estrangeira")
 	@JoinTable(name = "tb_product_category", //Essa Annotation JoinTable cria a tabela que FAZ a associação dos produtos com suas categorias, por meio da CRIAÇÃO de uma outra tabela armezenando o id das duas entidades
 			joinColumns = @JoinColumn(name = "product_id"), //JoinColumns estabele qual a chave estrangeira relacionada com a classe atual PRODUCT
 			inverseJoinColumns = @JoinColumn(name = "category_id")) //inverseJoinColumns estabelece a outra chave estrangeira que faz referencia de muitos para muitos N-N, ela identifica qual a entidade que terá essa associação pelo tipo definido na coleção SET

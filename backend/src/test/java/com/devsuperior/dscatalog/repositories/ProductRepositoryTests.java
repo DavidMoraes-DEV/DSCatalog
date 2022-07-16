@@ -76,7 +76,6 @@ public class ProductRepositoryTests {
 		Assertions.assertThrows(EmptyResultDataAccessException.class, () -> {
 			
 			nonExintingId = 100L;
-			
 			repository.deleteById(nonExintingId);
 		});	
 	}
