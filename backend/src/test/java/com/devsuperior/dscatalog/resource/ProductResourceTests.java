@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -49,8 +51,10 @@ public class ProductResourceTests {
 	public void findAllShoudReturnPage() throws Exception{
 		
 		//.perform() que faz a requisição
-		mockMvc.perform(MockMvcRequestBuilders.get("/products"))
-			.andExpect(MockMvcResultMatchers.status().isOk()); //Com o MockMvc já é possível fazer as assertions depois de chamar a requisição com o .andExpect() por exemplo
+		ResultActions result = mockMvc.perform(MockMvcRequestBuilders.get("/products")
+				.accept(MediaType.APPLICATION_JSON)); //Negociação de conteúdo, especifica nesse caso que vai aceitar como resposta conteúdo do tipo JSON
 		
-	}
+		result.andExpect(MockMvcResultMatchers.status().isOk()); //Com o MockMvc já é possível fazer as assertions depois de chamar a requisição com o .andExpect() por exemplo
+		
+		}
 	}
