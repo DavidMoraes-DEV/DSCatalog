@@ -12,7 +12,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.devsuperior.dscatalog.dto.ProductDTO;
+import com.devsuperior.dscatalog.tests.Factory;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -21,6 +27,9 @@ public class ProductResourceIntegrationTests {
 
 	@Autowired
 	private MockMvc mockMvc;
+	
+	@Autowired
+	private ObjectMapper objectMapper;
 
 	private Long existingId;
 	private Long nonExistingId;
@@ -48,5 +57,43 @@ public class ProductResourceIntegrationTests {
 		result.andExpect(jsonPath("$.content[1].name").value("PC Gamer"));
 		result.andExpect(jsonPath("$.content[2].name").value("PC Gamer Alfa"));
 		
+	}
+	
+	@Test
+	public void updateShouldReturnProductDTOWhenIdExists() throws Exception {
+
+		ProductDTO productDTO = Factory.createProductDTO();
+		String jsonBody = objectMapper.writeValueAsString(productDTO); //converte o objeto JAVA product DTO em uma string para o JSON com o método .writeValueAsString()
+		
+		String expectedName = productDTO.getName(); //Salva o nome anterior antes de salvar
+		String expectedDescription = productDTO.getDescription();
+		
+		ResultActions result = mockMvc
+			.perform(MockMvcRequestBuilders.put("/products/{id}", existingId)
+			.content(jsonBody) //Informa o corpo da requisição
+			.contentType(MediaType.APPLICATION_JSON) //Define o tipo do corpo da requisição que também vai ser do tipo JSON
+			.accept(MediaType.APPLICATION_JSON)); 
+	
+		//Verifica se a resposa veio OK com os valores que deveriao atualizar no banco
+		result.andExpect(MockMvcResultMatchers.status().isOk());
+		result.andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
+		result.andExpect(MockMvcResultMatchers.jsonPath("$.name").value(expectedName));
+		result.andExpect(MockMvcResultMatchers.jsonPath("$.description").value(expectedDescription));
+	}
+	
+	@Test
+	public void updateShouldReturnNotFoundWhenIdDoesNotExists() throws Exception {
+
+		ProductDTO productDTO = Factory.createProductDTO();
+		String jsonBody = objectMapper.writeValueAsString(productDTO); //converte o objeto JAVA product DTO em uma string para o JSON com o método .writeValueAsString()
+		
+		ResultActions result = mockMvc
+			.perform(MockMvcRequestBuilders.put("/products/{id}", nonExistingId)
+			.content(jsonBody) //Informa o corpo da requisição
+			.contentType(MediaType.APPLICATION_JSON) //Define o tipo do corpo da requisição que também vai ser do tipo JSON
+			.accept(MediaType.APPLICATION_JSON)); 
+	
+		//Verifica se a resposa veio OK com os valores que deveriao atualizar no banco
+		result.andExpect(MockMvcResultMatchers.status().isNotFound());
 	}
 }
