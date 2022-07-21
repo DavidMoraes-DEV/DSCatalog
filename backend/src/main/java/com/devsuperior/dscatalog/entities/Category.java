@@ -2,13 +2,16 @@ package com.devsuperior.dscatalog.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -30,6 +33,9 @@ public class Category implements Serializable{ //Serializable -> É o padrão do
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE") 
 	private Instant updateAt;
+	
+	@ManyToMany(mappedBy = "categories") //Vincula um dado obj do tipo category para ter condição de dar um .getProducts para acessar os produtos dessa categoria, pois o JPA vai no banco e busca esses produtos
+	private Set<Product> products = new HashSet<>();
 	
 	//Construtores
 	public Category() {
@@ -77,6 +83,10 @@ public class Category implements Serializable{ //Serializable -> É o padrão do
 		updateAt = Instant.now();
 	}
 	
+	public Set<Product> getProducts() {
+		return products;
+	}
+
 	//Parâmetro de comparação entre duas categorias de produtos com equals e hashCode comparando apenas por ID, ou seja, a categoria será igual se o id for igual independente do nome
 	@Override
 	public int hashCode() { //É rápido porém raramente objetos diferentes podem gerar o mesmo código hashCode então não é 100%

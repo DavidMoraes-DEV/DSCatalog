@@ -46,7 +46,7 @@ public class CategoryResource {
 	}
 	
 	//INSERE
-	@PostMapping //Por padrão no REST para inserir um novo recurso temq ue utilizar o método POST
+	@PostMapping //Por padrão no REST para inserir um novo recurso tem que utilizar o método POST
 	public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto) { //@RequestBody -> Para que o objeto enviado na requisição case com o Objeto declarado no método
 		dto = service.insert(dto);
 		//Quando se obtem o cód 201 de objeto criado no .created() convém também retornar um HEADER contendo o endereço. Aproveitando os recursos do FrameWork Spring é possível fazer dessa forma:
