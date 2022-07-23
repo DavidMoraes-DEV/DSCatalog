@@ -125,7 +125,7 @@ public class User implements Serializable, UserDetails {
 	//Retorna o identificador do usuário que nesse caso será o email mas pode ser o nome do usuário se prefirir desde que seja uma string
 	@Override
 	public String getUsername() {
-		return email;
+		return this.getEmail();
 	}
 
 	//Como não é prioridade validar esses testes iremos colocar tudo como TRUE, ou seja esta tudo ok com os testes
