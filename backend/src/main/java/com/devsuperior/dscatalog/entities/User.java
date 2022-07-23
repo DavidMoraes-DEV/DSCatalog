@@ -1,9 +1,11 @@
 package com.devsuperior.dscatalog.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,9 +18,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
 @Table(name = "tb_user")
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -107,6 +113,46 @@ public class User implements Serializable {
 			return false;
 		User other = (User) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	//Retorna as informações de perfil que o usuário tem. O tipo de perfil dentro do SpringSecutiry chama: GrantedAuthority porém nesse projeto será apenas uma String
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() { //Converte a lista de perfis para uma lista de GrantedAuthority
+		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getAuthority()))
+				.collect(Collectors.toList());
+	}
+
+	//Retorna o identificador do usuário que nesse caso será o email mas pode ser o nome do usuário se prefirir desde que seja uma string
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+	//Como não é prioridade validar esses testes iremos colocar tudo como TRUE, ou seja esta tudo ok com os testes
+	//isAccountNonExpired(), isAccountNonLocked(), isCredentialsNonExpired(), isEnabled() são métodos para controlar o usuário se tiver necessidade
+	
+	//Pode implementar uma lógica para verificar se a conta não esta expirada
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	//Pode implementar uma lógica para verificar se o usuário esta bloqueado
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	//Pode implementar uma lógica para verificar se as credenciais do usuário esta expirada, como a senha espirar depois de um tempo determinado
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	//Pode implementar uma lógica para verificar se o usuário esta habilitado ou não
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 
 }
