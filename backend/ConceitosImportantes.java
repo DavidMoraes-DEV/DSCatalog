@@ -206,6 +206,53 @@ PARTE 2 - TESTES AUTOMATIZADOS
 		- @AfterEach
 			- Preparação depois de cada teste da classe
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+PARTE 3 - Autenticação e Autorização com OAuth2 e SpringSecurity
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+* Spring Secutiry
+ 	- É um subprojeto do Spring para mecher com segurança(Autorização, autenticação e etc...)
+ 	- É necessário implementar algumas interfaces como:
+ 		
+ 		- UserDetails
+ 			- É a interface que dará informações do usuário:
+ 				- getAuthoriries() - Retorna as informações de perfil que o usuário tem. O tipo de perfil dentro do SpringSecutiry chama: GrantedAuthority porém nesse projeto será apenas uma String
+ 				- getUserName() - Retorna o identificador do usuário que nesse caso será o email mas pode ser o nome do usuário se prefirir desde que seja uma string
+ 				- isAccountNonExpired(), isAccountNonLocked(), isCredentialsNonExpired(), isEnabled() são métodos para controlar o usuário se tiver necessidade
+ 					- isAccountNonExpired() - Pode implementar uma lógica para verificar se a conta não esta expirada
+ 					- isAccountNonLocked() - Pode implementar uma lógica para verificar se o usuário esta bloqueado
+ 					- isCredentialsNonExpired() - Pode implementar uma lógica para verificar se as credenciais do usuário esta expirada, como a senha espirar depois de um tempo determinado
+ 					- isEnable() - Pode implementar uma lógica para verificar se o usuário esta habilitado ou não
+ 		
+ 		- UserDetailsService
+			- É a outra interface para controlar as informações que tem apenas um método:
+				- loadUserByUsername(String username) - Pega o nome do usuário fornecido como parâmetro e retorna um objeto UserDetails dele
+					- Esse método pode lançar uma exceção UsernameNotFoundException quando o username não for encontrado
 
+	- Classe para configuração de Segurança WEB
+		- Será preciso implementar uma classe que EXTENDE/HERDA a classe WebSecutiryConfigurerAdapter
+		
+	- Bean para efetuar autenticação
+			- Será necessário Instanciar um Bean para efetuar autenticação com o AutenticationManager
+	
+	- Essa 4 implementações é o mínimo para Integrar o SpringSecutiry na aplicação 		
+
+* Spring Cloud OAuth2
+	
+	- É uma BIBLIOTECA usada para implementar o PADRÃO OAUTH2 na aplicação, utilizando também o JWT
+	- Para Implementar o OAuth2 e o JWT será necessário implementar a dependencia com o Spring Cloud OAuth2
+	- Para definir que o sistema será um AuthorizationServer terá que implementar a:
+		- Classe de configuração para Authorization Server:
+			- AuthorizationServerConfigurerAdapter
+	
+	- Para definir que o sistema será um ResourceServer terá que implementar a:
+		- Classe de configuração para Resource Server que é a classe que decide se o usuário pode ou não acessar os recursos dependendo do token:
+			- ResourceServerConfigurerAdapter
+	
+	- Para definir também o Beans para implementar o padrão JWT
+			- Deverá disponibilizar 2 Beans:
+				- JwtAccessTokenConverter
+				- JwtTokenStore
+	
+	
 */
