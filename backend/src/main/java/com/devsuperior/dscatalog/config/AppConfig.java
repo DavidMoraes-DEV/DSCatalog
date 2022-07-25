@@ -1,6 +1,6 @@
 package com.devsuperior.dscatalog.config;
 
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,9 +10,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 //Classe de configuração dentro de um projeto Spring são responsáveis por manter alguma configuração, criar algum  componente específico e etc...
 @Configuration
 public class AppConfig {
-
-	@Value("${jwt.secret}")
-	private String jwtSecret;
 	
 	//@Beam: É um componente do Spring, porém ao invés de ser um annotation de classe como o @Service ele é um annotation de métodos
 	@Bean
@@ -25,7 +22,7 @@ public class AppConfig {
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
-		tokenConverter.setSigningKey(jwtSecret); //Registra a chave do token. Utilizando uma variável de ambiente definida no começo da classe
+		tokenConverter.setSigningKey("MY-JWT-SECRET"); //Registra a chave do token. Utilizando uma variável de ambiente definida no começo da classe
 		return tokenConverter;
 	}
 	

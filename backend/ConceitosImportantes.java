@@ -1,5 +1,7 @@
 package com.devsuperior.dscatalog.entities;
 
+import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
+
 public class ConceitosImportantes {
 }
 /*
@@ -266,6 +268,15 @@ security.oauth2.client.client-secret=${CLIENT_SECRET:dscatalog123}
 
 jwt.secret=${JWT_SECRET:MY-JWT-SECRET}
 jwt.duration=${JWT_DURATION:86400}
+
 	
+public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+	clients.inMemory() //Define que o processo será feito em memoria. 
+	.withClient("dscatalog") //Define o clientId, ou seja o nome da APLICAÇÃO, quando a aplicação WEB for acessar o backEnd ela irá procurar por esse nome definido aqui. Utilizando uma variável de ambiente definida no começo da classe (clientId)
+	.secret(passwordEncoder.encode("dscatalog1234")) //Define o clientSecret, hardCode provisório. Depois será colocado também no arquivo properties. Utilizando uma variável de ambiente definida no começo da classe (clientSecret)
+	.scopes("read", "write") //Define o tipo de acesso que será dados como por exemplo: acesso apenas de leitura(read) ou escrita(white) ou os dois juntos que é o que foi definido
+	.authorizedGrantTypes("password") //Define o GrantTypes que o mais utilizado é o password para acesso de login
+	.accessTokenValiditySeconds(86400); //Define o Tempo de expiração do token em segundos, nesse caso definimos um tempo de 24hrs ou 86400 segundos. Utilizando uma variável de ambiente definida no começo da classe (jwtDuration)
+}
 	
 */
