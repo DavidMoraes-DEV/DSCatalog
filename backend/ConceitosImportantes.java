@@ -253,6 +253,19 @@ PARTE 3 - Autenticação e Autorização com OAuth2 e SpringSecurity
 			- Deverá disponibilizar 2 Beans:
 				- JwtAccessTokenConverter
 				- JwtTokenStore
+# Adicionando agora variáveis de ambiente básicas depois de implementar a segurança
+# Nesse contexto uma variável de ambiente é uma variável que guarda um valor no contexto do sistema do ambiente onde a aplicação esta executando
+# Variáveis de ambiente é colocada dentro de ${VARIÁVEL de AMBIENTE DEFINIDA :(: = POR PADRÃO) Valor que será pego se não existir essa variável de ambiente} como abaixo.
+spring.profiles.active=${APP_PROFILE:test} 
+
+spring.jpa.open-in-view=false
+
+#Então fica definido POR PADRÃO (:) o valor dscatalog se não existir a variável de ambiente CLIENT_ID
+security.oauth2.client.client-id=${CLIENT_ID:dscatalog}
+security.oauth2.client.client-secret=${CLIENT_SECRET:dscatalog123}
+
+jwt.secret=${JWT_SECRET:MY-JWT-SECRET}
+jwt.duration=${JWT_DURATION:86400}
 	
 	
 */
