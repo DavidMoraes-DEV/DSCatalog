@@ -1,5 +1,7 @@
 package com.devsuperior.dscatalog.config;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,8 +11,11 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
+import com.devsuperior.dscatalog.components.JwtTokenEnhancer;
 
 @Configuration //Define que será uma classe de configuração
 @EnableAuthorizationServer //Define que será essa classe que fará os processamentos em segundo plano representando o AuthorizationServer do OAuth2 
@@ -29,13 +34,20 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
+	@Autowired
+	private JwtTokenEnhancer tokenEnhancer;
+	
 	//Define quem que vai autenticar(Será nesse caso o authenticationManager definido na classe WebSecurityConfig) e qual será o formato do TOKEN(que nesse caso será processado pelo TokenStore)
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-
+		
+		TokenEnhancerChain chain = new TokenEnhancerChain(); //Instancia um objeto do tipo TokenEnhancerChain
+		chain.setTokenEnhancers(Arrays.asList(accessTokenConverter, tokenEnhancer)); //Cria uma lista com os elementos adicionais para serem acrescentadas ao token
+		
 		endpoints.authenticationManager(authenticationManager) //Definindo que será o SpringSecurity que fará a autenticação
 		.tokenStore(jwtTokenStore) //Objetos responsáveis por processar o TOKEN
-		.accessTokenConverter(accessTokenConverter);
+		.accessTokenConverter(accessTokenConverter)
+		.tokenEnhancer(chain); //Adiciona as informações adicionais ao token definidas na classe JwtTokenEnhancer
 	}
 
 	@Override
