@@ -58,7 +58,7 @@ public class ProductResourceTests {
 		page = new PageImpl<>(List.of(productDTO));
 		
 		//Simulação do service.findAllPaged()
-		when(service.findAllPaged(ArgumentMatchers.any())).thenReturn(page); //Simulando um comportamento
+		when(service.findAllPaged(1L, ArgumentMatchers.any())).thenReturn(page); //Simulando um comportamento
 		
 		//Simulação dos 2 cenários do service.findById()
 		when(service.findById(existingId)).thenReturn(productDTO);
