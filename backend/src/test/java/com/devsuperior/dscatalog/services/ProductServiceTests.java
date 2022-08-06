@@ -68,6 +68,7 @@ public class ProductServiceTests {
 	private Product product;
 	private ProductDTO productDTO;
 	private Category category;
+	private String nameCategory;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -78,6 +79,7 @@ public class ProductServiceTests {
 		category = Factory.createCategory();
 		productDTO = Factory.createProductDTO(product);
 		page = new PageImpl<>(List.of(product)); //É um objeto de pagina do Spring contendo uma lista simples com um produto
+		nameCategory = "PC%20Gamer";
 		
 		//Quando o método for VOID primeiro coloca-se a AÇÃO(Exemplo: doNothing()) depois colaca o QUANDO(.when()...)
 		//Quando o método NÃO for VOID ou seja, ele retorna alguma coisa aí é invertido primeiro coloca o QUANDO(when()) e depois colaca a AÇÃO(doNothing())
@@ -132,7 +134,7 @@ public class ProductServiceTests {
 	public void findAllPagedShouldReturnPage() {
 		
 		Pageable pageable = PageRequest.of(0, 10); //Página 0, com o tamanho 10
-		Page<ProductDTO> result = service.findAllPaged(1L, pageable);
+		Page<ProductDTO> result = service.findAllPaged(1L, nameCategory, pageable);
 		
 		Assertions.assertNotNull(result);
 		Mockito.verify(repository, times(1)).findAll(pageable);

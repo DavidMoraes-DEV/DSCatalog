@@ -31,11 +31,11 @@ public class ProductService {
 	private CategoryRepository categoryRepository;
 	
 	@Transactional(readOnly = true)
-	public Page<ProductDTO> findAllPaged(Long categoryId, Pageable pageable) {
+	public Page<ProductDTO> findAllPaged(Long categoryId, String name, Pageable pageable) {
 		
 		//Utilizando a expressão terminal ternária para evitar o erro com o id padrão igual a 0 sendo: SE (categoryId == 0) RETORNA(?) NULL ou se falso retorna: o getOne(categoryId)
 		Category category = (categoryId == 0) ? null : categoryRepository.getOne(categoryId);
-		Page<Product> page = repository.findAllProductCategory(category, pageable);
+		Page<Product> page = repository.findAllProductCategory(category, name, pageable);
 		
 		Page<ProductDTO> pageDto = page.map(x -> new ProductDTO(x));
 		
