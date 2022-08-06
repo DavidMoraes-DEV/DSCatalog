@@ -65,7 +65,10 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 				- Ficando: (catg in :categories)
 	*/
 	@Query("SELECT DISTINCT obj FROM Product obj INNER JOIN obj.categories catg WHERE "
-			+ "( COALESCE(:categories) IS NULL OR catg IN :categories) AND"
-			+ "(LOWER(obj.name) LIKE LOWER(CONCAT('%', :name, '%')) )")
+			+ "(COALESCE(:categories) IS NULL OR catg IN :categories) AND "
+			+ "(LOWER(obj.name) LIKE LOWER(CONCAT('%',:name,'%'))) ")
 	Page<Product> findAllProductCategory(List<Category> categories, String name, Pageable pageable);
+
+	@Query("SELECT obj FROM Product obj JOIN FETCH obj.categories WHERE obj IN :products")
+	List<Product> findProductWithCategories(List<Product> products);
 }

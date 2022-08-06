@@ -61,7 +61,7 @@ public class ProductDTO implements Serializable{
 	
 	//Construtor recebendo uma entidade do tipo PRODUCT e uma coleção com a associação das categorias da entidade PRODUCT
 	public ProductDTO(Product entity, Set<Category> categories) {
-		this(entity); //Chama o construtor que recebe uma entidade PRODUCT
+		this(entity);
 		categories.forEach(cat -> this.categories.add(new CategoryDTO(cat))); //Percorre todos os elementos da coleção recebida como argumento e adiciona esses elementos na nova coleção categories dessa classe do tipo categoryDTO
 	}
 

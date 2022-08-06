@@ -39,9 +39,9 @@ public class ProductService {
 		List<Category> categories = (categoryId == 0) ? null : Arrays.asList(categoryRepository.getOne(categoryId));
 		Page<Product> page = repository.findAllProductCategory(categories, name, pageable);
 		
-		Page<ProductDTO> pageDto = page.map(x -> new ProductDTO(x));
+		repository.findProductWithCategories(page.getContent()); //Busca as categorias dos produtos consultados. .getContent converte uma pagina Page para LIST
 		
-		return pageDto;
+		return page.map(x -> new ProductDTO(x, x.getCategories()));
 	}
 
 	@Transactional(readOnly = true)
