@@ -1,5 +1,7 @@
 package com.devsuperior.dscatalog.repositories;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -56,10 +58,14 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 			- Para tratar isso podemos utilizar o Trim na hora de passa-lo do Resource/Controller para o Service, pois ele serve:
 				- Para remover espaços em branco antes e depois da String enviada para consulta
 				- Então se a consulta for eviada apenas com espaços em branco o Trim irá remover eles e ficará vazio onde o LIKE irá executar sem problemas e retornará os produtos independente do nome específico para buscar
-						
+				
+		- A implementação :category IS NULL OR :category IN catg não funciona no POSTGRES então devemos fazer uma atualização para lista de categorias para que o tratamento seja reconhecido no postgress
+			- Ficando: COALESCE(:categories) -> O COALESCE irá verificar se lista de categorias esta nula ou não
+			- E inverte a comparação (:category IN catg)
+				- Ficando: (catg in :categories)
 	*/
 	@Query("SELECT DISTINCT obj FROM Product obj INNER JOIN obj.categories catg WHERE "
-			+ "( :category IS NULL OR :category IN catg) AND"
+			+ "( COALESCE(:categories) IS NULL OR catg IN :categories) AND"
 			+ "(LOWER(obj.name) LIKE LOWER(CONCAT('%', :name, '%')) )")
-	Page<Product> findAllProductCategory(Category category, String name, Pageable pageable);
+	Page<Product> findAllProductCategory(List<Category> categories, String name, Pageable pageable);
 }
