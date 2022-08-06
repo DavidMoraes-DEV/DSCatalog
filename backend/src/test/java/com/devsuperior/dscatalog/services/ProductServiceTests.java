@@ -1,5 +1,6 @@
 package com.devsuperior.dscatalog.services;
 
+import static org.mockito.ArgumentMatchers.any;
 //Importes STATICOS do mockito para chamos automaticamente sem precisar digitar o nome da classe POR EXEMPLO: Mockito.doNothing() 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
@@ -68,7 +69,6 @@ public class ProductServiceTests {
 	private Product product;
 	private ProductDTO productDTO;
 	private Category category;
-	private String nameCategory;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -79,7 +79,6 @@ public class ProductServiceTests {
 		category = Factory.createCategory();
 		productDTO = Factory.createProductDTO(product);
 		page = new PageImpl<>(List.of(product)); //É um objeto de pagina do Spring contendo uma lista simples com um produto
-		nameCategory = "PC%20Gamer";
 		
 		//Quando o método for VOID primeiro coloca-se a AÇÃO(Exemplo: doNothing()) depois colaca o QUANDO(.when()...)
 		//Quando o método NÃO for VOID ou seja, ele retorna alguma coisa aí é invertido primeiro coloca o QUANDO(when()) e depois colaca a AÇÃO(doNothing())
@@ -88,6 +87,8 @@ public class ProductServiceTests {
 		
 		Mockito.when(repository.findById(existingId)).thenReturn(Optional.of(product)); //Configurando o .findById() retornando um Optional(product)
 		Mockito.when(repository.findById(nonExistingId)).thenReturn(Optional.empty()); //Configurando o .findById() retornando um Optional VAZIO quando o ID não existir
+		
+		Mockito.when(repository.findAllProductCategory(any(), any(), any())).thenReturn(page); //Configurando o .findById() retornando um Optional VAZIO quando o ID não existir
 		
 		Mockito.when(repository.getOne(existingId)).thenReturn(product);
 		Mockito.when(repository.getOne(nonExistingId)).thenThrow(EntityNotFoundException.class);
@@ -134,10 +135,9 @@ public class ProductServiceTests {
 	public void findAllPagedShouldReturnPage() {
 		
 		Pageable pageable = PageRequest.of(0, 10); //Página 0, com o tamanho 10
-		Page<ProductDTO> result = service.findAllPaged(1L, nameCategory, pageable);
+		Page<ProductDTO> result = service.findAllPaged(0L, "", pageable);
 		
 		Assertions.assertNotNull(result);
-		Mockito.verify(repository, times(1)).findAll(pageable);
 	}
 	
 	//Teste para quando o ID deletado for de um objeto que outro objeto depende simulado com o mockito

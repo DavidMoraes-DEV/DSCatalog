@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
@@ -20,14 +21,15 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.devsuperior.dscatalog.dto.ProductDTO;
 import com.devsuperior.dscatalog.entities.Product;
-import com.devsuperior.dscatalog.resources.ProductResource;
 import com.devsuperior.dscatalog.services.ProductService;
 import com.devsuperior.dscatalog.services.exceptions.DataBaseException;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 import com.devsuperior.dscatalog.tests.Factory;
+import com.devsuperior.dscatalog.tests.TokenUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebMvcTest(ProductResource.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class ProductResourceTests {
 
 	@Autowired
@@ -39,6 +41,9 @@ public class ProductResourceTests {
 	@Autowired
 	private ObjectMapper objectMapper; //Objeto auxiliar pois o corpo de requisições não é um objeto JAVA e sim um objeto JSON por isso usaremos esse objeto auxiliar para converter no formato texto JSON
 	
+	@Autowired
+	private TokenUtil tokenUtil;
+	
 	//Setando e simulando o compotamento do service no setUp e atribuido valores para algumas variáveis necessárias para os testes
 	private Long existingId;
 	private Long nonExistingId;
@@ -46,7 +51,8 @@ public class ProductResourceTests {
 	private PageImpl<ProductDTO> page;
 	private Product product;
 	private ProductDTO productDTO;
-	private String nameCategory;
+	private String username;
+	private String password;
 	
 	@BeforeEach
 	void setUp () throws Exception {
@@ -57,10 +63,11 @@ public class ProductResourceTests {
 		product = Factory.createProduct();
 		productDTO = Factory.createProductDTO(product);
 		page = new PageImpl<>(List.of(productDTO));
-		nameCategory = "PC%20Gamer";
+		username = "maria@gmail.com";
+		password = "123456";
 		
 		//Simulação do service.findAllPaged()
-		when(service.findAllPaged(1L, nameCategory, ArgumentMatchers.any())).thenReturn(page); //Simulando um comportamento
+		when(service.findAllPaged(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.any())).thenReturn(page); //Simulando um comportamento
 		
 		//Simulação dos 2 cenários do service.findById()
 		when(service.findById(existingId)).thenReturn(productDTO);
@@ -114,11 +121,14 @@ public class ProductResourceTests {
 	@Test
 	public void insertShouldReturnProductDTOCreated() throws Exception {
 		
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
+		
 		//CORPO da requisição HTTP
 		String jsonBody = objectMapper.writeValueAsString(productDTO); //converte o objeto JAVA product DTO em uma string para o JSON com o método .writeValueAsString()
 		
 		ResultActions result = mockMvc
 			.perform(MockMvcRequestBuilders.post("/products")
+			.header("Authorization", "Bearer " + accessToken)		
 			.content(jsonBody) //Informa o corpo da requisição
 			.contentType(MediaType.APPLICATION_JSON) //Define o tipo do corpo da requisição que também vai ser do tipo JSON
 			.accept(MediaType.APPLICATION_JSON)); 
@@ -130,11 +140,14 @@ public class ProductResourceTests {
 	@Test
 	public void updateShouldReturnProductDTOWhenIdExists() throws Exception {
 		
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
+		
 		//CORPO da requisição HTTP
 		String jsonBody = objectMapper.writeValueAsString(productDTO); //converte o objeto JAVA product DTO em uma string para o JSON com o método .writeValueAsString()
 		
 		ResultActions result = mockMvc
 			.perform(MockMvcRequestBuilders.put("/products/{id}", existingId)
+			.header("Authorization", "Bearer " + accessToken)		
 			.content(jsonBody) //Informa o corpo da requisição
 			.contentType(MediaType.APPLICATION_JSON) //Define o tipo do corpo da requisição que também vai ser do tipo JSON
 			.accept(MediaType.APPLICATION_JSON)); 
@@ -146,10 +159,13 @@ public class ProductResourceTests {
 	@Test
 	public void updateShouldReturnNotFoundWhenIdDoesNotExists() throws Exception {
 		
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
+		
 		String jsonBody = objectMapper.writeValueAsString(productDTO); //converte o objeto JAVA product DTO em uma string para o JSON com o método .writeValueAsString()
 		
 		ResultActions result = mockMvc
 			.perform(MockMvcRequestBuilders.put("/products/{id}", nonExistingId)
+			.header("Authorization", "Bearer " + accessToken)		
 			.content(jsonBody) //Informa o corpo da requisição
 			.contentType(MediaType.APPLICATION_JSON) //Define o tipo do corpo da requisição que também vai ser do tipo JSON
 			.accept(MediaType.APPLICATION_JSON)); 
@@ -161,8 +177,11 @@ public class ProductResourceTests {
 	@Test
 	public void deleteShouldReturnNotContentWhenIdExists() throws Exception {
 		
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
+		
 		ResultActions result = mockMvc
 				.perform(MockMvcRequestBuilders.delete("/products/{id}", existingId)
+				.header("Authorization", "Bearer " + accessToken)		
 				.accept(MediaType.APPLICATION_JSON)); 
 		
 		result.andExpect(MockMvcResultMatchers.status().isNoContent());
@@ -171,8 +190,11 @@ public class ProductResourceTests {
 	@Test
 	public void deleteShouldReturnNotFoundWhenIdDoesNotExists() throws Exception {
 		
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
+		
 		ResultActions result = mockMvc
 				.perform(MockMvcRequestBuilders.delete("/products/{id}", nonExistingId)
+				.header("Authorization", "Bearer " + accessToken)		
 				.accept(MediaType.APPLICATION_JSON)); 
 		
 		result.andExpect(MockMvcResultMatchers.status().isNotFound());
