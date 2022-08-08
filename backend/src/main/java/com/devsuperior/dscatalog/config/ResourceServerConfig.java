@@ -3,7 +3,10 @@ package com.devsuperior.dscatalog.config;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +14,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableResourceServer
@@ -42,6 +49,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 		.antMatchers(OPERATOR_OR_ADMIN).hasAnyRole("OPERATOR", "ADMIN") //.hasAnyRole() Define o acesso apenas a usuários que possui algum dos dois perfis definidos dentro do método
 		.antMatchers(ADMIN).hasRole("ADMIN") //Define que pode acessar a rota USERS apenas os usuários que possui perfil ADMIN
 		.anyRequest().authenticated(); //anyRequest() -> Define que qualquer outra rota que não foi especificado antes nesse necessário ter feito o LOGIN definido ao utilizar o .authenticated()
+
+		http.cors().configurationSource(corsConfigurationSource());
 	}
 
 	//Configura o trabalho com o token do Resource Serve, sendo capaz de codificar esse token e analiza-lo por exemplo se esta expirado e etc...
@@ -50,6 +59,28 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 		resources.tokenStore(tokenStore); 	
 	}
 	
-	
+	//CORS: Define um componente que proteje o back end para que apenas a própria aplicação consiga acessesa-la evitando que outras aplicação possam acessá-la
+	//Essa configuração atual permite acesso de outros host ao backEnd.
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+	    CorsConfiguration corsConfig = new CorsConfiguration();
+	    corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));//Aqui é limitado o domínio que poderá acessar o back end quando tiver o domínio como: hhtps://meudiminio.com, Já o * define que ta liberado para todos
+	    corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH")); //Métodos que serão liberados
+	    corsConfig.setAllowCredentials(true); //Permite Credenciais quando TRUE
+	    corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type")); //Especifica quais cabeçalhos serão permitidos
+	 
+	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	    source.registerCorsConfiguration("/**", corsConfig);
+	    return source;
+	}
+	 
+	@Bean
+	public FilterRegistrationBean<CorsFilter> corsFilter() {
+	    FilterRegistrationBean<CorsFilter> bean
+	            = new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));
+	    bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+	    return bean;
+	}
+
 	
 }
