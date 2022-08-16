@@ -1,11 +1,13 @@
 .home-container {
-    padding: 20px;
-    font-size: 26px;
+    padding: 10px;
+    font-size: 20px;
     text-align: center;
     border: 1px solid red;
 }
 
 .home-card {
+    display: flex;
+    flex-direction: column-reverse;
     background-color: #fff;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
@@ -13,15 +15,28 @@
 }
 
 .home-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 10px 60px 10px;
     border: 1px solid blue;
 }
 
 .home-content-container h1 {
+    width: 260px;
     font-size: 1em;
+    margin-bottom: 15px;
+}
+
+.home-content-container p {
+    width: 260px;
+    color: #9e9e9e;
+    font-size: 0.6em;
+    margin-bottom: 30px;
 }
 
 .home-image-container {
-    padding: 0 15px;
+    padding: 50px 15px;
     border: 1px solid purple;
 }
 
