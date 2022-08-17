@@ -2,3 +2,7 @@
 .btn-icon {
     height: 50px;
 }
+
+.btn-icon h6 {
+    color: white;
+}

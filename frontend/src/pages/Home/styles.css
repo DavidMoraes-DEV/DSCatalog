@@ -2,7 +2,6 @@
     padding: 10px;
     font-size: 20px;
     text-align: center;
-    border: 1px solid red;
 }
 
 .home-card {
@@ -11,7 +10,6 @@
     background-color: #fff;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
-    border: 1px solid orange;
 }
 
 .home-content-container {
@@ -19,7 +17,6 @@
     flex-direction: column;
     align-items: center;
     padding: 10px 10px 60px 10px;
-    border: 1px solid blue;
 }
 
 .home-content-container h1 {
@@ -37,7 +34,6 @@
 
 .home-image-container {
     padding: 50px 15px;
-    border: 1px solid purple;
 }
 
 .home-image-container svg {
@@ -102,5 +98,75 @@
     .home-content-container p {
         width: 700px;
         margin-bottom: 47px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .home-card{
+        flex-direction: row;
+        justify-content: space-around;
+        height: 80vh;
+    }
+
+    .home-content-container {
+        width: 60%;
+        height: 80vh;
+        padding: 80px 7%;
+        text-align: left;
+        align-content: space-between;
+        flex-flow: wrap;
+    }
+
+    .home-image-container {
+        width: 40%;
+        padding: 20px 30px 20px 0px;
+        display: flex;
+    }
+
+    .home-image-container svg {
+        width: 100%;
+    }
+
+    .home-content-container h1 {
+        width: 600px;
+        font-size: 0.95em;
+        margin-bottom: 35px;
+    }
+
+    .home-content-container p {
+        width: 600px;
+        font-size: 0.5em;
+        margin-bottom: 47px;
+    }
+
+    .home-content-container button {
+        width: 590px;
+        height: 60px;
+    }
+
+    .home-content-container button h6 {
+        font-size: 1.5em;
+    }
+}
+
+@media (min-width: 1400px) {
+
+    .home-content-container h1 {
+        width: 600px;
+        font-size: 1em;
+    }
+
+    .home-content-container p {
+        width: 600px;
+        font-size: 0.5em;
+    }
+
+    .home-content-container button {
+        width: 590px;
+        height: 80px;
+    }
+
+    .home-content-container button h6 {
+        font-size: 1.5em;
     }
 }
