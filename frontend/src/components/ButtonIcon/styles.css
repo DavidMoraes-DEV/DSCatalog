@@ -1,8 +1,51 @@
-
-.btn-icon {
-    height: 50px;
+.btn h6 {
+    color: white;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+.btn-container {
+    display: flex;
 }
 
-.btn-icon h6 {
-    color: white;
+.btn-container button {
+    border-radius: 10px 0 0 10px;
+}
+
+.btn-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 0px 10px 10px 0px;
+    background-color: #335698;
+}
+
+@media (min-width: 576px) {
+    .btn-icon-container {
+        width: 60px;
+        height: 60px;
+    }
+
+    .btn h6 {
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .btn {
+        width: 490px;
+    }
+
+    .btn h6 {
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 1400px) {
+
+    .btn {
+        width: 520px;
+    }
 }

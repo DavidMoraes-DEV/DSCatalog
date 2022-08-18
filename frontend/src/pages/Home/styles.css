@@ -55,10 +55,6 @@
         margin-bottom: 20px;
     }
 
-    .home-content-container button {
-        width: 506px;
-    }
-
     .home-image-container svg {
         width: 506px;
     }
@@ -136,15 +132,6 @@
         font-size: 0.5em;
         margin-bottom: 47px;
     }
-
-    .home-content-container button {
-        width: 590px;
-        height: 60px;
-    }
-
-    .home-content-container button h6 {
-        font-size: 1.5em;
-    }
 }
 
 @media (min-width: 1400px) {
@@ -157,14 +144,5 @@
     .home-content-container p {
         width: 600px;
         font-size: 0.5em;
-    }
-
-    .home-content-container button {
-        width: 590px;
-        height: 80px;
-    }
-
-    .home-content-container button h6 {
-        font-size: 1.5em;
     }
 }
