@@ -10,9 +10,11 @@ const RoutesDom = () => (
     <BrowserRouter>
         <Navbar />
         <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/products' element={<Catalog />} />
-            <Route path='/admin' element={<Admin />} />
+            <>
+                <Route path='/' element={<Home />} />
+                <Route path='/products' element={<Catalog />} />
+                <Route path='/admin' element={<Admin />} />
+            </>
         </Routes>
     </BrowserRouter>
 
