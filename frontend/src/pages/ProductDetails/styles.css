@@ -1,0 +1,147 @@
+.product-details-container {
+    padding: 10px;
+    font-size: 24px;
+    border: 1px solid red;
+}
+
+.product-details-card {
+    padding: 15px 10px;
+    border: 1px solid blue;
+}
+
+.goback-container {
+    margin-bottom: 10px;
+    border: 1px solid rebeccapurple;
+}
+
+.goback-container-link {
+    display: flex;
+    align-items: center;
+}
+
+.goback-container h2 {
+    margin-left: 15px;
+    font-size: 0.8em;
+    color: #263238;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+}
+
+.goback-container svg {
+    margin-left: 10px;
+    color: #407bff;
+    transform: rotate(-180deg);
+}
+
+.img-container {
+    text-align: center;
+    margin-bottom: 10px;
+    border: 1px solid #E1E1E1;
+    border-radius: 10px;
+}
+
+.img-container img {
+    width: 80%;
+    height: auto;
+}
+
+.name-price-container {
+    margin-bottom: 20px;
+    padding: 0 8px;
+    border: 1px solid green;
+}
+
+.name-price-container h1 {
+    font-size: 1.0em;
+    color: #263238;
+    letter-spacing: -0.015em;
+}
+
+.description-container {
+    padding: 8px;
+    text-align: justify;
+    color: #9e9e9e;
+    border: 1px solid #E1E1E1;
+    border-radius: 10px;
+}
+
+.description-container h2 {
+    letter-spacing: -0.015em;
+    font-size: 0.7em;
+    margin-bottom: 10px;
+}
+
+.description-container p {
+    font-size: 0.6em;
+    text-indent: 20px;
+}
+
+@media (min-width: 576px) {
+    .product-details-container {
+        padding: 20px;
+        font-size: 30px;
+    }
+
+    .product-details-card {
+        padding: 20px;
+    }
+}
+
+@media (min-width: 992px) {
+    .product-details-container {
+        padding: 40px;
+    }
+
+    .product-details-card {
+        padding: 40px;
+    }
+
+    .img-container {
+        margin-bottom: 20px;
+    }
+
+    .img-container img {
+        width: 50%;
+    }
+
+    .name-price-container {
+        margin-bottom: 25px;
+    }
+
+    .description-container {
+        padding: 40px;
+    }
+
+    .name-price-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .product-price-container {
+        margin-right: 60px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .name-price-container {
+        display: block;
+    }
+
+    .product-details-card {
+        padding: 40px 40px 10px 40px;
+    }
+
+    .img-container img {
+        width: 370px;
+    }
+
+    .description-container {
+        height: 95%;
+    }
+}
+
+@media (min-width: 1400px) {
+    .img-container img {
+        width: 57%;
+    }
+}

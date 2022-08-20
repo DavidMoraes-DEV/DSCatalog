@@ -1,8 +1,8 @@
 import ProductCard from 'components/ProductCard';
+import { Link } from 'react-router-dom';
 import { Product } from 'types/products';
 
 const Catalog = () => {
-    
   const product: Product = {
     id: 2,
     name: 'Smart TV',
@@ -28,35 +28,65 @@ const Catalog = () => {
     <div className="container my-4">
       <div className="row">
         <div className="col-sm-6 col-md-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to={'/products/1'}>
+            <ProductCard product={product} />
+          </Link>
         </div>
         <div className="col-sm-6 col-md-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to={'/products/1'}>
+            <ProductCard product={product} />
+          </Link>
         </div>
         <div className="col-sm-6 col-md-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to={'/products/1'}>
+            <ProductCard product={product} />
+          </Link>
         </div>
         <div className="col-sm-6 col-md-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to={'/products/1'}>
+            <ProductCard product={product} />
+          </Link>
         </div>
         <div className="col-sm-6 col-md-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to={'/products/1'}>
+            <ProductCard product={product} />
+          </Link>
         </div>
         <div className="col-sm-6 col-md-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to={'/products/1'}>
+            <ProductCard product={product} />
+          </Link>
         </div>
         <div className="col-sm-6 col-md-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to={'/products/1'}>
+            <ProductCard product={product} />
+          </Link>
         </div>
         <div className="col-sm-6 col-md-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to={'/products/1'}>
+            <ProductCard product={product} />
+          </Link>
         </div>
         <div className="col-sm-6 col-md-4 col-xl-3">
-          <ProductCard product={product} />
+          <Link to={'/products/1'}>
+            <ProductCard product={product} />
+          </Link>
         </div>
         <div className="col-sm-6 col-md-4 col-xl-3">
-          <ProductCard product={product} />
-        </div>        
+          <Link to={'/products/1'}>
+            <ProductCard product={product} />
+          </Link>
+        </div>
+        <div className="col-sm-6 col-md-4 col-xl-3">
+          <Link to={'/products/1'}>
+            <ProductCard product={product} />
+          </Link>
+        </div>
+        <div className="col-sm-6 col-md-4 col-xl-3">
+          <Link to={'/products/1'}>
+            <ProductCard product={product} />
+          </Link>
+        </div>{' '}
       </div>
     </div>
   );

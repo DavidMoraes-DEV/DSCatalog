@@ -1,13 +1,18 @@
 import { ReactComponent as ArrowIcon } from 'assets/images/arrow.svg';
 import ProductPrice from 'components/ProductPrice';
+import { Link } from 'react-router-dom';
+
+import './styles.css';
 
 const ProductDetails = () => {
     return (
-        <div className="products-details-container">
-            <div className="product-details-card">
+        <div className="product-details-container">
+            <div className="base-card product-details-card">
                 <div className="goback-container">
-                    <ArrowIcon />
-                    <h2>VOLTAR</h2>
+                    <Link to={'/products'} className="goback-container-link">
+                        <ArrowIcon />
+                        <h2>VOLTAR</h2>
+                    </Link> 
                 </div>
                 <div className="row">
                     <div className="col-xl-6">
@@ -16,7 +21,7 @@ const ProductDetails = () => {
                         </div>
                         <div className="name-price-container">
                             <h1>Nome do Produto</h1>
-                            <ProductPrice price={2345.67}/>
+                            < ProductPrice price={2345.67} />
                         </div>
                     </div>
                     <div className="col-xl-6">
