@@ -1,10 +1,22 @@
 import { ReactComponent as ArrowIcon } from 'assets/images/arrow.svg';
+import axios from 'axios';
 import ProductPrice from 'components/ProductPrice';
 import { Link } from 'react-router-dom';
+import { Product } from 'types/products';
+import { BASE_URL } from 'util/requests';
 
 import './styles.css';
 
 const ProductDetails = () => {
+
+    //Formas incorretas de declarar a variável (Apenas para questões didático)
+    let product : Product;
+
+    axios.get(BASE_URL + "/products/2")
+    .then(response => {
+        console.log(response.data)
+    });
+
     return (
         <div className="product-details-container">
             <div className="base-card product-details-card">
