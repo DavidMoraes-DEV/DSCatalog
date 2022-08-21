@@ -26,3 +26,12 @@
     color:#fff;
     font-weight: 700;
 }
+
+@media (max-width: 319px) {
+    .main-nav {
+        padding: 10px 0;
+    }
+    .nav-logo-text h4 {
+        font-size: 0.9em;
+    }
+}
