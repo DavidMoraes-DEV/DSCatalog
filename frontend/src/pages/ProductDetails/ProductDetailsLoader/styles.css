@@ -1,0 +1,10 @@
+.loader-card-details-content {
+    width: 100%;
+    height: 65vh;
+    padding: 10px;
+    
+}
+
+.loader-card-details-content rect y {
+    y: 300;
+}
