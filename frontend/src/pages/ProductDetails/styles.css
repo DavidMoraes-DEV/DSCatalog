@@ -1,17 +1,14 @@
 .product-details-container {
     padding: 10px;
     font-size: 24px;
-    border: 1px solid red;
 }
 
 .product-details-card {
     padding: 15px 10px;
-    border: 1px solid blue;
 }
 
 .goback-container {
     margin-bottom: 10px;
-    border: 1px solid rebeccapurple;
 }
 
 .goback-container-link {
@@ -48,7 +45,6 @@
 .name-price-container {
     margin-bottom: 20px;
     padding: 0 8px;
-    border: 1px solid green;
 }
 
 .name-price-container h1 {
