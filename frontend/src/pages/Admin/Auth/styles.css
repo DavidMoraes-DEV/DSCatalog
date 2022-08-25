@@ -3,32 +3,21 @@
     justify-content: space-evenly;
     padding: 10px;
     background-image: url('assets/images/backgroud-auth.svg');
-    border: 1px solid red;
 }
 
 .auth-banner-container {
     display: none;
-    border: 1px solid blue;
-}
-
-.auth-banner-container h1 {
-    border: 1px solid purple;
-}
-
-.auth-banner-container p {
-    border: 1px solid green;
-}
-
-.auth-banner-container svg {
-    border: 1px solid black;
 }
 
 .auth-form-container {
     width: 100%;
-    border: 1px solid orange;
 }
 
 @media (min-width: 576px) {
+    .auth-container {
+        padding: 30px;
+    }
+    
     .auth-form-container {
         width: 480px;
     }
@@ -104,7 +93,7 @@
     }
 
     .auth-form-container {
-        width: 550px;
+        width: 450px;
         margin-left: 20px;
     }
 }
