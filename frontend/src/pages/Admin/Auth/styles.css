@@ -1,8 +1,13 @@
 .auth-container {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+    background-image: url('assets/images/backgroud-auth.svg');
     border: 1px solid red;
 }
 
 .auth-banner-container {
+    display: none;
     border: 1px solid blue;
 }
 
@@ -16,4 +21,90 @@
 
 .auth-banner-container svg {
     border: 1px solid black;
+}
+
+.auth-form-container {
+    width: 100%;
+    border: 1px solid orange;
+}
+
+@media (min-width: 576px) {
+    .auth-form-container {
+        width: 480px;
+    }
+}
+
+@media (min-width: 768px) {
+    .auth-form-container {
+        width: 550px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .auth-container {
+        height: 90vh;
+        padding: 40px;
+        background-position-x: 60%;
+        background-position-y: 65%;
+    }
+
+    .auth-banner-container {
+        display: flex;
+        flex-direction: column;
+        width: 600px;
+        margin-top: 40px;
+    }
+
+    .auth-banner-container h1 {
+        font-size: 40px;
+        letter-spacing: -0.015em;
+        color: #263238;
+        margin: 0 50px 15px 50px;
+        
+    }
+
+    .auth-banner-container p {
+        font-size: 16px;
+        width: 400px;
+        margin-left: 50px;
+        letter-spacing: -0.015em;
+        color: #9E9E9E;
+        margin-bottom: 0;
+    }
+
+    .auth-banner-container svg {
+        width: 100%;
+    }
+
+    .auth-form-container {
+        width: 450px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .auth-container {
+        background-size: 110%;
+        background-position: 100%;
+    }
+
+    .auth-banner-container {
+        width: 750px;
+    }
+
+    .auth-banner-container h1 {
+        width: 100%;
+        font-size: 40px;
+        margin: 0 0 5px 0;
+    }
+
+    .auth-banner-container p {
+        width: 100%;
+        margin: 0 0 10px 0;
+        font-size: 18px;
+    }
+
+    .auth-form-container {
+        width: 550px;
+        margin-left: 20px;
+    }
 }
