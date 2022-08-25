@@ -1,0 +1,19 @@
+.auth-container {
+    border: 1px solid red;
+}
+
+.auth-banner-container {
+    border: 1px solid blue;
+}
+
+.auth-banner-container h1 {
+    border: 1px solid purple;
+}
+
+.auth-banner-container p {
+    border: 1px solid green;
+}
+
+.auth-banner-container svg {
+    border: 1px solid black;
+}
