@@ -21,14 +21,19 @@ a, a:hover {
 }
 
 .base-input {
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 1em;
     letter-spacing: -0.015em;
     color: #263238;
-    height: 50px;
+    height: 40px;
   }
    
   .base-input::placeholder {
     color: #9E9E9E;
   }
   
+  @media (min-width: 576px) {
+    .base-input {
+        height: 50px;
+    }
+  }

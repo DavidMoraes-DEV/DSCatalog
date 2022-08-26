@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-evenly;
     padding: 10px;
+    min-height: 90vh;
     background-image: url('assets/images/backgroud-auth.svg');
 }
 
@@ -11,6 +12,13 @@
 
 .auth-form-container {
     width: 100%;
+    border: 1px solid darkgoldenrod;
+}
+
+@media (max-height: 600px) {
+    .auth-container {
+        min-height: 85vh;
+    }
 }
 
 @media (min-width: 576px) {
@@ -41,7 +49,7 @@
         display: flex;
         flex-direction: column;
         width: 600px;
-        margin-top: 40px;
+        margin-top: 15px;
     }
 
     .auth-banner-container h1 {
@@ -63,10 +71,12 @@
 
     .auth-banner-container svg {
         width: 100%;
+        height: auto;
     }
 
     .auth-form-container {
         width: 450px;
+        height: 100%;
     }
 }
 
@@ -90,6 +100,10 @@
         width: 100%;
         margin: 0 0 10px 0;
         font-size: 18px;
+    }
+
+    .auth-banner-container svg {
+        height: 850%;
     }
 
     .auth-form-container {

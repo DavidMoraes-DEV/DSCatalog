@@ -4,6 +4,7 @@ import ButtonIcon from 'components/ButtonIcon';
 import './styles.css';
 import { useForm } from 'react-hook-form';
 import { requestBackendLogin } from 'util/requests';
+import { useState } from 'react';
 
 type FormData = {
   username: string;
@@ -11,13 +12,16 @@ type FormData = {
 };
 
 const CardLogin = () => {
+  const [hasError, setHasError] = useState(false);
   const { register, handleSubmit } = useForm<FormData>();
   const onSubmit = (formData: FormData) => {
     requestBackendLogin(formData)
       .then((response) => {
+        setHasError(false);
         console.log('SUCESSO!!!', response);
       })
       .catch((error) => {
+        setHasError(true);
         console.log('ERRO', error);
       });
     console.log(formData);
@@ -27,7 +31,12 @@ const CardLogin = () => {
     <div className="base-card login-card-container">
       <h1>LOGIN</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-4">
+        {hasError && (
+          <div className="alert alert-danger" role="alert">
+            Erro ao tentar efetuar o login
+          </div>
+        )}
+        <div className="input-email">
           <input
             {...register('username')}
             type="text"
@@ -36,7 +45,7 @@ const CardLogin = () => {
             name="username"
           />
         </div>
-        <div className="mb-2">
+        <div className="input-password">
           <input
             {...register('password')}
             type="password"
@@ -48,7 +57,7 @@ const CardLogin = () => {
         <Link to="/admin/auth/recover" className="login-link-recover">
           Esqueci a senha
         </Link>
-        <div className="login-submit">
+        <div className="login-submit" >
           <ButtonIcon text="Fazer login" />
         </div>
         <div className="signup-container">
