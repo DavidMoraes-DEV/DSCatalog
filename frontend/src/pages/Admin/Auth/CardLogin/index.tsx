@@ -1,18 +1,25 @@
 import { Link } from 'react-router-dom';
 import ButtonIcon from 'components/ButtonIcon';
- 
+
 import './styles.css';
 import { useForm } from 'react-hook-form';
- 
+import { requestBackendLogin } from 'util/requests';
+
 type FormData = {
-  username: string
-  password: string
-}
+  username: string;
+  password: string;
+};
 
 const CardLogin = () => {
-
   const { register, handleSubmit } = useForm<FormData>();
-  const onSubmit = (formData : FormData) => {
+  const onSubmit = (formData: FormData) => {
+    requestBackendLogin(formData)
+      .then((response) => {
+        console.log('SUCESSO!!!', response);
+      })
+      .catch((error) => {
+        console.log('ERRO', error);
+      });
     console.log(formData);
   };
 
@@ -22,7 +29,7 @@ const CardLogin = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <input
-            {...register("username")}
+            {...register('username')}
             type="text"
             className="form-control base-input"
             placeholder="Email"
@@ -31,7 +38,7 @@ const CardLogin = () => {
         </div>
         <div className="mb-2">
           <input
-            {...register("password")}
+            {...register('password')}
             type="password"
             className="form-control base-input "
             placeholder="Password"
