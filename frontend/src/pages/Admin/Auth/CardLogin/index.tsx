@@ -39,7 +39,11 @@ const CardLogin = () => {
         <div className="input-email">
           <input
             {...register('username', {
-              required: 'Campo Obrigatório'
+              required: 'Campo Obrigatório',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Email inválido'
+              }
             })}
             type="text"
             className="form-control base-input"
