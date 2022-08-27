@@ -12,7 +12,6 @@
 
 .auth-form-container {
     width: 100%;
-    border: 1px solid darkgoldenrod;
 }
 
 @media (max-height: 600px) {
