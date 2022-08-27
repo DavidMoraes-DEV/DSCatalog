@@ -1,10 +1,9 @@
+import Users from "pages/Admin/User";
 
 
 const UsersCRUD = () => {
     return (
-        <h1>
-            Users CRUD
-        </h1>
+        <Users />
     );
 }
 
