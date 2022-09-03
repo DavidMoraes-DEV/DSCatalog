@@ -40,7 +40,7 @@ const CardLogin = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         {hasError && (
           <div className="alert alert-danger" role="alert">
-            Erro ao tentar efetuar o login
+            Erro ao tentar efetuar o login!!!
           </div>
         )}
         <div className="input-email">
