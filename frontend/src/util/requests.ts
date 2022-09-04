@@ -65,3 +65,21 @@ export const getAuthData = () => {
 
     return (obj);
 }
+
+// Add a request interceptor
+axios.interceptors.request.use(function (config) {
+  console.log('INTERCEPTOR ANTES DA REQUISIÇÃO');
+  return config;
+}, function (error) {
+  console.log('INTERCEPTOR ERRO NA REQUISIÇÃO');
+  return Promise.reject(error);
+});
+
+// Add a response interceptor
+axios.interceptors.response.use(function (response) {
+  console.log('INTERCEPTOR RESPOSTA COM SUCESSO');
+  return response;
+}, function (error) {
+  console.log('INTERCEPTOR RESPOSTA COM ERRO');
+  return Promise.reject(error);
+});
