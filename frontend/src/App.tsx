@@ -1,11 +1,11 @@
 import './assets/styles/custom.scss';
 import './App.css';
 
-import RoutesDom from 'RoutesDom';
+import Routes from 'Routes';
 
 function App() {
   return (
-    <RoutesDom />
+    <Routes />
   ); 
 }
 

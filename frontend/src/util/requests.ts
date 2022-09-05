@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import QueryString from 'qs';
+import history from './history';
 
 type LoginResponse = {
   access_token: string;
@@ -46,40 +47,46 @@ export const requestBackendLogin = (loginData: LoginData) => {
 };
 
 export const requestBackend = (config: AxiosRequestConfig) => {
-    
-    const headers = config.withCredentials ? {
+  const headers = config.withCredentials
+    ? {
         ...config.headers,
-        Authorization: "Bearer " + getAuthData().access_token
-    } : config.headers;
+        Authorization: 'Bearer ' + getAuthData().access_token,
+      }
+    : config.headers;
 
-    return axios({...config, baseURL: BASE_URL, headers});
-}
+  return axios({ ...config, baseURL: BASE_URL, headers });
+};
 
-export const saveAuthData = (obj : LoginResponse) => {
-    localStorage.setItem(tokenKey, JSON.stringify(obj))
-}
+export const saveAuthData = (obj: LoginResponse) => {
+  localStorage.setItem(tokenKey, JSON.stringify(obj));
+};
 
 export const getAuthData = () => {
-    const str = localStorage.getItem(tokenKey) ?? "{}";
-    const obj = JSON.parse(str) as LoginResponse;
+  const str = localStorage.getItem(tokenKey) ?? '{}';
+  const obj = JSON.parse(str) as LoginResponse;
 
-    return (obj);
-}
+  return obj;
+};
 
 // Add a request interceptor
-axios.interceptors.request.use(function (config) {
-  console.log('INTERCEPTOR ANTES DA REQUISIÇÃO');
-  return config;
-}, function (error) {
-  console.log('INTERCEPTOR ERRO NA REQUISIÇÃO');
-  return Promise.reject(error);
-});
+axios.interceptors.request.use(
+  function (config) {
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
 
 // Add a response interceptor
-axios.interceptors.response.use(function (response) {
-  console.log('INTERCEPTOR RESPOSTA COM SUCESSO');
-  return response;
-}, function (error) {
-  console.log('INTERCEPTOR RESPOSTA COM ERRO');
-  return Promise.reject(error);
-});
+axios.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    if (error.response.status === 401 || error.response.status === 403) {
+      history.push('/admin/auth');
+    }
+    return Promise.reject(error);
+  }
+);
