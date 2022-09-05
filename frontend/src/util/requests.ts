@@ -2,7 +2,6 @@ import axios, { AxiosRequestConfig } from 'axios';
 import QueryString from 'qs';
 import history from './history';
 import jwtDecode from 'jwt-decode';
-import { start } from 'repl';
 
 type Role = 'ROLE_OPERATION' | 'ROLE_ADMIN';
 
@@ -102,10 +101,14 @@ axios.interceptors.response.use(
 );
 
 export const getTokenData = () : TokenData | undefined => {
-
   try {
     return jwtDecode(getAuthData().access_token) as TokenData;
   }catch(error) {
     return undefined;
   }
+}
+
+export const isAuthenticated = () : boolean => {
+  const tokenData = getTokenData();
+  return (tokenData && tokenData.exp * 1000 > Date.now()) ? true : false;
 }
