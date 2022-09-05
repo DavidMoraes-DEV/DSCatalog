@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import ButtonIcon from 'components/ButtonIcon';
 
 import './styles.css';
@@ -15,7 +15,7 @@ const CardLogin = () => {
   const [hasError, setHasError] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
   
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const onSubmit = (formData: FormData) => {
       requestBackendLogin(formData)
@@ -25,7 +25,7 @@ const CardLogin = () => {
         console.log("TOKEN GERADO: " + token);
         setHasError(false);
         console.log('SUCESSO!!!', response);
-        navigate('/admin');
+        history.push('/admin');
       })
       .catch((error) => {
         setHasError(true);

@@ -1,42 +1,34 @@
-import Navbar from "components/Navbar";
-import Admin from "pages/Admin";
-import Auth from "pages/Admin/Auth";
-import CardLogin from "pages/Admin/Auth/CardLogin";
-import CardRecover from "pages/Admin/Auth/CardRecover";
-import CardSignup from "pages/Admin/Auth/CardSignup";
-import ProductsCRUD from "pages/Admin/CRUDS/ProductsCRUD";
-import CategoriesCRUD from "pages/Admin/CRUDS/CategoriesCRUD";
-import UsersCRUD from "pages/Admin/CRUDS/UsersCRUD";
-import Catalog from "pages/Catalog";
-import Home from "pages/Home";
-import ProductDetails from "pages/ProductDetails";
-import { BrowserRouter, Routes, Route, } from "react-router-dom";
-
+import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
+import Home from 'pages/Home';
+import Navbar from 'components/Navbar';
+import Catalog from 'pages/Catalog';
+import Admin from 'pages/Admin';
+import ProductDetails from 'pages/ProductDetails';
+import Auth from 'pages/Admin/Auth';
 
 const RoutesDom = () => (
-
     <BrowserRouter>
-        <Navbar />
-        <Routes>
-            <>
-                <Route path='/' element={<Home />} />
-                <Route path='/admin' element={<Admin />}>
-                    <Route index element={<ProductsCRUD /> }/>
-                    <Route path="products" element={<ProductsCRUD /> } />
-                    <Route path="categories"element={<CategoriesCRUD /> } />
-                    <Route path="users" element={<UsersCRUD /> } />
-                </Route>
-                <Route path="/admin/auth" element={<Auth />}>
-                    <Route index element={<CardLogin />} />
-                    <Route path="signup" element={<CardSignup />} />
-                    <Route path="recover" element={<CardRecover />} />
-                </Route>
-                <Route path='/products' element={<Catalog />} />
-                <Route path='/products/:productId' element={<ProductDetails />} />
-            </>
-        </Routes>
-    </BrowserRouter>
-
+    <Navbar />
+    <Switch>
+      <Route path="/" exact>
+        <Home />
+      </Route>
+      <Route path="/products" exact>
+        <Catalog />
+      </Route>
+      <Route path="/products/:productId">
+        <ProductDetails />
+      </Route>
+      <Redirect from="/admin/auth" to="/admin/auth/login" exact />
+      <Route path="/admin/auth" >
+        <Auth />
+      </Route>
+      <Redirect from="/admin" to="/admin/products" exact />
+      <Route path="/admin">
+        <Admin />
+      </Route>
+    </Switch>
+  </BrowserRouter>
 );
 
 export default RoutesDom;
