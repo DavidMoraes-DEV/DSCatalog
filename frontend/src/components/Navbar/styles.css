@@ -27,11 +27,38 @@
     font-weight: 700;
 }
 
+.nav-login-logout {
+    display: none;
+}
+
+.nav-username {
+    display: none;
+}
+
 @media (max-width: 319px) {
     .main-nav {
         padding: 10px 0;
     }
     .nav-logo-text h4 {
         font-size: 0.9em;
+    }
+}
+
+@media (min-width: 768px) {
+    .nav-login-logout {
+        display: unset;
+        color:#fff;
+        margin-right: 15px;
+    }
+}
+
+@media (min-width: 992px) {
+    .nav-login-logout {
+        margin-right: 40px;
+    }
+
+    .nav-username {
+        display: unset;
+        margin-right: 20px;
     }
 }
