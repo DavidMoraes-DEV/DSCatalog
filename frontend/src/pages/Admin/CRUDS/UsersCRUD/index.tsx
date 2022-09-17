@@ -1,4 +1,4 @@
-import Users from "pages/Admin/User";
+import Users from "pages/Admin/Users";
 
 
 const UsersCRUD = () => {
