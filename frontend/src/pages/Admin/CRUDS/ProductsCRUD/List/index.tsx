@@ -21,6 +21,10 @@ const List = () => {
         id: 3,
         name: 'Computadores',
       },
+      {
+        id: 4,
+        name: 'Celulares',
+      },
     ],
   };
 

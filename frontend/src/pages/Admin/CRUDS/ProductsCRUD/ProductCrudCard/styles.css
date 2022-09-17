@@ -1,4 +1,5 @@
 .product-crud-card {
+    padding-bottom: 20px;
     margin-bottom: 30px;
 }
 
@@ -13,17 +14,77 @@
     height: auto;
 }
 
-.product-crud-card-bottom-container {
+.product-crud-card-button-container {
     text-align: left;
     padding: 15px 20px 30px 20px;
 }
 
-.product-crud-card-bottom-container h6 {
+.product-crud-card-button-container h6 {
     font-size: 18px;
     color: #263238;
 }
 
 .product-crud-categories-container {
     display: flex;
+    flex-wrap: wrap;
     padding:  0 20px;
+}
+
+.product-crud-card-buttons-container {
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-crud-card-button {
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: -0.015em;
+    border-radius: 10px;
+    width: 110px;
+    height: 40px;
+}
+
+.product-crud-card-button-first {
+    margin-right: 10px;
+}
+
+@media (min-width: 768px) {
+    .product-crud-card {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 0;
+    }
+
+    .product-crud-card-buttons-container {
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+
+    .product-crud-card-button-first {
+        margin-right: 0;
+        margin-top: 22px;
+    }
+
+    .product-crud-card-button {
+        width: 140px;
+    }
+
+    .product-crud-card-description {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+    }
+
+    .product-crud-card-top-container {
+        border-bottom: 0;
+        border-right: 1px solid #E1E1E1;
+    }
+}
+
+@media (min-width: 992px) {
+    .product-crud-card-button {
+        width: 220px;
+    }
 }
