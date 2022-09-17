@@ -1,0 +1,29 @@
+.product-crud-card {
+    margin-bottom: 30px;
+}
+
+.product-crud-card-top-container {
+    text-align: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.product-crud-card-top-container img {
+    width: 158px;
+    height: auto;
+}
+
+.product-crud-card-bottom-container {
+    text-align: left;
+    padding: 15px 20px 30px 20px;
+}
+
+.product-crud-card-bottom-container h6 {
+    font-size: 18px;
+    color: #263238;
+}
+
+.product-crud-categories-container {
+    display: flex;
+    padding:  0 20px;
+}
