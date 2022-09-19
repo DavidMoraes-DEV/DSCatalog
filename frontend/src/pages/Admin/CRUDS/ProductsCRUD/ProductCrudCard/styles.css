@@ -11,7 +11,7 @@
 
 .product-crud-card-top-container img {
     width: 158px;
-    height: auto;
+    height: 158px;
 }
 
 .product-crud-card-button-container {
@@ -79,6 +79,7 @@
 
     .product-crud-card-top-container {
         border-bottom: 0;
+        width: 200px;
         border-right: 1px solid #E1E1E1;
     }
 }
