@@ -9,7 +9,7 @@ import { requestBackendLogin } from 'util/requests';
 import { saveAuthData } from 'util/storage';
 import { getTokenData } from 'util/auth';
 
-type FormData = {
+type CredentialsDTO = {
   username: string;
   password: string;
 };
@@ -24,12 +24,12 @@ const CardLogin = () => {
   const { from } = location.state || {from: {pathname: '/admin'}};
   const { setAuthContextData } = useContext(AuthContext);
   const [hasError, setHasError] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const { register, handleSubmit, formState: { errors } } = useForm<CredentialsDTO>();
   
   const history = useHistory();
 
-  const onSubmit = (formData: FormData) => {
-      requestBackendLogin(formData)
+  const onSubmit = (credentialsDTO: CredentialsDTO) => {
+      requestBackendLogin(credentialsDTO)
       .then((response) => {
         saveAuthData(response.data);
         setHasError(false);
@@ -43,7 +43,7 @@ const CardLogin = () => {
         setHasError(true);
         console.log('ERRO', error);
       });
-    console.log(formData);
+    console.log(credentialsDTO);
   };
 
   return (
