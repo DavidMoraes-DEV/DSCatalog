@@ -1,0 +1,56 @@
+.product-crud-form-card {
+  padding: 20px;
+}
+
+.product-crud-form-title {
+  font-weight: bold;
+  font-size: 22px;
+  letter-spacing: -0.015em;
+  color: #263238;
+  margin-bottom: 30px;
+}
+
+.margin-botton-30 {
+  margin-bottom: 30px;
+}
+
+.product-crud-inputs-container {
+    margin-bottom: 30px;
+}
+
+.product-crud-inputs-left-container {
+  margin-bottom: 30px;
+}
+
+.product-crud-buttons-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-crud-button {
+    width: 110px;
+    height: 50px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+@media (min-width: 576px) {
+    .product-crud-buttons-container {
+        justify-content: flex-end;
+    }
+
+    .product-crud-button {
+        width: 150px;
+        margin-left: 30px;
+    }
+}
+
+@media (min-width: 992px) {
+  .product-crud-inputs-left-container {
+    margin-bottom: 0;
+  }
+
+  .product-crud-button {
+    width: 170px;
+  }
+}
