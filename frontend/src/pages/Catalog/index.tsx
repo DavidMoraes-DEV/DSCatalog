@@ -14,25 +14,30 @@ const Catalog = () => {
   const [page, setPage] = useState<SpringPage<Product>>();
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const params: AxiosRequestConfig = {
-      method: 'GET',
-      url: '/products',
-      params: {
-        page: 0,
-        size: 12,
-      }
-    };
+  const getProducts = (pageNumber: number) => {
+      const params: AxiosRequestConfig = {
+        method: 'GET',
+        url: '/products',
+        params: {
+          page: pageNumber,
+          size: 12,
+        }
+      };
+  
+      setIsLoading(true);
+      requestBackend(params)
+        .then((response) => {
+          setPage(response.data);
+          console.log(page);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+  }
 
-    setIsLoading(true);
-    requestBackend(params)
-      .then((response) => {
-        setPage(response.data);
-        console.log(page);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+  useEffect(() => {
+    getProducts(0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -55,7 +60,7 @@ const Catalog = () => {
       </div>
 
       <div className="row">
-      <Pagination pageCount={page ? page.totalPages : 0} range={3} />
+      <Pagination pageCount={page ? page.totalPages : 0} range={3} onChange={getProducts}/>
       </div>
     </div>
   );
