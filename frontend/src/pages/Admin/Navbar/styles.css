@@ -1,4 +1,4 @@
-.admin-nav-container ul {
+.admin-nav-itens-container {
     display: flex;
     justify-content: space-around;
     list-style-type: none;
