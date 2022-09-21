@@ -3,6 +3,24 @@
     margin-bottom: 20px;
 }
 
+.product-filter-name-container {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #E1E1E1;
+}
+
+.product-filter-name-container input {
+    border: none;
+} 
+
+.product-filter-name-container input:focus {
+    box-shadow: none;
+}
+
+.product-filter-name-container input::placeholder {
+    color: #9E9E9E;
+}
+
 @media (min-width:768px) {
     .product-filter-container {
         margin-bottom: 0;
