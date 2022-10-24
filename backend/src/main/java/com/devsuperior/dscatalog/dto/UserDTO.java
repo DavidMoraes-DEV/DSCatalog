@@ -33,12 +33,12 @@ public class UserDTO implements Serializable {
 		this.email = email;
 	}
 	
-	public UserDTO(User entity) { //Como declaramos na entidade fetch = FetchType.EAGER para vim vinculado os perfis dessa entidade, podemos ja carregar a coleção de perfis ROLE no construtor do DTO
+	public UserDTO(User entity) {
 		id = entity.getId();
 		firstName = entity.getFirstName();
 		lastName = entity.getLastName();
 		email = entity.getEmail();
-		entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role))); //Povoa os perfis desse usuário atravez do construtor que recebe uma entidade no Role DTO porque esses perfis já vem vinculado com o usuário por conta do codigo fetch na entidade User
+		entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
 	}
 
 	public Long getId() {

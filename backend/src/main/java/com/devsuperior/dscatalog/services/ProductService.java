@@ -35,11 +35,10 @@ public class ProductService {
 	@Transactional(readOnly = true)
 	public Page<ProductDTO> findAllPaged(Long categoryId, String name, Pageable pageable) {
 		
-		//Utilizando a expressão terminal ternária para evitar o erro com o id padrão igual a 0 sendo: SE (categoryId == 0) RETORNA(?) NULL ou se falso retorna: o getOne(categoryId)
 		List<Category> categories = (categoryId == 0) ? null : Arrays.asList(categoryRepository.getOne(categoryId));
 		Page<Product> page = repository.findAllProductCategory(categories, name, pageable);
 		
-		repository.findProductWithCategories(page.getContent()); //Busca as categorias dos produtos consultados. .getContent converte uma pagina Page para LIST
+		repository.findProductWithCategories(page.getContent()); 
 		
 		return page.map(x -> new ProductDTO(x, x.getCategories()));
 	}
@@ -53,12 +52,11 @@ public class ProductService {
 		return new ProductDTO(entity, entity.getCategories());
 	}
 
-	//A diferença em inserir e atualizar um produto em relação com a categoria é que vai mudar os dados que serão utilizados, pois na categoria era apenas o nome e os produtos tem mais dados diferentes para incluir
 	@Transactional
 	public ProductDTO insert(ProductDTO dto) {
 		
 		Product entity = new Product();
-		copyDtoToEntity(dto, entity); //Utilizamos então um método auxiliar para realizar a cópia dos dados do produto para não utilizar vários SETs nesse método
+		copyDtoToEntity(dto, entity);
 		
 		entity = repository.save(entity);
 		return new ProductDTO(entity);
@@ -89,20 +87,18 @@ public class ProductService {
 		}
 	}
 	
-	//Associa categorias que é uma entidade dentro de outra entidade que é PRODUCT para que sejá salva(inserida) ou atualizadas
 	private void copyDtoToEntity(ProductDTO dto, Product entity) {
 		
-		//Não se copia o Id, porque não se troca ele na hora de ATUALIZAR e também não informa ele na hora de INSERIR, por isso o id não entra no método de copiar os dados
 		entity.setName(dto.getName());
 		entity.setDescription(dto.getDescription());
 		entity.setDate(dto.getDate());
 		entity.setImgUrl(dto.getImgUrl());
 		entity.setPrice(dto.getPrice());
 		
-		entity.getCategories().clear(); //Limpa o conjunto de categorias que podem estar na entidade
+		entity.getCategories().clear();
 		for(CategoryDTO catDto : dto.getCategories()) {
 			Category category = categoryRepository.getOne(catDto.getId());
-			entity.getCategories().add(category); //Coleção do tipo Product pronta para ser inserida ou atualizada
+			entity.getCategories().add(category);
 		}
 	}
 }

@@ -37,7 +37,7 @@ public class User implements Serializable, UserDetails {
 	private String email;
 	private String password;
 
-	@ManyToMany(fetch = FetchType.EAGER) //Isso força que sempre que buscar um usuário no banco já vai vim vinculado nele os perfis de usuário (Exigência do Spring Securiy)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role",
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -115,41 +115,32 @@ public class User implements Serializable, UserDetails {
 		return Objects.equals(id, other.id);
 	}
 
-	//Retorna as informações de perfil que o usuário tem. O tipo de perfil dentro do SpringSecutiry chama: GrantedAuthority porém nesse projeto será apenas uma String
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() { //Converte a lista de perfis para uma lista de GrantedAuthority
+	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getAuthority()))
 				.collect(Collectors.toList());
 	}
 
-	//Retorna o identificador do usuário que nesse caso será o email mas pode ser o nome do usuário se prefirir desde que seja uma string
 	@Override
 	public String getUsername() {
 		return this.getEmail();
 	}
 
-	//Como não é prioridade validar esses testes iremos colocar tudo como TRUE, ou seja esta tudo ok com os testes
-	//isAccountNonExpired(), isAccountNonLocked(), isCredentialsNonExpired(), isEnabled() são métodos para controlar o usuário se tiver necessidade
-	
-	//Pode implementar uma lógica para verificar se a conta não esta expirada
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 
-	//Pode implementar uma lógica para verificar se o usuário esta bloqueado
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
-	//Pode implementar uma lógica para verificar se as credenciais do usuário esta expirada, como a senha espirar depois de um tempo determinado
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
-	//Pode implementar uma lógica para verificar se o usuário esta habilitado ou não
 	@Override
 	public boolean isEnabled() {
 		return true;

@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-//Esse código PADRÃO esta definindo uma ANNOTATION
+
 @Constraint(validatedBy = UserInsertValidator.class)
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)

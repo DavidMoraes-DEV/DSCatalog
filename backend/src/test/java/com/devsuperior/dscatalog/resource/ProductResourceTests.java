@@ -33,18 +33,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ProductResourceTests {
 
 	@Autowired
-	private MockMvc mockMvc; //Para fazer testes na camada web precisamos fazer requisições chamando o endPoint utilizando o MockMvc 
+	private MockMvc mockMvc;
 	
-	@MockBean //Troca o componente e realiza o mock do componente (simula)
+	@MockBean
 	private ProductService service;
 	
 	@Autowired
-	private ObjectMapper objectMapper; //Objeto auxiliar pois o corpo de requisições não é um objeto JAVA e sim um objeto JSON por isso usaremos esse objeto auxiliar para converter no formato texto JSON
+	private ObjectMapper objectMapper;
 	
 	@Autowired
 	private TokenUtil tokenUtil;
 	
-	//Setando e simulando o compotamento do service no setUp e atribuido valores para algumas variáveis necessárias para os testes
 	private Long existingId;
 	private Long nonExistingId;
 	private Long dependentId;
@@ -66,21 +65,16 @@ public class ProductResourceTests {
 		username = "maria@gmail.com";
 		password = "123456";
 		
-		//Simulação do service.findAllPaged()
 		when(service.findAllPaged(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.any())).thenReturn(page); //Simulando um comportamento
 		
-		//Simulação dos 2 cenários do service.findById()
 		when(service.findById(existingId)).thenReturn(productDTO);
 		when(service.findById(nonExistingId)).thenThrow(ResourceNotFoundException.class);
 		
-		//Simulação do service.insert()
 		when(service.insert(ArgumentMatchers.any())).thenReturn(productDTO);		
 		
-		//Simulação dos 2 cenários do service.update()
 		when(service.update(ArgumentMatchers.eq(existingId), ArgumentMatchers.any())).thenReturn(productDTO);
 		when(service.update(ArgumentMatchers.eq(nonExistingId), ArgumentMatchers.any())).thenThrow(ResourceNotFoundException.class);
 		
-		//Simulação dos 3 cenários possíveis do service.delete()
 		Mockito.doNothing().when(service).delete(existingId);
 		Mockito.doThrow(ResourceNotFoundException.class).when(service).delete(nonExistingId);
 		Mockito.doThrow(DataBaseException.class).when(service).delete(dependentId);
@@ -89,13 +83,11 @@ public class ProductResourceTests {
 	@Test
 	public void findAllShoudReturnPage() throws Exception {
 		
-		//.perform() que faz a requisição
 		ResultActions result = mockMvc
 			.perform(MockMvcRequestBuilders.get("/products")
-			.accept(MediaType.APPLICATION_JSON)); //Negociação de conteúdo, especifica nesse caso que vai aceitar como resposta conteúdo do tipo JSON
+			.accept(MediaType.APPLICATION_JSON)); 
 		
-		result.andExpect(MockMvcResultMatchers.status().isOk()); //Com o MockMvc já é possível fazer as assertions depois de chamar a requisição com o .andExpect() por exemplo
-		
+		result.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
 	@Test
@@ -105,7 +97,7 @@ public class ProductResourceTests {
 			.accept(MediaType.APPLICATION_JSON)); 
 
 		result.andExpect(MockMvcResultMatchers.status().isOk());
-		result.andExpect(MockMvcResultMatchers.jsonPath("$.id").exists()); //Nesse caso o "$" VAI acessar o objeto da resposta, com se estive acessando aquele objeto JSON mostrado nos testes do postman, testando se aquele id EXISTE
+		result.andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
 	}
 	
 	@Test
@@ -123,14 +115,13 @@ public class ProductResourceTests {
 		
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
 		
-		//CORPO da requisição HTTP
-		String jsonBody = objectMapper.writeValueAsString(productDTO); //converte o objeto JAVA product DTO em uma string para o JSON com o método .writeValueAsString()
+		String jsonBody = objectMapper.writeValueAsString(productDTO); 
 		
 		ResultActions result = mockMvc
 			.perform(MockMvcRequestBuilders.post("/products")
 			.header("Authorization", "Bearer " + accessToken)		
-			.content(jsonBody) //Informa o corpo da requisição
-			.contentType(MediaType.APPLICATION_JSON) //Define o tipo do corpo da requisição que também vai ser do tipo JSON
+			.content(jsonBody)
+			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON)); 
 	
 		result.andExpect(MockMvcResultMatchers.status().isCreated());
@@ -142,14 +133,13 @@ public class ProductResourceTests {
 		
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
 		
-		//CORPO da requisição HTTP
-		String jsonBody = objectMapper.writeValueAsString(productDTO); //converte o objeto JAVA product DTO em uma string para o JSON com o método .writeValueAsString()
+		String jsonBody = objectMapper.writeValueAsString(productDTO);
 		
 		ResultActions result = mockMvc
 			.perform(MockMvcRequestBuilders.put("/products/{id}", existingId)
 			.header("Authorization", "Bearer " + accessToken)		
-			.content(jsonBody) //Informa o corpo da requisição
-			.contentType(MediaType.APPLICATION_JSON) //Define o tipo do corpo da requisição que também vai ser do tipo JSON
+			.content(jsonBody)
+			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON)); 
 	
 		result.andExpect(MockMvcResultMatchers.status().isOk());
@@ -161,13 +151,13 @@ public class ProductResourceTests {
 		
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
 		
-		String jsonBody = objectMapper.writeValueAsString(productDTO); //converte o objeto JAVA product DTO em uma string para o JSON com o método .writeValueAsString()
+		String jsonBody = objectMapper.writeValueAsString(productDTO); 
 		
 		ResultActions result = mockMvc
 			.perform(MockMvcRequestBuilders.put("/products/{id}", nonExistingId)
 			.header("Authorization", "Bearer " + accessToken)		
-			.content(jsonBody) //Informa o corpo da requisição
-			.contentType(MediaType.APPLICATION_JSON) //Define o tipo do corpo da requisição que também vai ser do tipo JSON
+			.content(jsonBody)
+			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON)); 
 	
 		result.andExpect(MockMvcResultMatchers.status().isNotFound());

@@ -14,18 +14,8 @@ import com.devsuperior.dscatalog.dto.ProductDTO;
 import com.devsuperior.dscatalog.repositories.ProductRepository;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 
-/*
-* TESTES DE INTEGRAÇÃO:
-	- O que são testes de integração?
-		- São testes Utilizados para testar de forma integrada mais de um componente
-		- Podendo testar como os componentes estão conversando entre si para fazer um objetivo específico
-		- É um teste muito mais lento pois precisa carregar o contexto da aplicação
-		- Esse tipo de teste não é rodado toda hora como nos testes de Unidade
-		- É rodado com menor frequência, pois é muito lento, sendo um teste que pode testar muito mais coisas
-			- podendo testar por exemplo se as categorias dos produtos esta retornando de forma ordenada adequadamente considerando a instancia do banco
-*/
-@SpringBootTest //Utilizamos essa annotation porque agora precisamos carregar o contexto da aplicação
-@Transactional //Retorna o banco ao seu estado original depois de cada teste para as mudanças dos testes influenciar no resultado dos outros testes tratando cada teste como uma transação individual
+@SpringBootTest
+@Transactional
 public class ProductServiceIntegrationTests {
 
 	@Autowired
@@ -46,7 +36,6 @@ public class ProductServiceIntegrationTests {
 		countTotalProducts = 25L;
 	}
 	
-	//Testa se realmente esta deletando quando o Id existir
 	@Test
 	public void deleteShouldDeleteResourceWhenIdExists() {
 		
@@ -55,7 +44,6 @@ public class ProductServiceIntegrationTests {
 		Assertions.assertEquals(countTotalProducts - 1, repository.count());
 	}
 	
-	//Testa se realmente esta lançando uma exceção quando o Id NÃO EXISTIR
 	@Test
 	public void deleteShouldThrowResourceNotFoundExceptionWhenIdDoesNotExists() {
 		
@@ -64,17 +52,16 @@ public class ProductServiceIntegrationTests {
 		});
 	}
 	
-	//Teste básico passando o numero da pagina = 0 e com 10 elementos verificando se realmente esta voltando uma pagina
 	@Test
 	public void findAllPagedShouldReturnPagedWhenPage0Size10() {
 		
-		PageRequest pageRequest = PageRequest.of(0, 10); //PageRequest é a classe que implementa o pageable
+		PageRequest pageRequest = PageRequest.of(0, 10);
 		Page<ProductDTO> result = service.findAllPaged(0L, "", pageRequest);
 		
-		Assertions.assertFalse(result.isEmpty()); //Testa se a página esta vazia, como colocamos assertFalse se der FALSE vai passar no teste
-		Assertions.assertEquals(0, result.getNumber()); //Testa se a pagina é a de numero 0
-		Assertions.assertEquals(10, result.getSize()); //Testa se a quantidade de elementos da pagina é realmente 10
-		Assertions.assertEquals(countTotalProducts, result.getTotalElements()); //Testa se o total de produtos buscado é igual ao numero máximo de produtos no banco que no caso é 25 produtos	
+		Assertions.assertFalse(result.isEmpty());
+		Assertions.assertEquals(0, result.getNumber());
+		Assertions.assertEquals(10, result.getSize());
+		Assertions.assertEquals(countTotalProducts, result.getTotalElements());
 	}
 	
 	@Test
@@ -83,13 +70,13 @@ public class ProductServiceIntegrationTests {
 		PageRequest pageRequest = PageRequest.of(50, 10); 
 		Page<ProductDTO> result = service.findAllPaged(0L, "", pageRequest);
 		
-		Assertions.assertTrue(result.isEmpty()); //Nesse teste quando a página não existir agora sim a pagina vai retornar vazia
+		Assertions.assertTrue(result.isEmpty());
 	}
 	
 	@Test
 	public void findAllPagedShouldReturnSortedPageWhenSortByName() {
 		
-		PageRequest pageRequest = PageRequest.of(0, 10, Sort.by("name")); //Instanciando um PageRequest passando: a pagina(0), a quantidade de elementos(10) e o critério de ordenação(Sort.by("name"))
+		PageRequest pageRequest = PageRequest.of(0, 10, Sort.by("name"));
 		Page<ProductDTO> result = service.findAllPaged(0L, "", pageRequest);
 		
 		Assertions.assertFalse(result.isEmpty());

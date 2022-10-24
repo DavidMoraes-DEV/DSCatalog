@@ -38,7 +38,6 @@ public class ProductDTO implements Serializable{
 	public ProductDTO () {
 	}
 
-	//Contrutor recebendo os atributos normalmente
 	public ProductDTO(Long id, String name, String description, Double price, String imgUrl, Instant date) {
 		super();
 		this.id = id;
@@ -49,7 +48,6 @@ public class ProductDTO implements Serializable{
 		this.date = date;
 	}
 	
-	//Construtor recebendo uma entidade do tipo PRODUCT
 	public ProductDTO(Product entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();
@@ -59,10 +57,9 @@ public class ProductDTO implements Serializable{
 		this.date = entity.getDate();
 	}
 	
-	//Construtor recebendo uma entidade do tipo PRODUCT e uma coleção com a associação das categorias da entidade PRODUCT
 	public ProductDTO(Product entity, Set<Category> categories) {
 		this(entity);
-		categories.forEach(cat -> this.categories.add(new CategoryDTO(cat))); //Percorre todos os elementos da coleção recebida como argumento e adiciona esses elementos na nova coleção categories dessa classe do tipo categoryDTO
+		categories.forEach(cat -> this.categories.add(new CategoryDTO(cat)));
 	}
 
 	public Long getId() {

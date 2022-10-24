@@ -16,34 +16,32 @@ import com.devsuperior.dscatalog.entities.User;
 import com.devsuperior.dscatalog.repositories.UserRepository;
 import com.devsuperior.dscatalog.resources.exceptions.FieldMessage;
 
-//Parametriza o tipo da annotation(UserInsertValid) e o tipo da classe que vai receber esse annotation(UserInsertDTO)
 public class UserUpdateValidator implements ConstraintValidator<UserUpdateValid, UserUpdateDTO> {
 	
 	@Autowired
-	private HttpServletRequest request; //Guarda as informações da requisição, então a partir dele que conseguimos pegar o código passado na requisição UPDATE
+	private HttpServletRequest request; 
 	@Autowired
 	private UserRepository repository;
 	
 	@Override
-	public void initialize(UserUpdateValid ann) { //Coloca-se aqui alguma lógica para quando for inicializar um objeto(Nesse projeto ficará em branco)
+	public void initialize(UserUpdateValid ann) { 
 	}
 
 	@Override
-	public boolean isValid(UserUpdateDTO dto, ConstraintValidatorContext context) { //Esse método testa se o objeto (UserInsertDTO) é válido ou não
+	public boolean isValid(UserUpdateDTO dto, ConstraintValidatorContext context) { 
 		
-		@SuppressWarnings("unchecked") //Annotation para suprimir o sublinhado amarelo de WARNING
-		var uriVars = (Map<String, String>)request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE); //Pega um mapa com os atributos da URL, ou seja as variáveis da URI
+		@SuppressWarnings("unchecked")
+		var uriVars = (Map<String, String>)request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 		long userId = Long.parseLong(uriVars.get("id"));
 		
 		List<FieldMessage> list = new ArrayList<>();
 		
-		//Coloque aqui seus testes de validação, acrescentando objetos FieldMessage à lista
 		User user = repository.findByEmail(dto.getEmail());
-		if(user != null && userId != user.getId()) { //Teste para ver se o email vindo do UserInsertDTO já existe no banco e caso existir insere a mensagem de erro que o email já existe e(&&) verifica também se o id é o mesmo pois se não for é porque esta tentando atualizar informações de outro usuário
+		if(user != null && userId != user.getId()) { 
 			list.add(new FieldMessage("email", "Email já existe"));
 		}
 		
-		for (FieldMessage e : list) { //Insere na lista de erros do beanValidation os erros se gerados
+		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())
 					.addConstraintViolation();
