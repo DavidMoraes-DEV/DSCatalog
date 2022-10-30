@@ -24,17 +24,14 @@ public class JwtTokenEnhancer implements TokenEnhancer {
 
 		User user = userRepository.findByEmail(authentication.getName());
 		
-		//Define as informações desejadas para ser adicionadas ao TOKEN com o MAP
 		Map<String, Object> map = new HashMap<>();
-		map.put("userFirtName", user.getFirstName()); //Adiciona o primeiro nome
-		map.put("userId", user.getId()); //Adiciona o Id do usuário
+		map.put("userFirtName", user.getFirstName());
+		map.put("userId", user.getId());
 		
-		//Fazer um DownCatch pois apenas o tipo específico DefaultOAuth2AccessToken que possui o método .setAdditionalInformation() para adicionar as informações ao token
 		DefaultOAuth2AccessToken token = (DefaultOAuth2AccessToken)accessToken;
 		
-		token.setAdditionalInformation(map); //Adiciona as informações definidas no MAP ao TOKEN
+		token.setAdditionalInformation(map); 
 		
-		//Para que essas informações sejam válidas é preciso atualizar o authorizationService
 		return token;
 	}
 

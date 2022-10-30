@@ -30,11 +30,10 @@ public class ProductResource {
 	private ProductService service;
 	
 	@GetMapping
-	public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable, /*PARAMETROS do Pageable: page, size, sort*/
+	public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable,
 			@RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
 			@RequestParam(value = "name", defaultValue = "") String name) {		
 
-		//.trim -> irá eliminar os espaços em branco vindos no parâmetro opcional "name" evitando o retorna da lista vazia conforme explicado na consulta do ProductRepository
 		Page<ProductDTO> page = service.findAllPaged(categoryId, name.trim(), pageable);
 		return ResponseEntity.ok().body(page); 
 	}
@@ -45,7 +44,6 @@ public class ProductResource {
 		return ResponseEntity.ok().body(dto); 
 	}
 	
-	//INSERE
 	@PostMapping 
 	public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto) { 
 		dto = service.insert(dto);

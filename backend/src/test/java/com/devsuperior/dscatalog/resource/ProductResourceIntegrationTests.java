@@ -47,7 +47,7 @@ public class ProductResourceIntegrationTests {
 		existingId = 1L;
 		nonExistingId = 100L;
 		countTotalProducts = 25L;
-		username = "maria@gmail.com";
+		username = "admin@dmdeveloper.com";
 		password = "123456";
 	}
 	
@@ -73,19 +73,18 @@ public class ProductResourceIntegrationTests {
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
 		
 		ProductDTO productDTO = Factory.createProductDTO();
-		String jsonBody = objectMapper.writeValueAsString(productDTO); //converte o objeto JAVA product DTO em uma string para o JSON com o método .writeValueAsString()
+		String jsonBody = objectMapper.writeValueAsString(productDTO);
 		
-		String expectedName = productDTO.getName(); //Salva o nome anterior antes de salvar
+		String expectedName = productDTO.getName();
 		String expectedDescription = productDTO.getDescription();
 		
 		ResultActions result = mockMvc
 			.perform(MockMvcRequestBuilders.put("/products/{id}", existingId)
 			.header("Authorization", "Bearer " + accessToken)		
-			.content(jsonBody) //Informa o corpo da requisição
-			.contentType(MediaType.APPLICATION_JSON) //Define o tipo do corpo da requisição que também vai ser do tipo JSON
+			.content(jsonBody)
+			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON)); 
 	
-		//Verifica se a resposa veio OK com os valores que deveriao atualizar no banco
 		result.andExpect(MockMvcResultMatchers.status().isOk());
 		result.andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
 		result.andExpect(MockMvcResultMatchers.jsonPath("$.name").value(expectedName));
@@ -98,16 +97,15 @@ public class ProductResourceIntegrationTests {
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
 		
 		ProductDTO productDTO = Factory.createProductDTO();
-		String jsonBody = objectMapper.writeValueAsString(productDTO); //converte o objeto JAVA product DTO em uma string para o JSON com o método .writeValueAsString()
+		String jsonBody = objectMapper.writeValueAsString(productDTO); 
 		
 		ResultActions result = mockMvc
 			.perform(MockMvcRequestBuilders.put("/products/{id}", nonExistingId)
 			.header("Authorization", "Bearer " + accessToken)		
-			.content(jsonBody) //Informa o corpo da requisição
-			.contentType(MediaType.APPLICATION_JSON) //Define o tipo do corpo da requisição que também vai ser do tipo JSON
+			.content(jsonBody)
+			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON)); 
 	
-		//Verifica se a resposa veio OK com os valores que deveriao atualizar no banco
 		result.andExpect(MockMvcResultMatchers.status().isNotFound());
 	}
 }

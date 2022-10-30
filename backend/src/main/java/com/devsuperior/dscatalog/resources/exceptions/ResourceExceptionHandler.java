@@ -17,11 +17,9 @@ import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
-	//Intercepta um tipo de exceção definida entre () e trata no método abaixo
 	@ExceptionHandler(ResourceNotFoundException.class) 
 	public ResponseEntity<StandardError> entityNotFound(ResourceNotFoundException e, HttpServletRequest request) {
 		
-		//HttpStatus.NOT_FOUND é erro 404 e .value() pega apenas o numero inteiro
 		HttpStatus status = HttpStatus.NOT_FOUND; 
 		StandardError err = new StandardError();
 		
@@ -34,7 +32,6 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(err);
 	}
 	
-	//Intercepta um tipo de exceção definida entre () e trata no método abaixo
 	@ExceptionHandler(DataBaseException.class) 
 	public ResponseEntity<StandardError> database(DataBaseException e, HttpServletRequest request) {
 		
@@ -53,7 +50,7 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(MethodArgumentNotValidException.class) 
 	public ResponseEntity<ValidationError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
 		
-		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY; //Cod 422 - Alguma entidade não foi possível de ser processada
+		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY; 
 		ValidationError err = new ValidationError();
 		
 		err.setTimestamp(Instant.now());
@@ -62,8 +59,8 @@ public class ResourceExceptionHandler {
 		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
 		
-		for( FieldError f : e.getBindingResult().getFieldErrors()) { //Pega os erros específicos continos na validação
-			err.addError(f.getField(), f.getDefaultMessage()); //.getField() pega o valor do campo do erro, .getDefaultMessage() pega a messagem do erro do campo
+		for( FieldError f : e.getBindingResult().getFieldErrors()) {
+			err.addError(f.getField(), f.getDefaultMessage());
 		}
 		
 		return ResponseEntity.status(status).body(err);

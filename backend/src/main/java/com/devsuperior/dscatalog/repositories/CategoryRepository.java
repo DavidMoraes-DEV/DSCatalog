@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.devsuperior.dscatalog.entities.Category;
 
-@Repository //Ao colocar esse Annotation os Objetos da interface CategoryRepository passam a ser gerenciados pelo Spring
+@Repository
 public interface CategoryRepository extends JpaRepository<Category, Long>{
 
 }

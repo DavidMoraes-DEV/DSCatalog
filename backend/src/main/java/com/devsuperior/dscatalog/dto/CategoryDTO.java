@@ -18,7 +18,6 @@ public class CategoryDTO implements Serializable {
 		this.name = name;
 	}
 	
-	//Construtor que recebe a ENTIDADE
 	public CategoryDTO(Category entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();

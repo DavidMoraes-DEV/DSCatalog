@@ -43,9 +43,8 @@ public class UserResource {
 		return ResponseEntity.ok().body(dto); 
 	}
 	
-	//INSERE
 	@PostMapping 
-	public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto) { //Para que as anotações de validação de dados colocadas no DTO da entidade sejam validas precisamos utilizar a annotation @Valid no EndPoint que precisará levar em considerações as especificações impostas no DTO
+	public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto) {
 		UserDTO newDto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(newDto.getId()).toUri();
