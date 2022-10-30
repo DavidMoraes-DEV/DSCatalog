@@ -47,7 +47,7 @@ public class ProductResourceIntegrationTests {
 		existingId = 1L;
 		nonExistingId = 100L;
 		countTotalProducts = 25L;
-		username = "maria@gmail.com";
+		username = "admin@dmdeveloper.com";
 		password = "123456";
 	}
 	

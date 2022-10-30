@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://davidmoraes-dev.github.io/ProjectDSCatalog/frontend/public",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
@@ -17,8 +18,9 @@
     "@types/react-select": "^5.0.1",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
+    "gh-pages": "^4.0.0",
     "jwt-decode": "^3.1.2",
-    "node-sass": "4.14.1",
+    "node-sass": "^7.0.3",
     "qs": "^6.11.0",
     "react": "17.0.2",
     "react-content-loader": "^6.2.0",
@@ -34,6 +36,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

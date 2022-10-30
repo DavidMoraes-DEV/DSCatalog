@@ -62,7 +62,7 @@ public class ProductResourceTests {
 		product = Factory.createProduct();
 		productDTO = Factory.createProductDTO(product);
 		page = new PageImpl<>(List.of(productDTO));
-		username = "maria@gmail.com";
+		username = "admin@dmdeveloper.com";
 		password = "123456";
 		
 		when(service.findAllPaged(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.any())).thenReturn(page); //Simulando um comportamento
