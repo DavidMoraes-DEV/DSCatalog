@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^27.5.2",
     "@types/jwt-decode": "^3.1.0",
@@ -15,6 +15,7 @@
     "@types/react-paginate": "^7.1.1",
     "@types/react-router-dom": "^5.1.7",
     "@types/react-select": "^5.0.1",
+    "@types/testing-library__react": "^10.2.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "gh-pages": "^4.0.0",
@@ -31,6 +32,7 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.4.0",
     "react-toastify": "^9.0.8",
+    "testing-library": "^0.0.2",
     "typescript": "^4.7.4",
     "web-vitals": "^2.1.4"
   },
