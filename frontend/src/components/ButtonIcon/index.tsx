@@ -12,7 +12,7 @@ const ButtonIcon = ({ text } : Props) => {
         <h6>{text}</h6>
       </button>
       <div className="btn-icon-container">
-        <ArrowIcon />
+        <ArrowIcon data-testid="arrow" />
       </div>
     </div>
   );
