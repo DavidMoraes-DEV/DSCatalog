@@ -80,12 +80,49 @@ describe('Product Form Create tests', () => {
     userEvent.click(submitButton);
 
     await waitFor(() => {
-        
         const messages = screen.getAllByText('Campo Obrigatório');
         expect(messages).toHaveLength(5);
-
     })
 
   });
+
+  test('should clear validation maessages when filling out the form correctly', async () => {
+    
+    render(
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Router history={history}>
+          <Form />
+        </Router>
+      </BrowserRouter>
+    );
+    
+    const submitButton = screen.getByRole('button', { name: /salvar/i });
+
+    userEvent.click(submitButton);
+
+    await waitFor(() => {
+        const messages = screen.getAllByText('Campo Obrigatório');
+        expect(messages).toHaveLength(5);
+    })
+
+    const nameInput = screen.getByTestId('name');
+    const categoriesInput = screen.getByLabelText('Categorias');
+    const priceInput = screen.getByTestId('price');
+    const imgUrlInput = screen.getByTestId('imgUrl');
+    const descriptionInput = screen.getByTestId('description');
+
+    userEvent.type(nameInput, 'Computador');
+    await selectEvent.select(categoriesInput, ['Eletrônicos', 'Computadores']);
+    userEvent.type(priceInput, '5000.12');
+    userEvent.type(imgUrlInput, 'https://raw.githubusercontent.com/DavidMoraes-DEV/imagem-computador-test.png');
+    userEvent.type(descriptionInput, 'Teste de Descrição do Produto');
+
+    await waitFor(() => {
+    const messages = screen.queryAllByText('Campo Obrigatório');
+    expect(messages).toHaveLength(0);
+
+  });
+
+})
 
 });
