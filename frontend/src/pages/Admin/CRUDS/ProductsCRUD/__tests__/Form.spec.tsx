@@ -52,13 +52,40 @@ describe('Product Form Create tests', () => {
     userEvent.type(imgUrlInput, 'https://raw.githubusercontent.com/DavidMoraes-DEV/imagem-computador-test.png');
     userEvent.type(descriptionInput, 'Teste de Descrição do Produto');
 
+    /*Simula o click do Botão SALVAR*/
     userEvent.click(submitButton);
 
+    /*Verifica se o Toast está presente*/
     await waitFor(() => {
       const toastElement = screen.getByText('Produto Cadastrado com Sucesso');
       expect(toastElement).toBeInTheDocument();
     });
 
+    /*Verifica se foi realmente redirecionado para a tela de listagem de produtos*/
     expect(history.location.pathname).toEqual('/admin/products');
   });
+
+  test('should show 5 validation messages when just clicking submit', async () => {
+    
+    render(
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Router history={history}>
+          <Form />
+        </Router>
+      </BrowserRouter>
+    );
+    
+    const submitButton = screen.getByRole('button', { name: /salvar/i });
+
+    userEvent.click(submitButton);
+
+    await waitFor(() => {
+        
+        const messages = screen.getAllByText('Campo Obrigatório');
+        expect(messages).toHaveLength(5);
+
+    })
+
+  });
+
 });

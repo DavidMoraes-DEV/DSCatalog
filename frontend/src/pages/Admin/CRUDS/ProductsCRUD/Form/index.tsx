@@ -120,7 +120,7 @@ const Form = () => {
                 />
                 {errors.categories && (
                   <div className="invalid-feedback d-block">
-                    * Campo Obrigatório!
+                    Campo Obrigatório
                   </div>
                 )}
               </div>
@@ -151,7 +151,7 @@ const Form = () => {
               <div className="margin-botton-30">
                 <input
                   {...register('imgUrl', {
-                    required: '* Campo Obrigatório',
+                    required: 'Campo Obrigatório',
                     pattern: {
                       value: /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm,
                       message: 'Deve ser uma URL válida',
