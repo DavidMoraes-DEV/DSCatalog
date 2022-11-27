@@ -9,26 +9,51 @@ desenvolvimento de um catálogo de produtos. Disponibiliza uma área administrat
 alterar e remover os recursos com a aplicação do controle de acesso pelo perfil do usuário cadastrado no
 sistema.
 
-####  Modelo Conceitual
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+##  Modelo Conceitual
+<img align="center" alt="Modelo Conceitual DS Catalog" width="100%" src="https://raw.githubusercontent.com/DavidMoraes-DEV/assetsReadme/main/dscatalog/modelo-conceitual.png" />
 
 ## Layout
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+<img align="center" alt="Layouts DS Catalog" width="100%" src="https://raw.githubusercontent.com/DavidMoraes-DEV/assetsReadme/main/dscatalog/telas-ds-catalog.png" />
 
-####  Design Completo:
+##  Design Completo:
+
 [![npm](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/file/1n0aifcfatWv9ozp16XCrq/DSCatalog-Bootcamp)
 
-
-
 ## Stack utilizada
-
-**Front-end:** Typescript, React, React Router, React Hook, React Hook Form, React Select, React Paginate, React Toastify, Axios, JWT Decode, NodeJS, QS, Jest.
-
-**Back-end:** Java, Spring Boot, Spring Data JPA, Spring Security, Maven, Oauth2, JWT, Jakarta ou Beans Validation, JUnit5
-
-**Database:** MySQL, H2 Database (Profile: test), Postresql (Profile: dev, prod)
-
-
+  
+### **Front-end:** 
+<div>
+<img align="center" alt="David-HTML5" height="30" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+<img align="center" alt="David-CSS" height="30" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+<img align="center" alt="David-TS" height="30" src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
+<img align="center" alt="David-NodeJS" height="30" src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" />
+<img align="center" alt="David-React" height="30" src="https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+<img align="center" alt="David-React-Router" height="30" src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white" />
+<img align="center" alt="David-React-Components" height="30" src="https://img.shields.io/badge/React_Hook_/_Hook_Form_/_Select_/_Paginate_/_Toastify-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+<img align="center" alt="David-Axios" height="30" src="https://img.shields.io/badge/Axios-00000F?style=for-the-badge" />
+<img align="center" alt="David-JWT-Decoce" height="30" src="https://img.shields.io/badge/JWT_Decode-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white" />
+<img align="center" alt="David-Jest" height="30" src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white" />
+<img align="center" alt="David-Netlify" height="30" src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" />
+</div>
+  
+### **Back-end:**
+<div>
+<img align="center" alt="David-JAVA" height="30" src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white" />
+<img align="center" alt="David-SpringBoot" height="30" src="https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot" />
+<img align="center" alt="David-Spring-Data-JPA" height="30" src="https://img.shields.io/badge/Spring_Data_JPA-59666C?style=for-the-badge&logo=Hibernate&logoColor=white" />
+<img align="center" alt="David-Spring-Security" height="30" src="https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=Spring-Security&logoColor=white" />
+<img align="center" alt="David-Maven" height="30" src="https://img.shields.io/badge/apache_maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white" />
+<img align="center" alt="David-Oauth2" height="30" src="https://img.shields.io/badge/OAuth2-2875E3?style=for-the-badge&logo=jsDelivr&logoColor=white" />
+<img align="center" alt="David-JWT" height="30" src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white" />
+<img align="center" alt="David-Jakarta" height="30" src="https://img.shields.io/badge/Jakarta_Bean_Validation-6DB33F?style=for-the-badge" />
+<img align="center" alt="David-JUnit5" height="30" src="https://img.shields.io/badge/Junit5-25A162?style=for-the-badge&logo=junit5&logoColor=white" />
+<img align="center" alt="David-MYSQL" height="30" src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white" />
+<img align="center" alt="David-H2-Database" height="30" src="https://img.shields.io/badge/H2 Database-27338e?style=for-the-badge&logo=Databricks&logoColor=white" />
+<img align="center" alt="David-POSTGREES" height="30" src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" />
+<img align="center" alt="David-Heroku" height="30" src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white" />
+</div>
+  
+  
 ## Projeto Online
 
 [![npm](https://img.shields.io/badge/Abrir_Projeto-000000?style=for-the-badge&logo=SoundCloud&logoColor=white)](https://dm-developer-ds-catalog.netlify.app)
