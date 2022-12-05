@@ -53,7 +53,7 @@ const ProductFilter = ({ onSubmitFilter } : Props) => {
             {...register('name')}
             type="text"
             className="form-control"
-            placeholder="Nome do Produto"
+            placeholder="Pesquisar Produto"
             name="name"
           />
           <button className="product-filter-search-icon">
