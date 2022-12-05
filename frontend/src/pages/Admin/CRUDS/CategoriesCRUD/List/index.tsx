@@ -7,7 +7,7 @@ const List = () => {
   return (
     <div className="category-crud-container">
       <div className="category-crud-bar-container">
-        <Link to="/admin/category/create">
+        <Link to="/admin/categories/create">
           <button className="btn btn-primary text-white btn-crud-add">
             ADICIONAR
           </button>

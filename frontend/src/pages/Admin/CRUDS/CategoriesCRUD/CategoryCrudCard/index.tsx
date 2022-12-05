@@ -6,7 +6,7 @@ const CategoryCrudCard = () => {
     <div className="base-card category-crud-card">
       <h6>Livros</h6>
       <div className="category-crud-card-buttons-container">
-        <Link to={'/admin/categorys/1'}>
+        <Link to={'/admin/categories/1'}>
           <button className="btn btn-outline-secondary category-crud-card-button">
             EDITAR
           </button>
