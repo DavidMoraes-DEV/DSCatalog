@@ -186,14 +186,14 @@ const Form = () => {
             </div>
           </div>
           <div className="product-crud-buttons-container">
+          <button className="btn btn-primary product-crud-button text-white">
+              SALVAR
+            </button>
             <button
               className="btn btn-outline-danger product-crud-button"
               onClick={handleCancel}
             >
               CANCELAR
-            </button>
-            <button className="btn btn-primary product-crud-button text-white">
-              SALVAR
             </button>
           </div>
         </form>

@@ -44,6 +44,7 @@ const List = () => {
     };
 
     requestBackend(config).then((response) => {
+      console.log(config)
       setPage(response.data);
     });
   }, [controlComponentsData]);
