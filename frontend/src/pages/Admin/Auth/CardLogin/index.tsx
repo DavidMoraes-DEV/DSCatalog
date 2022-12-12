@@ -41,9 +41,7 @@ const CardLogin = () => {
       })
       .catch((error) => {
         setHasError(true);
-        console.log('ERRO', error);
       });
-    console.log(credentialsDTO);
   };
 
   return (

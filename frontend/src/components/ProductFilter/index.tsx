@@ -5,6 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
 import { useEffect, useState } from 'react';
 import { requestBackend } from 'util/requests';
+import { AxiosRequestConfig } from 'axios';
 
 export type ProductFilterData = {
   name: string;
@@ -17,7 +18,7 @@ type Props = {
 
 const ProductFilter = ({ onSubmitFilter } : Props) => {
   const [selectCategories, setSelectCategories] = useState<Category[]>([]);
-
+  const [totalCategories, setTotalCategories] = useState(null);
   const { register, handleSubmit, setValue, getValues, control } = useForm<ProductFilterData>();
 
   const onSubmit = (formData: ProductFilterData) => {
@@ -40,10 +41,19 @@ const ProductFilter = ({ onSubmitFilter } : Props) => {
   }
 
   useEffect(() => {
-    requestBackend({ url: '/categories' }).then((response) => {
+    const config: AxiosRequestConfig = {
+      method: 'GET',
+      url: '/categories',
+      params: {
+        size: totalCategories,
+      },
+    };
+
+    requestBackend(config).then((response) => {
       setSelectCategories(response.data.content);
+      setTotalCategories(response.data.totalElements)
     });
-  }, []);
+  }, [totalCategories]);
 
   return (
     <div className="base-card product-filter-container">
@@ -71,7 +81,7 @@ const ProductFilter = ({ onSubmitFilter } : Props) => {
                   options={selectCategories}
                   isClearable
                   classNamePrefix="product-filter-select"
-                  placeholder="Categoria"
+                  placeholder="Filtrar por Categoria"
                   onChange={value => handleChangeCategory(value as Category)}
                   getOptionLabel={(category: Category) => category.name}
                   getOptionValue={(category: Category) => String(category.id)}

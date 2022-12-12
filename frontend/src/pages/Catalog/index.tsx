@@ -28,7 +28,6 @@ const Catalog = () => {
       requestBackend(params)
         .then((response) => {
           setPage(response.data);
-          console.log(page);
         })
         .finally(() => {
           setIsLoading(false);
