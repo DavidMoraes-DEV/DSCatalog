@@ -9,7 +9,15 @@
 .catalog-title-container h1 {
     font-size: 0.9em;
     letter-spacing: -0.015em;
-    color: #236238;
+    color: #263238;
+}
+
+.catalog-grid-container {
+    height: 100%;
+}
+
+.catalog-item-container {
+    padding-bottom: 30px;
 }
 
 @media (min-width: 576px) {

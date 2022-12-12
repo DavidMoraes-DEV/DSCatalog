@@ -45,12 +45,12 @@ const Catalog = () => {
         <h1>Catálogo de produtos</h1>
       </div>
 
-      <div className="row">
+      <div className="row catalog-grid-container">
         {isLoading ? <CardLoader /> : (
           page?.content.map((product) => {
           return (
-            <div className="col-sm-6 col-md-4 col-xl-3" key={product.id}>
-              <Link to={'/products/1'}>
+            <div className="col-sm-6 col-md-4 col-xl-3 catalog-item-container" key={product.id}>
+              <Link to={`/products/${product.id}`}>
                 <ProductCard product={product} />
               </Link>
             </div>

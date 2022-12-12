@@ -12,6 +12,10 @@
     margin-bottom: 20px;
 }
 
+.product-crud-item-container {
+    padding-bottom: 30px;
+}
+
 @media (min-width: 576px) {
     
 }
