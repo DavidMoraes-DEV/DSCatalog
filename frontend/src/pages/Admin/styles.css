@@ -4,7 +4,13 @@
 }
 
 .admin-content-container {
-    padding: 30px;
+    padding: 0 20px 20px;
+}
+
+@media (min-width:768px) {
+    .admin-content-container {
+        padding: 0 40px 40px;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -14,5 +20,6 @@
 
     .admin-content-container {
         flex: 1;
+        padding: 40px;
     }
 }
