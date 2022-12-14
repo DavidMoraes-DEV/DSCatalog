@@ -44,9 +44,9 @@ public class UserService implements UserDetailsService {
 	private RoleRepository roleRepository;
 	
 	@Transactional(readOnly = true)
-	public Page<UserDTO> findAllPaged(Pageable pageable) {
+	public Page<UserDTO> findAllPaged(String firstName, Pageable pageable) {
 		
-		Page<User> page = repository.findAll(pageable);
+		Page<User> page = repository.findAllFirstName(firstName, pageable);
 		
 		return page.map(x -> new UserDTO(x));
 	}
@@ -76,6 +76,7 @@ public class UserService implements UserDetailsService {
 		try {
 			User entity = repository.getOne(id); 
 			copyDtoToEntity(dto, entity);
+			entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 			
 			entity = repository.save(entity);
 			return new UserDTO(entity);
