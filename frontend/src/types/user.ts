@@ -6,6 +6,5 @@ export type User = {
     lastName: string,
     email: string,
     password?: string,
-    confirmPassword?: string,
     roles: Role[],
 }

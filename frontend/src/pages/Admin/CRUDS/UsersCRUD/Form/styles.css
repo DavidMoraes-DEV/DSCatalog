@@ -14,8 +14,44 @@
   margin-bottom: 30px;
 }
 
-.user-crud-input, .user-crud-input-email {
+.user-crud-input,
+.user-crud-input-email {
   margin-bottom: 30px;
+}
+
+.user-crud-input-password-container {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  font-size: 1em;
+  letter-spacing: -0.015em;
+  color: #263238;
+  height: 40px;
+  border: 1px solid #ced4da;
+  margin: -2px;
+  padding: 4px;
+}
+
+.user-crud-input-password-container input::placeholder {
+  color: #9e9e9e;
+}
+
+.user-crud-input-password {
+  border: none;
+  border-radius: 1px 0 0 1px;
+  height: 99%;
+}
+
+.user-crud-reveal-password-icon {
+  width: auto;
+  padding: 0 5px 0 7px;
+  border-left: 2px solid #E1E1E1;
+}
+
+.user-crud-reveal-password-icon button {
+  background: transparent;
+  padding: 0;
+  border: none;
 }
 
 .user-crud-buttons-container {
@@ -45,7 +81,7 @@
 }
 
 .user-crud-select__placeholder {
-  color: #9E9E9E !important;
+  color: #9e9e9e !important;
 }
 
 .user-crud-select__indicator-separator {
@@ -53,6 +89,10 @@
 }
 
 @media (min-width: 576px) {
+  .user-crud-input-password-container {
+    height: 50px;
+  }
+
   .user-crud-buttons-container {
     justify-content: flex-end;
   }
@@ -62,7 +102,7 @@
   }
 }
 
-@media(min-width: 768px) {
+@media (min-width: 768px) {
   .user-crud-form-card {
     padding: 40px;
   }
@@ -87,7 +127,6 @@
   .user-crud-input:first-child {
     margin-right: 30px;
   }
-
 }
 
 @media (min-width: 1200px) {
