@@ -11,7 +11,11 @@ type Props = {
 
 const CategoryCrudCard = ({ category, onDelete }: Props) => {
   const handleDelete = (categoryId: number) => {
-    if (!window.confirm('Tem certeza que seja Excluir esse produto?')) {
+    if (
+      !window.confirm(
+        'Tem certeza que deseja Excluir essa categoria? Se a categoria já estiver vinculada a algum produto deverá excluir esses produtos primeiro.'
+      )
+    ) {
       return;
     }
 

@@ -8,9 +8,7 @@ import { AuthContext } from 'AuthContext';
 import { getTokenData, isAuthenticated } from 'util/auth';
 import { removeAuthData } from 'util/storage';
 
-
 const Navbar = () => {
-
   const { authContextData, setAuthContextData } = useContext(AuthContext);
 
   useEffect(() => {
@@ -33,7 +31,7 @@ const Navbar = () => {
       authenticated: false,
     });
     history.replace('/');
-  }
+  };
 
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-primary main-nav">
@@ -74,18 +72,20 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className='nav-login-logout'>
+        <div className="nav-login-logout">
           {authContextData.authenticated ? (
-              <>
-              <span className='nav-username'>{authContextData.tokenData?.user_name}</span>
-              <a href="#logout" onClick={handleLogoutClick}>LOGOUT</a>
-              </>
-            ) : (
-              <Link to='/admin/auth'>LOGIN</Link>
-            )}
-            
+            <>
+              <span className="nav-username">
+                {authContextData.tokenData?.user_name}
+              </span>
+              <a href="#logout" onClick={handleLogoutClick}>
+                LOGOUT
+              </a>
+            </>
+          ) : (
+            <Link to="/admin/auth">LOGIN</Link>
+          )}
         </div>
-
       </div>
     </nav>
   );

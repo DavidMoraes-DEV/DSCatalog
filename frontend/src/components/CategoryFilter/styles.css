@@ -98,7 +98,7 @@
 }
 
 @media (min-width: 992px) {
-    .btn-category-filter-word {
-        display: unset;
-    }
+  .btn-category-filter-word {
+    display: unset;
+  }
 }

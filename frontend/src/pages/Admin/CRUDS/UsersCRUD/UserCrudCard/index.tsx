@@ -28,7 +28,7 @@ const userCrudCard = ({ user, onDelete }: Props) => {
 
   return (
     <div className="base-card user-crud-card">
-      <div className='user-crud-card-content'>
+      <div className="user-crud-card-content">
         <h6>{`${user.firstName} ${user.lastName}`}</h6>
         <p>{user.email}</p>
       </div>

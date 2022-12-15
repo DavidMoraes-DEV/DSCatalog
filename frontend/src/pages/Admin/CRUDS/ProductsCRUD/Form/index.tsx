@@ -40,7 +40,7 @@ const Form = () => {
 
     requestBackend(config).then((response) => {
       setSelectCategories(response.data.content);
-      setTotalCategories(response.data.totalElements)
+      setTotalCategories(response.data.totalElements);
     });
   }, [totalCategories]);
 
@@ -71,12 +71,14 @@ const Form = () => {
       withCredentials: true,
     };
 
-    requestBackend(config).then(() => {
-      toast.info('Produto Cadastrado com Sucesso');
-      history.push('/admin/products');
-    }).catch(() => {
-      toast.error('Erro ao Cadastrar Produto');
-    });
+    requestBackend(config)
+      .then(() => {
+        toast.info('Produto Cadastrado com Sucesso');
+        history.push('/admin/products');
+      })
+      .catch(() => {
+        toast.error('Erro ao Cadastrar Produto');
+      });
   };
 
   const handleCancel = () => {
@@ -197,7 +199,7 @@ const Form = () => {
             </div>
           </div>
           <div className="product-crud-buttons-container">
-          <button className="btn btn-primary product-crud-button text-white">
+            <button className="btn btn-primary product-crud-button text-white">
               SALVAR
             </button>
             <button

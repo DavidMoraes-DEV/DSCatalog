@@ -98,7 +98,7 @@
 }
 
 @media (min-width: 992px) {
-    .btn-user-filter-word {
-        display: unset;
-    }
+  .btn-user-filter-word {
+    display: unset;
+  }
 }

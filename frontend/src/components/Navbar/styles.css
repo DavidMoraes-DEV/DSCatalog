@@ -1,64 +1,65 @@
 .main-nav {
-    padding-left: 40px;
-    min-height: 70px;
+  padding-left: 40px;
+  min-height: 70px;
 }
 
-.nav-logo-text,.nav-logo-text:hover {
-    color: #fff;
+.nav-logo-text,
+.nav-logo-text:hover {
+  color: #fff;
 }
 
 .main-menu {
-    display: flex;
-    font-size: 18px;
-    width: 380px;
-    justify-content: space-between;
+  display: flex;
+  font-size: 18px;
+  width: 380px;
+  justify-content: space-between;
 }
 
 .main-menu a {
-    color: rgba(255, 225, 255, 0.5);
+  color: rgba(255, 225, 255, 0.5);
 }
 
 .main-menu a:hover {
-    color: #fff;
+  color: #fff;
 }
 
 .main-menu a.active {
-    color:#fff;
-    font-weight: 700;
+  color: #fff;
+  font-weight: 700;
 }
 
 .nav-login-logout {
-    display: none;
+  display: none;
 }
 
 .nav-username {
-    display: none;
+  display: none;
 }
 
 @media (max-width: 319px) {
-    .main-nav {
-        padding: 10px 0;
-    }
-    .nav-logo-text h4 {
-        font-size: 0.9em;
-    }
+  .main-nav {
+    padding: 10px 0;
+  }
+  .nav-logo-text h4 {
+    font-size: 0.9em;
+  }
 }
 
 @media (min-width: 768px) {
-    .nav-login-logout {
-        display: unset;
-        color:#fff;
-        margin-right: 15px;
-    }
+  .nav-login-logout {
+    display: unset;
+    color: #fff;
+    margin-right: 15px;
+  }
 }
 
 @media (min-width: 992px) {
-    .nav-login-logout {
-        margin-right: 40px;
-    }
+  .nav-login-logout {
+    margin-right: 40px;
+  }
 
-    .nav-username {
-        display: unset;
-        margin-right: 20px;
-    }
+  .nav-username {
+    display: unset;
+    margin-right: 20px;
+  }
 }

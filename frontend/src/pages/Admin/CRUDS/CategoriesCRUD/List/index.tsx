@@ -76,7 +76,7 @@ const List = () => {
   }, [getCategory]);
 
   return (
-    <div className='category-crud-container'>
+    <div className="category-crud-container">
       <div className="category-crud-content">
         <div className="category-crud-bar-container">
           <Link to="/admin/categories/create">

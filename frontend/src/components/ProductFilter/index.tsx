@@ -13,13 +13,14 @@ export type ProductFilterData = {
 };
 
 type Props = {
-    onSubmitFilter : (data: ProductFilterData) => void;
-}
+  onSubmitFilter: (data: ProductFilterData) => void;
+};
 
-const ProductFilter = ({ onSubmitFilter } : Props) => {
+const ProductFilter = ({ onSubmitFilter }: Props) => {
   const [selectCategories, setSelectCategories] = useState<Category[]>([]);
   const [totalCategories, setTotalCategories] = useState(null);
-  const { register, handleSubmit, setValue, getValues, control } = useForm<ProductFilterData>();
+  const { register, handleSubmit, setValue, getValues, control } =
+    useForm<ProductFilterData>();
 
   const onSubmit = (formData: ProductFilterData) => {
     onSubmitFilter(formData);
@@ -32,13 +33,13 @@ const ProductFilter = ({ onSubmitFilter } : Props) => {
 
   const handleChangeCategory = (value: Category) => {
     setValue('category', value);
-    const obj : ProductFilterData = {
-        name: getValues('name'),
-        category: getValues('category')
-    }
-    
+    const obj: ProductFilterData = {
+      name: getValues('name'),
+      category: getValues('category'),
+    };
+
     onSubmitFilter(obj);
-  }
+  };
 
   useEffect(() => {
     const config: AxiosRequestConfig = {
@@ -51,7 +52,7 @@ const ProductFilter = ({ onSubmitFilter } : Props) => {
 
     requestBackend(config).then((response) => {
       setSelectCategories(response.data.content);
-      setTotalCategories(response.data.totalElements)
+      setTotalCategories(response.data.totalElements);
     });
   }, [totalCategories]);
 
@@ -82,7 +83,7 @@ const ProductFilter = ({ onSubmitFilter } : Props) => {
                   isClearable
                   classNamePrefix="product-filter-select"
                   placeholder="Filtrar por Categoria"
-                  onChange={value => handleChangeCategory(value as Category)}
+                  onChange={(value) => handleChangeCategory(value as Category)}
                   getOptionLabel={(category: Category) => category.name}
                   getOptionValue={(category: Category) => String(category.id)}
                 />

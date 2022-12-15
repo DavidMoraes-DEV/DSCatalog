@@ -24,7 +24,10 @@ const List = () => {
     });
 
   const handlePageChange = (pageNumber: number) => {
-    setControlComponentsData({ activePage: pageNumber, filterData: controlComponentsData.filterData });
+    setControlComponentsData({
+      activePage: pageNumber,
+      filterData: controlComponentsData.filterData,
+    });
   };
 
   const handleSubmitFilter = (data: ProductFilterData) => {
@@ -64,7 +67,10 @@ const List = () => {
       </div>
       <div className="row">
         {page?.content.map((product) => (
-          <div className="col-sm-6 col-md-12 product-crud-item-container" key={product.id}>
+          <div
+            className="col-sm-6 col-md-12 product-crud-item-container"
+            key={product.id}
+          >
             <ProductCrudCard product={product} onDelete={getProducts} />
           </div>
         ))}

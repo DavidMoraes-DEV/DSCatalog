@@ -63,22 +63,25 @@ const Form = () => {
     <div className="category-crud-container">
       <div className="base-card category-crud-form-card">
         <h1 className="category-crud-form-title">DADOS DA CATEGORIA</h1>
-        <form className="category-crud-form-container" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="category-crud-form-container"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="category-crud-input-container">
-                <input
-                  {...register('name', {
-                    required: 'Campo Obrigatório',
-                  })}
-                  type="text"
-                  className={`form-control base-input ${
-                    errors.name ? 'is-invalid' : ''
-                  }`}
-                  placeholder="Nome da Categoria"
-                  name="name"
-                />
-                <div className="invalid-feedback d-block">
-                  {errors.name?.message}
-                </div>
+            <input
+              {...register('name', {
+                required: 'Campo Obrigatório',
+              })}
+              type="text"
+              className={`form-control base-input ${
+                errors.name ? 'is-invalid' : ''
+              }`}
+              placeholder="Nome da Categoria"
+              name="name"
+            />
+            <div className="invalid-feedback d-block">
+              {errors.name?.message}
+            </div>
           </div>
           <div className="category-crud-buttons-container">
             <button className="btn btn-primary category-crud-button text-white">

@@ -98,7 +98,7 @@
 }
 
 @media (min-width: 992px) {
-    .btn-product-filter-word {
-        display: unset;
-    }
+  .btn-product-filter-word {
+    display: unset;
+  }
 }

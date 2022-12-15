@@ -61,7 +61,7 @@ const List = () => {
       withCredentials: true,
       params: {
         page: controlComponentsData.activePage,
-        size: 4,
+        size: 3,
         firstName: controlComponentsData.filterData.textInput,
         sort: sortUser,
       },
@@ -77,7 +77,7 @@ const List = () => {
   }, [getuser]);
 
   return (
-    <div className='user-crud-container'>
+    <div className="user-crud-container">
       <div className="user-crud-content">
         <div className="user-crud-bar-container">
           <Link to="/admin/Users/create">

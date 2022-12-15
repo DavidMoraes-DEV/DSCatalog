@@ -39,7 +39,7 @@
 }
 
 .category-crud-select__placeholder {
-  color: #9E9E9E !important;
+  color: #9e9e9e !important;
 }
 
 .category-crud-select__indicator-separator {
@@ -57,7 +57,7 @@
   }
 }
 
-@media(min-width: 768px) {
+@media (min-width: 768px) {
   .category-crud-form-container {
     display: flex;
     justify-content: space-between;

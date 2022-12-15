@@ -1,12 +1,12 @@
 .catalog-loader-container {
-    display: flex;
-    width: 100%;
-    margin: 0;
-    padding: 10px 0;
-    align-items: center;
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 10px 0;
+  align-items: center;
 }
 
 .catalog-loader {
-    display: flex;
-    padding: 10px;
+  display: flex;
+  padding: 10px;
 }

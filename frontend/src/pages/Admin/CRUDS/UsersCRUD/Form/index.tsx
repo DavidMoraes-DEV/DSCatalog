@@ -95,7 +95,9 @@ const Form = () => {
     console.log(getValue(confPassword));
     console.log(getValue(newPassword));
     if (getValue(confPassword) !== '') {
-      !((getValue(confPassword) as String) === (getValue(newPassword) as String))
+      !(
+        (getValue(confPassword) as String) === (getValue(newPassword) as String)
+      )
         ? setError('password', {
             type: 'validate',
             message: 'As senhas não correspondem',
@@ -164,7 +166,7 @@ const Form = () => {
                 {errors.email?.message}
               </div>
             </div>
-            
+
             <div className="user-crud-inputs-content">
               <div className="user-crud-input">
                 <div className="user-crud-input-password-container">

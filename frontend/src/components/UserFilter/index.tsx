@@ -24,13 +24,15 @@ const UserFilter = ({ onSubmitFilter }: Props) => {
     useForm<UserFilterData>();
 
   useEffect(() => {
-    requestBackend({ url: '/users', withCredentials: true }).then((response) => {
-      setSelectedUsers(response.data.content);
-    });
+    requestBackend({ url: '/users', withCredentials: true }).then(
+      (response) => {
+        setSelectedUsers(response.data.content);
+      }
+    );
   }, []);
 
   const onSubmit = (formData: UserFilterData) => {
-    console.log(formData)
+    console.log(formData);
     const selectedUser = selectedUsers.find(
       (user) => user.firstName === formData.textInput
     );
