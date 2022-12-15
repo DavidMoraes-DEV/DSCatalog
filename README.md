@@ -10,10 +10,10 @@ alterar e remover os recursos com a aplicação do controle de acesso pelo perfi
 sistema.
 
 ####  Modelo Conceitual
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://raw.githubusercontent.com/DavidMoraes-DEV/ProjectsAssets/main/dscatalog/modelo-conceitual.png)
 
 ## Layout
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://raw.githubusercontent.com/DavidMoraes-DEV/ProjectsAssets/main/dscatalog/telas-ds-catalog.png)
 
 ####  Design Completo:
 [![npm](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/file/1n0aifcfatWv9ozp16XCrq/DSCatalog-Bootcamp)
@@ -46,7 +46,7 @@ david@dmdeveloper.com
 ```
 ##### **Senha:**
 ```bash
-123456
+david123
 ```
 
 ### Usuário com Perfil Admin:
@@ -58,7 +58,7 @@ admin@dmdeveloper.com
 ```
 ##### **Senha:**
 ```bash
-123456
+admin123
 ```
 ## Rodando Localmente
 
@@ -77,7 +77,7 @@ cd DSCatalog
 ### Rodar a API:
 Importe o projeto pelo Spring Tools Suite:
 
-```bash
+```
 File -> import -> Maven -> Existing Maven Projects -> Next -> Browse...
 -> Localizar e abrir a pasta DSCatalog 
 -> Abrir a pasta backend -> Selecionar pasta
@@ -85,7 +85,7 @@ File -> import -> Maven -> Existing Maven Projects -> Next -> Browse...
 ```
 Rodar o projeto no Spring Tools Suite:
 
-```bash
+```
 Botão direito do mouse na pasta raiz do projeto -> Run As... -> Spring Boot App
 ```
 
