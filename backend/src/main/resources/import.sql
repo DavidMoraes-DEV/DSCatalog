@@ -1,5 +1,5 @@
-INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('David', 'Moraes de Oliveira', 'david@dmdeveloper.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
-INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('DM', 'Developer', 'admin@dmdeveloper.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_user (first_name, last_name, email, password, created_At) VALUES ('David', 'Moraes de Oliveira', 'david@dmdeveloper.com', '$2a$10$OR9.wTGPmt9uSEEgMwKdMO0MlQb.ga/jt.XM/5QJ0XKACaFlEYNKa', NOW());
+INSERT INTO tb_user (first_name, last_name, email, password, created_At) VALUES ('Admin', 'Developer', 'admin@dmdeveloper.com', '$2a$10$EtxNDJiOOVgT88lnBO6B5Oi83otMUyT75FTFuEAp5XG/5YGym.spK', NOW());
 
 INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
 INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');

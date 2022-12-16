@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 import './styles.css';
 
 type Props = {
-  forcePage?: number,
+  forcePage?: number;
   pageCount: number;
   range: number;
   onChange?: (pageNumber: number) => void;
@@ -13,7 +13,7 @@ type Props = {
 const Pagination = ({ forcePage, pageCount, range, onChange }: Props) => {
   return (
     <ReactPaginate
-    forcePage={forcePage}
+      forcePage={forcePage}
       pageCount={pageCount}
       pageRangeDisplayed={range}
       marginPagesDisplayed={1}
@@ -22,6 +22,19 @@ const Pagination = ({ forcePage, pageCount, range, onChange }: Props) => {
       breakClassName="pagination-item"
       previousClassName="arrow-previous"
       nextClassName="arrow-next"
+<<<<<<< HEAD
+=======
+      previousLabel={
+        <div className="pagination-arrow-container">
+          <ArrowIcon />
+        </div>
+      }
+      nextLabel={
+        <div className="pagination-arrow-container">
+          <ArrowIcon />
+        </div>
+      }
+>>>>>>> e3b24920c27b9a027a81f2bf02c72e29a08f8b7b
       activeLinkClassName="pagination-link-active"
       disabledClassName="arrow-inactive"
       

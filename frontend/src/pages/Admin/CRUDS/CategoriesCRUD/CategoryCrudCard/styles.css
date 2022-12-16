@@ -1,0 +1,58 @@
+.category-crud-card {
+  margin-bottom: 30px;
+  text-align: left;
+  padding: 20px;
+}
+
+.category-crud-card h6 {
+  font-size: 18px;
+  color: #263238;
+  padding-bottom: 20px;
+}
+
+.category-crud-card-buttons-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.category-crud-card-button {
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: -0.015em;
+  border-radius: 10px;
+  width: 100px;
+  height: 40px;
+}
+
+@media (min-width: 768px) {
+  .category-crud-card {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .category-crud-card h6 {
+    padding-bottom: 0;
+  }
+
+  .category-crud-card-buttons-container {
+    width: 320px;
+    padding: 0;
+    justify-content: space-between;
+  }
+
+  .category-crud-card-button {
+    width: 140px;
+  }
+}
+
+@media (min-width: 992px) {
+  .category-crud-card-buttons-container {
+    width: 500px;
+  }
+
+  .category-crud-card-button {
+    width: 220px;
+  }
+}

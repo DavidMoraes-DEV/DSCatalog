@@ -1,0 +1,76 @@
+.category-crud-form-card {
+  padding: 20px;
+}
+
+.category-crud-form-title {
+  font-weight: bold;
+  font-size: 22px;
+  letter-spacing: -0.015em;
+  color: #263238;
+  margin-bottom: 30px;
+}
+
+.margin-botton-30 {
+  margin-bottom: 30px;
+}
+
+.category-crud-input-container {
+  margin-bottom: 30px;
+}
+
+.category-crud-buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.category-crud-button {
+  width: 110px;
+  height: 50px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.category-crud-select__control {
+  border-radius: 5px;
+  font-size: 1em;
+  letter-spacing: -0.015em;
+  color: #263238;
+  height: 50px;
+}
+
+.category-crud-select__placeholder {
+  color: #9e9e9e !important;
+}
+
+.category-crud-select__indicator-separator {
+  display: none;
+}
+
+@media (min-width: 576px) {
+  .category-crud-buttons-container {
+    justify-content: flex-end;
+  }
+
+  .category-crud-button {
+    width: 150px;
+    margin-left: 30px;
+  }
+}
+
+@media (min-width: 768px) {
+  .category-crud-form-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .category-crud-input-container {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .category-crud-button {
+    width: 170px;
+  }
+}

@@ -1,148 +1,147 @@
 .home-container {
-    padding: 10px;
-    font-size: 20px;
-    text-align: center;
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
 }
 
 .home-card {
-    display: flex;
-    flex-direction: column-reverse;
-    border-radius: 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  border-radius: 20px;
 }
 
 .home-content-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 10px 60px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 10px 60px 10px;
 }
 
 .home-content-container h1 {
-    width: 260px;
-    font-size: 1em;
-    margin-bottom: 15px;
+  width: 260px;
+  font-size: 1em;
+  margin-bottom: 15px;
 }
 
 .home-content-container p {
-    width: 260px;
-    color: #9e9e9e;
-    font-size: 0.6em;
-    margin-bottom: 30px;
+  width: 260px;
+  color: #9e9e9e;
+  font-size: 0.6em;
+  margin-bottom: 30px;
 }
 
 .home-image-container {
-    padding: 50px 15px;
+  padding: 50px 15px;
 }
 
 .home-image-container svg {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 @media (min-width: 576px) {
-    .home-container {
-        padding: 15px;
-        font-size: 40px;
-    } 
+  .home-container {
+    padding: 15px;
+    font-size: 40px;
+  }
 
-    .home-content-container h1 {
-        width: 506px;
-        margin-bottom: 20px;
-    }
-    
-    .home-content-container p {
-        width: 506px;
-        margin-bottom: 20px;
-    }
+  .home-content-container h1 {
+    width: 506px;
+    margin-bottom: 20px;
+  }
 
-    .home-image-container svg {
-        width: 506px;
-    }
+  .home-content-container p {
+    width: 506px;
+    margin-bottom: 20px;
+  }
+
+  .home-image-container svg {
+    width: 506px;
+  }
 }
 
 @media (min-width: 768px) {
-    .home-image-container {
-        padding: 100px 20px;
-    }
+  .home-image-container {
+    padding: 100px 20px;
+  }
 
-    .home-content-container {
-        padding: 20px 20px 100px 20px;
-    }
+  .home-content-container {
+    padding: 20px 20px 100px 20px;
+  }
 }
 
 @media (min-width: 992px) {
-    .home-container {
-        font-size: 55px;
-        padding: 40px;
-    }
+  .home-container {
+    font-size: 55px;
+    padding: 40px;
+  }
 
-    .home-image-container {
-        padding: 125px 20px;
-    }
+  .home-image-container {
+    padding: 125px 20px;
+  }
 
-    .home-content-container {
-        padding: 20px 20px 150px 20px;
-    }
+  .home-content-container {
+    padding: 20px 20px 150px 20px;
+  }
 
-    .home-content-container h1 {
-        width: 700px;
-        margin-bottom: 26px;
-    }
+  .home-content-container h1 {
+    width: 700px;
+    margin-bottom: 26px;
+  }
 
-    .home-content-container p {
-        width: 700px;
-        margin-bottom: 47px;
-    }
+  .home-content-container p {
+    width: 700px;
+    margin-bottom: 47px;
+  }
 }
 
 @media (min-width: 1200px) {
-    .home-card{
-        flex-direction: row;
-        justify-content: space-around;
-        height: 80vh;
-    }
+  .home-card {
+    flex-direction: row;
+    justify-content: space-around;
+    height: 80vh;
+  }
 
-    .home-content-container {
-        width: 60%;
-        height: 80vh;
-        padding: 80px 7%;
-        text-align: left;
-        align-content: space-between;
-        flex-flow: wrap;
-    }
+  .home-content-container {
+    width: 60%;
+    height: 80vh;
+    padding: 80px 7%;
+    text-align: left;
+    align-content: space-between;
+    flex-flow: wrap;
+  }
 
-    .home-image-container {
-        width: 40%;
-        padding: 20px 30px 20px 0px;
-        display: flex;
-    }
+  .home-image-container {
+    width: 40%;
+    padding: 20px 30px 20px 0px;
+    display: flex;
+  }
 
-    .home-image-container svg {
-        width: 100%;
-    }
+  .home-image-container svg {
+    width: 100%;
+  }
 
-    .home-content-container h1 {
-        width: 600px;
-        font-size: 0.95em;
-        margin-bottom: 35px;
-    }
+  .home-content-container h1 {
+    width: 600px;
+    font-size: 0.95em;
+    margin-bottom: 35px;
+  }
 
-    .home-content-container p {
-        width: 600px;
-        font-size: 0.5em;
-        margin-bottom: 47px;
-    }
+  .home-content-container p {
+    width: 600px;
+    font-size: 0.5em;
+    margin-bottom: 47px;
+  }
 }
 
 @media (min-width: 1400px) {
+  .home-content-container h1 {
+    width: 600px;
+    font-size: 1em;
+  }
 
-    .home-content-container h1 {
-        width: 600px;
-        font-size: 1em;
-    }
-
-    .home-content-container p {
-        width: 600px;
-        font-size: 0.5em;
-    }
+  .home-content-container p {
+    width: 600px;
+    font-size: 0.5em;
+  }
 }

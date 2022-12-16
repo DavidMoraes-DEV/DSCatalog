@@ -19,6 +19,7 @@ const Form = () => {
   const isEditing = productId !== 'create';
   const history = useHistory();
   const [selectCategories, setSelectCategories] = useState<Category[]>([]);
+  const [totalCategories, setTotalCategories] = useState(null);
 
   const {
     register,
@@ -29,10 +30,19 @@ const Form = () => {
   } = useForm<Product>();
 
   useEffect(() => {
-    requestBackend({ url: '/categories' }).then((response) => {
+    const config: AxiosRequestConfig = {
+      method: 'GET',
+      url: '/categories',
+      params: {
+        size: totalCategories,
+      },
+    };
+
+    requestBackend(config).then((response) => {
       setSelectCategories(response.data.content);
+      setTotalCategories(response.data.totalElements);
     });
-  }, []);
+  }, [totalCategories]);
 
   useEffect(() => {
     if (isEditing) {
@@ -61,12 +71,14 @@ const Form = () => {
       withCredentials: true,
     };
 
-    requestBackend(config).then(() => {
-      toast.info('Produto Cadastrado com Sucesso');
-      history.push('/admin/products');
-    }).catch(() => {
-      toast.error('Erro ao Cadastrar Produto');
-    });
+    requestBackend(config)
+      .then(() => {
+        toast.info('Produto Cadastrado com Sucesso');
+        history.push('/admin/products');
+      })
+      .catch(() => {
+        toast.error('Erro ao Cadastrar Produto');
+      });
   };
 
   const handleCancel = () => {
@@ -110,6 +122,7 @@ const Form = () => {
                       options={selectCategories}
                       classNamePrefix="product-crud-select"
                       isMulti
+                      placeholder="Categorias"
                       getOptionLabel={(category: Category) => category.name}
                       getOptionValue={(category: Category) =>
                         String(category.id)
@@ -192,14 +205,14 @@ const Form = () => {
             </div>
           </div>
           <div className="product-crud-buttons-container">
+            <button className="btn btn-primary product-crud-button text-white">
+              SALVAR
+            </button>
             <button
               className="btn btn-outline-danger product-crud-button"
               onClick={handleCancel}
             >
               CANCELAR
-            </button>
-            <button className="btn btn-primary product-crud-button text-white">
-              SALVAR
             </button>
           </div>
         </form>

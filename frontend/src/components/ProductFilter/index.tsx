@@ -5,6 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
 import { useEffect, useState } from 'react';
 import { requestBackend } from 'util/requests';
+import { AxiosRequestConfig } from 'axios';
 
 export type ProductFilterData = {
   name: string;
@@ -12,13 +13,14 @@ export type ProductFilterData = {
 };
 
 type Props = {
-    onSubmitFilter : (data: ProductFilterData) => void;
-}
+  onSubmitFilter: (data: ProductFilterData) => void;
+};
 
-const ProductFilter = ({ onSubmitFilter } : Props) => {
+const ProductFilter = ({ onSubmitFilter }: Props) => {
   const [selectCategories, setSelectCategories] = useState<Category[]>([]);
-
-  const { register, handleSubmit, setValue, getValues, control } = useForm<ProductFilterData>();
+  const [totalCategories, setTotalCategories] = useState(null);
+  const { register, handleSubmit, setValue, getValues, control } =
+    useForm<ProductFilterData>();
 
   const onSubmit = (formData: ProductFilterData) => {
     onSubmitFilter(formData);
@@ -31,19 +33,28 @@ const ProductFilter = ({ onSubmitFilter } : Props) => {
 
   const handleChangeCategory = (value: Category) => {
     setValue('category', value);
-    const obj : ProductFilterData = {
-        name: getValues('name'),
-        category: getValues('category')
-    }
-    
+    const obj: ProductFilterData = {
+      name: getValues('name'),
+      category: getValues('category'),
+    };
+
     onSubmitFilter(obj);
-  }
+  };
 
   useEffect(() => {
-    requestBackend({ url: '/categories' }).then((response) => {
+    const config: AxiosRequestConfig = {
+      method: 'GET',
+      url: '/categories',
+      params: {
+        size: totalCategories,
+      },
+    };
+
+    requestBackend(config).then((response) => {
       setSelectCategories(response.data.content);
+      setTotalCategories(response.data.totalElements);
     });
-  }, []);
+  }, [totalCategories]);
 
   return (
     <div className="base-card product-filter-container">
@@ -53,7 +64,7 @@ const ProductFilter = ({ onSubmitFilter } : Props) => {
             {...register('name')}
             type="text"
             className="form-control"
-            placeholder="Nome do Produto"
+            placeholder="Pesquisar Produto"
             name="name"
           />
           <button className="product-filter-search-icon">
@@ -71,8 +82,8 @@ const ProductFilter = ({ onSubmitFilter } : Props) => {
                   options={selectCategories}
                   isClearable
                   classNamePrefix="product-filter-select"
-                  placeholder="Categoria"
-                  onChange={value => handleChangeCategory(value as Category)}
+                  placeholder="Filtrar por Categoria"
+                  onChange={(value) => handleChangeCategory(value as Category)}
                   getOptionLabel={(category: Category) => category.name}
                   getOptionValue={(category: Category) => String(category.id)}
                 />

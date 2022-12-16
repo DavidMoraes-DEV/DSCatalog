@@ -40,6 +40,7 @@
 }
 
 .product-filter-select__control {
+  margin-bottom: 16px;
   font-size: 1em;
   letter-spacing: -0.015em;
   color: #263238;
@@ -62,6 +63,10 @@
 
   .btn-product-filter-clear {
     width: auto;
+  }
+
+  .product-filter-select__control {
+    margin-bottom: 0;
   }
 }
 
@@ -93,7 +98,7 @@
 }
 
 @media (min-width: 992px) {
-    .btn-product-filter-word {
-        display: unset;
-    }
+  .btn-product-filter-word {
+    display: unset;
+  }
 }

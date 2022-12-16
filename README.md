@@ -9,11 +9,22 @@ desenvolvimento de um catálogo de produtos. Disponibiliza uma área administrat
 alterar e remover os recursos com a aplicação do controle de acesso pelo perfil do usuário cadastrado no
 sistema.
 
+<<<<<<< HEAD
 ##  Modelo Conceitual
 <img align="center" alt="Modelo Conceitual DS Catalog" width="100%" src="https://raw.githubusercontent.com/DavidMoraes-DEV/assetsReadme/main/dscatalog/modelo-conceitual.png" />
 
 ## Layout
 <img align="center" alt="Layouts DS Catalog" width="100%" src="https://raw.githubusercontent.com/DavidMoraes-DEV/assetsReadme/main/dscatalog/telas-ds-catalog.png" />
+=======
+####  Modelo Conceitual
+![App Screenshot](https://raw.githubusercontent.com/DavidMoraes-DEV/ProjectsAssets/main/dscatalog/modelo-conceitual.png)
+
+## Layout
+![App Screenshot](https://raw.githubusercontent.com/DavidMoraes-DEV/ProjectsAssets/main/dscatalog/telas-ds-catalog.png)
+
+####  Design Completo:
+[![npm](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/file/1n0aifcfatWv9ozp16XCrq/DSCatalog-Bootcamp)
+>>>>>>> e3b24920c27b9a027a81f2bf02c72e29a08f8b7b
 
 ##  Design Completo:
 
@@ -71,7 +82,7 @@ david@dmdeveloper.com
 ```
 ##### **Senha:**
 ```bash
-123456
+david123
 ```
 
 ### Usuário com Perfil Admin:
@@ -83,7 +94,7 @@ admin@dmdeveloper.com
 ```
 ##### **Senha:**
 ```bash
-123456
+admin123
 ```
 ## Rodando Localmente
 
@@ -102,7 +113,7 @@ cd DSCatalog
 ### Rodar a API:
 Importe o projeto pelo Spring Tools Suite:
 
-```bash
+```
 File -> import -> Maven -> Existing Maven Projects -> Next -> Browse...
 -> Localizar e abrir a pasta DSCatalog 
 -> Abrir a pasta backend -> Selecionar pasta
@@ -110,7 +121,7 @@ File -> import -> Maven -> Existing Maven Projects -> Next -> Browse...
 ```
 Rodar o projeto no Spring Tools Suite:
 
-```bash
+```
 Botão direito do mouse na pasta raiz do projeto -> Run As... -> Spring Boot App
 ```
 

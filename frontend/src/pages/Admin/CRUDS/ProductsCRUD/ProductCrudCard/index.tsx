@@ -13,7 +13,6 @@ type Props = {
 
 const ProductCrudCard = ({ product, onDelete }: Props) => {
   const handleDelete = (productId: number) => {
-
     if (!window.confirm('Tem certeza que seja Excluir esse produto?')) {
       return;
     }
@@ -31,18 +30,20 @@ const ProductCrudCard = ({ product, onDelete }: Props) => {
 
   return (
     <div className="base-card product-crud-card">
-      <div className="product-crud-card-top-container">
-        <img src={product.imgUrl} alt={product.name} />
-      </div>
-      <div className="product-crud-card-description">
-        <div className="product-crud-card-button-container">
-          <h6>{product.name}</h6>
-          <ProductPrice price={product.price} />
+      <div className="product-crud-card-content">
+        <div className="product-crud-card-top-container">
+          <img src={product.imgUrl} alt={product.name} />
         </div>
-        <div className="product-crud-categories-container">
-          {product.categories.map((category) => (
-            <CategoryBadge name={category.name} key={category.id} />
-          ))}
+        <div className="product-crud-card-description">
+          <div className="product-crud-card-button-container">
+            <h6>{product.name}</h6>
+            <ProductPrice price={product.price} />
+          </div>
+          <div className="product-crud-categories-container">
+            {product.categories.map((category) => (
+              <CategoryBadge name={category.name} key={category.id} />
+            ))}
+          </div>
         </div>
       </div>
       <div className="product-crud-card-buttons-container">
