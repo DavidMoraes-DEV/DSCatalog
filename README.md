@@ -1,38 +1,38 @@
 
 # **DS Catalog**
+
 [![npm](https://img.shields.io/npm/l/react)](https://github.com/DavidMoraes-DEV/DSCatalog/blob/master/LICENCE)
 
 ## Descrição
-DS Catalog é uma aplicação full stack e mobile desenvolvida no curso BootCamp Spring React da DevSuperior.
-O objetivo do projeto foi apresentar e praticar os conceitos e as ferramentas relacionadas com o
-desenvolvimento de um catálogo de produtos. Disponibiliza uma área administrativa completa para adicionar,
-alterar e remover os recursos com a aplicação do controle de acesso pelo perfil do usuário cadastrado no
-sistema.
 
-<<<<<<< HEAD
+DS Catalog é uma aplicação full stack e mobile desenvolvido no curso **_BootCamp Spring React_** da
+<a href="https://devsuperior.com.br/cursos"><img align="center" height="16" alt="DevSuperior" src="https://devsuperior.com.br/_next/static/images/logo-white-10059e26f600604a7b5bd7782ed7550c.svg"></a>.
+
+O projeto foi desenvolvido durante diversos módulos do curso com o objetivo de apresentar e praticar os conceitos e as ferramentas relacionadas com o desenvolvimento web com a construção de um catálogo de produtos. Disponibiliza uma área administrativa completa para adicionar, alterar e remover os recursos, Contém um controle de acesso dos recursos pelo tipo de perfil do usuário cadastrado no sistema.
+
+Possui também algumas personalizações pessoais que apliquei depois de terminar o curso, para continuar praticando e aperfeiçoando os conhecimentos adiquiridos.
+<br><br>
+
 ##  Modelo Conceitual
+
 <img align="center" alt="Modelo Conceitual DS Catalog" width="100%" src="https://raw.githubusercontent.com/DavidMoraes-DEV/assetsReadme/main/dscatalog/modelo-conceitual.png" />
+<br>
 
 ## Layout
+
 <img align="center" alt="Layouts DS Catalog" width="100%" src="https://raw.githubusercontent.com/DavidMoraes-DEV/assetsReadme/main/dscatalog/telas-ds-catalog.png" />
-=======
-####  Modelo Conceitual
-![App Screenshot](https://raw.githubusercontent.com/DavidMoraes-DEV/ProjectsAssets/main/dscatalog/modelo-conceitual.png)
 
-## Layout
-![App Screenshot](https://raw.githubusercontent.com/DavidMoraes-DEV/ProjectsAssets/main/dscatalog/telas-ds-catalog.png)
-
-####  Design Completo:
-[![npm](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/file/1n0aifcfatWv9ozp16XCrq/DSCatalog-Bootcamp)
->>>>>>> e3b24920c27b9a027a81f2bf02c72e29a08f8b7b
+<br>
 
 ##  Design Completo:
 
-[![npm](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/file/1n0aifcfatWv9ozp16XCrq/DSCatalog-Bootcamp)
+<a href="https://www.figma.com/file/1n0aifcfatWv9ozp16XCrq/DSCatalog-Bootcamp"><img align="center" height="45" alt="DSSales" src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"></a>
+
+<br>
 
 ## Stack utilizada
   
-### **Front-end:** 
+### **_Front-end:_** 
 <div>
 <img align="center" alt="David-HTML5" height="30" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
 <img align="center" alt="David-CSS" height="30" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
@@ -47,7 +47,7 @@ sistema.
 <img align="center" alt="David-Netlify" height="30" src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" />
 </div>
   
-### **Back-end:**
+### **_Back-end:_**
 <div>
 <img align="center" alt="David-JAVA" height="30" src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white" />
 <img align="center" alt="David-SpringBoot" height="30" src="https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot" />
@@ -63,39 +63,43 @@ sistema.
 <img align="center" alt="David-POSTGREES" height="30" src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" />
 <img align="center" alt="David-Heroku" height="30" src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white" />
 </div>
-  
-  
+<br><br>
+ 
 ## Projeto Online
 
-[![npm](https://img.shields.io/badge/Abrir_Projeto-000000?style=for-the-badge&logo=SoundCloud&logoColor=white)](https://dm-developer-ds-catalog.netlify.app)
+<a href="https://dm-developer-ds-catalog.netlify.app"><img align="center" height="45" alt="DSMeta" src="https://img.shields.io/badge/Abrir_Projeto-27338e?style=for-the-badge&logo=SoundCloud&logoColor=white"></a>
+
+<br>
 
 Para acessar a área administrativa dos produtos e usuários contidos no projeto
 é necessário efetuar o login no sistema. Clicando em **ADMIN** ou **LOGIN** na
 barra de navegação.
 
-### Usuário com Perfil Operador:
+### _Usuário com Perfil Operador:_
 Acesso liberado apenas para a área administrativa dos recursos: Produtos, Categorias.
 
-##### **Usuário:**
+##### **_Usuário:_**
 ```bash
 david@dmdeveloper.com
 ```
-##### **Senha:**
+##### **_Senha:_**
 ```bash
 david123
 ```
 
-### Usuário com Perfil Admin:
+### _Usuário com Perfil Admin:_
 Acesso liberado para a área administrativa de todos os recursos: Produtos, Categorias e os Usuários.
 
-##### **Usuário:**
+##### **_Usuário:_**
 ```bash
 admin@dmdeveloper.com
 ```
-##### **Senha:**
+##### **_Senha:_**
 ```bash
 admin123
 ```
+<br>
+
 ## Rodando Localmente
 
 Clone o projeto:
@@ -110,7 +114,7 @@ Entre no diretório do projeto:
 cd DSCatalog
 ```
 
-### Rodar a API:
+### _Rodar a API:_
 Importe o projeto pelo Spring Tools Suite:
 
 ```
@@ -125,13 +129,13 @@ Rodar o projeto no Spring Tools Suite:
 Botão direito do mouse na pasta raiz do projeto -> Run As... -> Spring Boot App
 ```
 
-### Rodar o frontend:
+### _Rodar o frontend:_
 No diretório do projeto navegue até a pasta do frontend:
 
 ```bash
 cd frontend/
 ```
-Opcional: Abrir o projeto no VS Code pelo terminal:
+**_Opcional:_** Abrir o projeto no VS Code pelo terminal:
 ```bash
 code .
 ```
@@ -143,6 +147,25 @@ Rodar o projeto pelo terminal do git:
 ```bash
 yarn start
 ```
+<br>
 
-### Teste as requisições da API local no Postman:
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/13224574-a4d50c74-3992-48cf-82ee-a9949fc6c0a8?action=collection%2Ffork&collection-url=entityId%3D13224574-a4d50c74-3992-48cf-82ee-a9949fc6c0a8%26entityType%3Dcollection%26workspaceId%3D12264e20-d846-461a-9328-4f3aea62b603#?env%5Bdscatalog-bootcamp-local%5D=W3sia2V5IjoiaG9zdCIsInZhbHVlIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6ImNsaWVudC1pZCIsInZhbHVlIjoiZHNjYXRhbG9nIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6ImNsaWVudC1zZWNyZXQiLCJ2YWx1ZSI6ImRzY2F0YWxvZzEyMzQiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoidXNlcm5hbWUiLCJ2YWx1ZSI6ImRhdmlkQGRtZGV2ZWxvcGVyLmNvbSIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJwYXNzd29yZCIsInZhbHVlIjoiMTIzNDU2IiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6InRva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9XQ==)
+## Teste as requisições da API no Postman:
+
+<a href="https://app.getpostman.com/run-collection/13224574-a3856d6b-9fb2-4932-9499-4db274de3851?action=collection%2Ffork&collection-url=entityId%3D13224574-a3856d6b-9fb2-4932-9499-4db274de3851%26entityType%3Dcollection%26workspaceId%3D12264e20-d846-461a-9328-4f3aea62b603#?env%5Bdscatalog-local-github%5D=W3sia2V5IjoiaG9zdCIsInZhbHVlIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6ImNsaWVudC1pZCIsInZhbHVlIjoiZHNjYXRhbG9nIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6ImNsaWVudC1zZWNyZXQiLCJ2YWx1ZSI6ImRzY2F0YWxvZzEyMzQiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoidXNlcm5hbWUiLCJ2YWx1ZSI6ImFkbWluQGRtZGV2ZWxvcGVyLmNvbSIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJwYXNzd29yZCIsInZhbHVlIjoiYWRtaW4xMjMiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoidG9rZW4iLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In1d"><img align="center" height="45" alt="DSMeta" src="https://run.pstmn.io/button.svg"></a>
+<br><br>
+
+## Rodando os Testes:
+
+**_Backend:_**
+Rodar os testes no Spring Tools Suite:
+```bash
+Pasta raiz / botão direito / Run As... / JUnitTest
+```
+
+**_Frontend:_**
+Rodar os testes no terminal:
+```bash
+cd frontend/
+yarn test
+```
+
