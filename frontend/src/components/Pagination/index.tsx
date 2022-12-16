@@ -23,7 +23,10 @@ const Pagination = ({ forcePage, pageCount, range, onChange }: Props) => {
       previousClassName="arrow-previous"
       nextClassName="arrow-next"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> e3b24920c27b9a027a81f2bf02c72e29a08f8b7b
       previousLabel={
         <div className="pagination-arrow-container">
           <ArrowIcon />
@@ -34,6 +37,9 @@ const Pagination = ({ forcePage, pageCount, range, onChange }: Props) => {
           <ArrowIcon />
         </div>
       }
+<<<<<<< HEAD
+>>>>>>> e3b24920c27b9a027a81f2bf02c72e29a08f8b7b
+=======
 >>>>>>> e3b24920c27b9a027a81f2bf02c72e29a08f8b7b
       activeLinkClassName="pagination-link-active"
       disabledClassName="arrow-inactive"
