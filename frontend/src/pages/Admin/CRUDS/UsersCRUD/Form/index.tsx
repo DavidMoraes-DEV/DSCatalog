@@ -6,7 +6,7 @@ import { User } from 'types/user';
 import { requestBackend } from 'util/requests';
 import { toast } from 'react-toastify';
 import Select from 'react-select';
-import { Role } from 'types/role';
+import { RoleData } from 'types/role';
 import { getValue } from '@testing-library/user-event/dist/utils';
 import { ReactComponent as RevealPass } from '../../../../../assets/images/reveal-password-icon.svg';
 import { ReactComponent as HiddenPass } from '../../../../../assets/images/hidden-password-icon.svg';
@@ -20,7 +20,7 @@ const Form = () => {
   const { userId } = useParams<UrlParams>();
   const isEditing = userId !== 'create';
   const history = useHistory();
-  const [selectRoles, setSelectRoles] = useState<Role[]>([]);
+  const [selectRoles, setSelectRoles] = useState<RoleData[]>([]);
   const [inputTypePass, setInputTypePass] = useState(false);
 
   const {
@@ -239,13 +239,13 @@ const Form = () => {
                     classNamePrefix="product-crud-select"
                     isMulti
                     placeholder="Perfil do Usuário..."
-                    getOptionLabel={(role: Role) =>
+                    getOptionLabel={(role: RoleData) =>
                       role.authority
                         .split('_', 2)[1]
                         .replace('OPERATOR', 'OPERADOR')
                         .replace('ADMIN', 'ADMINISTRADOR')
                     }
-                    getOptionValue={(role: Role) => String(role.id)}
+                    getOptionValue={(role: RoleData) => String(role.id)}
                   />
                 )}
               />

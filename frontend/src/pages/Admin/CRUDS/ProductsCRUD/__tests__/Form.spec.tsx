@@ -25,7 +25,6 @@ describe('Product Form Create tests', () => {
   });
 
   test('should show toast and redirect when submit form correctly', async () => {
-    
     /*Renderiza o formulário e da acesso ao ToastContainer*/
     render(
       <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -49,7 +48,10 @@ describe('Product Form Create tests', () => {
     userEvent.type(nameInput, 'Computador');
     await selectEvent.select(categoriesInput, ['Eletrônicos', 'Computadores']);
     userEvent.type(priceInput, '5000.12');
-    userEvent.type(imgUrlInput, 'https://raw.githubusercontent.com/DavidMoraes-DEV/imagem-computador-test.png');
+    userEvent.type(
+      imgUrlInput,
+      'https://raw.githubusercontent.com/DavidMoraes-DEV/imagem-computador-test.png'
+    );
     userEvent.type(descriptionInput, 'Teste de Descrição do Produto');
 
     /*Simula o click do Botão SALVAR*/
@@ -66,7 +68,6 @@ describe('Product Form Create tests', () => {
   });
 
   test('should show 5 validation messages when just clicking submit', async () => {
-    
     render(
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Router history={history}>
@@ -74,20 +75,18 @@ describe('Product Form Create tests', () => {
         </Router>
       </BrowserRouter>
     );
-    
+
     const submitButton = screen.getByRole('button', { name: /salvar/i });
 
     userEvent.click(submitButton);
 
     await waitFor(() => {
-        const messages = screen.getAllByText('Campo Obrigatório');
-        expect(messages).toHaveLength(5);
-    })
-
+      const messages = screen.getAllByText('Campo Obrigatório');
+      expect(messages).toHaveLength(5);
+    });
   });
 
   test('should clear validation maessages when filling out the form correctly', async () => {
-    
     render(
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Router history={history}>
@@ -95,15 +94,15 @@ describe('Product Form Create tests', () => {
         </Router>
       </BrowserRouter>
     );
-    
+
     const submitButton = screen.getByRole('button', { name: /salvar/i });
 
     userEvent.click(submitButton);
 
     await waitFor(() => {
-        const messages = screen.getAllByText('Campo Obrigatório');
-        expect(messages).toHaveLength(5);
-    })
+      const messages = screen.getAllByText('Campo Obrigatório');
+      expect(messages).toHaveLength(5);
+    });
 
     const nameInput = screen.getByTestId('name');
     const categoriesInput = screen.getByLabelText('Categorias');
@@ -114,63 +113,75 @@ describe('Product Form Create tests', () => {
     userEvent.type(nameInput, 'Computador');
     await selectEvent.select(categoriesInput, ['Eletrônicos', 'Computadores']);
     userEvent.type(priceInput, '5000.12');
-    userEvent.type(imgUrlInput, 'https://raw.githubusercontent.com/DavidMoraes-DEV/imagem-computador-test.png');
+    userEvent.type(
+      imgUrlInput,
+      'https://raw.githubusercontent.com/DavidMoraes-DEV/imagem-computador-test.png'
+    );
     userEvent.type(descriptionInput, 'Teste de Descrição do Produto');
 
     await waitFor(() => {
-        const messages = screen.queryAllByText('Campo Obrigatório');
-        expect(messages).toHaveLength(0);
+      const messages = screen.queryAllByText('Campo Obrigatório');
+      expect(messages).toHaveLength(0);
     });
-
   });
-
 });
 
 describe('Product form update tests', () => {
-    beforeEach(() => {
-        (useParams as jest.Mock).mockReturnValue({
-          productId: '2',
-        });
+  beforeEach(() => {
+    (useParams as jest.Mock).mockReturnValue({
+      productId: '2',
+    });
+  });
+
+  test('should show toast and redirect when submit form correctly', async () => {
+    render(
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Router history={history}>
+          <ToastContainer />
+          <Form />
+        </Router>
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      const nameInput = screen.getByTestId('name');
+
+      expect(nameInput).toHaveValue(productResponse.name);
     });
 
-    test('should show toast and redirect when submit form correctly', async () => {
-    
-        render(
-          <BrowserRouter basename={process.env.PUBLIC_URL}>
-            <Router history={history}>
-              <ToastContainer />
-              <Form />
-            </Router>
-          </BrowserRouter>
-        );
-    
-        await waitFor(() => {
-            const nameInput = screen.getByTestId('name');
-            const priceInput = screen.getByTestId('price');
-            const imgUrlInput = screen.getByTestId('imgUrl');
-            const descriptionInput = screen.getByTestId('description');
-    
-            const formElement = screen.getByTestId("form");
+    await waitFor(() => {
+      const priceInput = screen.getByTestId('price');
 
-            expect(nameInput).toHaveValue(productResponse.name);
-            expect(priceInput).toHaveValue(String(productResponse.price));
-            expect(imgUrlInput).toHaveValue(productResponse.imgUrl);
-            expect(descriptionInput).toHaveValue(productResponse.description);
-
-            const ids = productResponse.categories.map(catg => String(catg.id));
-            expect(formElement).toHaveFormValues({categories: ids});
-        });
-
-        const submitButton = screen.getByRole('button', { name: /salvar/i });
-        userEvent.click(submitButton);
-
-        await waitFor(() => {
-        const toastElement = screen.getByText('Produto Cadastrado com Sucesso');
-        expect(toastElement).toBeInTheDocument();
-        });
-
-        expect(history.location.pathname).toEqual('/admin/products');
-            
+      expect(priceInput).toHaveValue(String(productResponse.price));
     });
 
+    await waitFor(() => {
+      const imgUrlInput = screen.getByTestId('imgUrl');
+
+      expect(imgUrlInput).toHaveValue(productResponse.imgUrl);
+    });
+
+    await waitFor(() => {
+      const descriptionInput = screen.getByTestId('description');
+
+      expect(descriptionInput).toHaveValue(productResponse.description);
+    });
+
+    await waitFor(() => {
+      const formElement = screen.getByTestId('form');
+      const ids = productResponse.categories.map((catg) => String(catg.id));
+
+      expect(formElement).toHaveFormValues({ categories: ids });
+    });
+
+    const submitButton = screen.getByRole('button', { name: /salvar/i });
+    userEvent.click(submitButton);
+
+    await waitFor(() => {
+      const toastElement = screen.getByText('Produto Cadastrado com Sucesso');
+      expect(toastElement).toBeInTheDocument();
+    });
+
+    expect(history.location.pathname).toEqual('/admin/products');
+  });
 });

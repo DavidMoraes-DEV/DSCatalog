@@ -14,7 +14,7 @@ describe('hasAnyRoles tests', () => {
         jest.spyOn(TokenModule, 'getTokenData').mockReturnValue({
             exp: 0,
             user_name: '',
-            authorities: ['ROLE_ADMIN', 'ROLE_OPERATION'],
+            authorities: ['ROLE_ADMIN', 'ROLE_OPERATOR'],
         })
 
         const result = hasAnyRoles(['ROLE_ADMIN']);
@@ -26,7 +26,7 @@ describe('hasAnyRoles tests', () => {
         jest.spyOn(TokenModule, 'getTokenData').mockReturnValue({
             exp: 0,
             user_name: '',
-            authorities: ['ROLE_OPERATION'],
+            authorities: ['ROLE_OPERATOR'],
         })
 
         const result = hasAnyRoles(['ROLE_ADMIN']);

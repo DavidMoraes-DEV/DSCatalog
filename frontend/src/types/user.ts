@@ -1,4 +1,4 @@
-import { Role } from "./role"
+import { RoleData } from "./role"
 
 export type User = {
     id: number,
@@ -6,5 +6,5 @@ export type User = {
     lastName: string,
     email: string,
     password?: string,
-    roles: Role[],
+    roles: RoleData[],
 }
