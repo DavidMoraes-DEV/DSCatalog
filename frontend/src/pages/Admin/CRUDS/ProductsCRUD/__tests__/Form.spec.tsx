@@ -1,5 +1,4 @@
-import matchers from '@testing-library/jest-dom/matchers';
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter, Router, useParams } from 'react-router-dom';
 import selectEvent from 'react-select-event';
@@ -46,7 +45,9 @@ describe('Product Form Create tests', () => {
     const submitButton = screen.getByRole('button', { name: /salvar/i });
 
     userEvent.type(nameInput, 'Computador');
-    await selectEvent.select(categoriesInput, ['Eletrônicos', 'Computadores']);
+    await waitFor(() =>
+      selectEvent.select(categoriesInput, ['Eletrônicos', 'Computadores'])
+    );
     userEvent.type(priceInput, '5000.12');
     userEvent.type(
       imgUrlInput,
@@ -55,7 +56,7 @@ describe('Product Form Create tests', () => {
     userEvent.type(descriptionInput, 'Teste de Descrição do Produto');
 
     /*Simula o click do Botão SALVAR*/
-    userEvent.click(submitButton);
+    fireEvent.click(submitButton);
 
     /*Verifica se o Toast está presente*/
     await waitFor(() => {
@@ -78,7 +79,7 @@ describe('Product Form Create tests', () => {
 
     const submitButton = screen.getByRole('button', { name: /salvar/i });
 
-    userEvent.click(submitButton);
+    fireEvent.click(submitButton);
 
     await waitFor(() => {
       const messages = screen.getAllByText('Campo Obrigatório');
@@ -97,7 +98,7 @@ describe('Product Form Create tests', () => {
 
     const submitButton = screen.getByRole('button', { name: /salvar/i });
 
-    userEvent.click(submitButton);
+    fireEvent.click(submitButton);
 
     await waitFor(() => {
       const messages = screen.getAllByText('Campo Obrigatório');
@@ -111,7 +112,9 @@ describe('Product Form Create tests', () => {
     const descriptionInput = screen.getByTestId('description');
 
     userEvent.type(nameInput, 'Computador');
-    await selectEvent.select(categoriesInput, ['Eletrônicos', 'Computadores']);
+    await waitFor(() =>
+      selectEvent.select(categoriesInput, ['Eletrônicos', 'Computadores'])
+    );
     userEvent.type(priceInput, '5000.12');
     userEvent.type(
       imgUrlInput,
@@ -145,37 +148,22 @@ describe('Product form update tests', () => {
 
     await waitFor(() => {
       const nameInput = screen.getByTestId('name');
-
       expect(nameInput).toHaveValue(productResponse.name);
     });
 
-    await waitFor(() => {
-      const priceInput = screen.getByTestId('price');
+    const priceInput = screen.getByTestId('price');
+    const imgUrlInput = screen.getByTestId('imgUrl');
+    const descriptionInput = screen.getByTestId('description');
+    const formElement = screen.getByTestId('form');
+    const ids = productResponse.categories.map((catg) => String(catg.id));
 
-      expect(priceInput).toHaveValue(String(productResponse.price));
-    });
-
-    await waitFor(() => {
-      const imgUrlInput = screen.getByTestId('imgUrl');
-
-      expect(imgUrlInput).toHaveValue(productResponse.imgUrl);
-    });
-
-    await waitFor(() => {
-      const descriptionInput = screen.getByTestId('description');
-
-      expect(descriptionInput).toHaveValue(productResponse.description);
-    });
-
-    await waitFor(() => {
-      const formElement = screen.getByTestId('form');
-      const ids = productResponse.categories.map((catg) => String(catg.id));
-
-      expect(formElement).toHaveFormValues({ categories: ids });
-    });
+    expect(priceInput).toHaveValue(String(productResponse.price));
+    expect(imgUrlInput).toHaveValue(productResponse.imgUrl);
+    expect(descriptionInput).toHaveValue(productResponse.description);
+    expect(formElement).toHaveFormValues({ categories: ids });
 
     const submitButton = screen.getByRole('button', { name: /salvar/i });
-    userEvent.click(submitButton);
+    fireEvent.click(submitButton);
 
     await waitFor(() => {
       const toastElement = screen.getByText('Produto Cadastrado com Sucesso');
