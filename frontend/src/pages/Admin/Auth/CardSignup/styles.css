@@ -1,0 +1,130 @@
+.signup-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px;
+  font-size: 16px;
+  height: 100%;
+}
+
+.signup-card-container h1 {
+  margin: 30px 0 10px 0;
+  font-weight: normal;
+  font-size: 1.7em;
+  text-align: center;
+  letter-spacing: -0.015em;
+  color: #263238;
+  text-transform: uppercase;
+}
+
+.signup-card-input-content {
+  margin-bottom: 20px;
+}
+
+.signup-card-input-content input {
+  height: 40px;
+}
+
+.signup-card-input-password {
+  margin-bottom: 20px;
+}
+
+.signup-card-input-password-container {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  font-size: 1em;
+  letter-spacing: -0.015em;
+  color: #263238;
+  height: 40px;
+  border: 1px solid #ced4da;
+  margin: -2px;
+  padding: 4px;
+}
+
+.signup-card-input-password-container input::placeholder {
+  color: #9e9e9e;
+}
+
+.signup-card-input {
+  border: none;
+  border-radius: 1px 0 0 1px;
+  height: 99%;
+}
+
+.signup-card-reveal-password-icon {
+  width: auto;
+  padding: 0 5px 0 7px;
+  border-left: 2px solid #e1e1e1;
+}
+
+.signup-card-reveal-password-icon button {
+  background: transparent;
+  padding: 0;
+  border: none;
+}
+
+.signup-card-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.signup-card-buttons-container button:first-child {
+  margin-right: 15px;
+}
+
+.signup-card-button {
+  width: 100%;
+  max-width: 270px;
+  height: 50px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+@media (max-height: 600px) {
+  .signup-card-container {
+    height: 100%;
+    justify-content: space-evenly;
+  }
+
+  .signup-card-container h1 {
+    margin: 30px 0 20px 0;
+  }
+}
+
+@media (min-width: 576px) {
+  .signup-card-container {
+    padding: 20px 50px;
+    min-height: 100%;
+  }
+
+  .signup-card-container h1 {
+    font-size: 2.2em;
+  }
+
+  .signup-card-buttons-container {
+    justify-content: flex-end;
+  }
+
+  .signup-card-buttons-container button:first-child {
+    margin-right: 30px;
+  }
+}
+
+@media (min-width: 768px) {
+  .signup-card-input-content {
+    width: 100%;
+  }
+
+  .signup-card-input-content:first-child {
+    margin-right: 30px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .signup-card-container {
+    min-height: 100%;
+    height: 100%;
+  }
+}

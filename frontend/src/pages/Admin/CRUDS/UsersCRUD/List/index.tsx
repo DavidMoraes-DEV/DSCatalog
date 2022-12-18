@@ -61,7 +61,7 @@ const List = () => {
       withCredentials: true,
       params: {
         page: controlComponentsData.activePage,
-        size: 3,
+        size: 4,
         firstName: controlComponentsData.filterData.textInput,
         sort: sortUser,
       },

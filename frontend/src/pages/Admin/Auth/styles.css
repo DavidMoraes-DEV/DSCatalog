@@ -12,6 +12,7 @@
 
 .auth-form-container {
   width: 100%;
+  max-height: 600px;
 }
 
 @media (max-height: 600px) {
@@ -39,7 +40,7 @@
 @media (min-width: 1200px) {
   .auth-container {
     height: 90vh;
-    padding: 40px;
+    padding: 30px 40px;
     background-position-x: 60%;
     background-position-y: 65%;
   }
