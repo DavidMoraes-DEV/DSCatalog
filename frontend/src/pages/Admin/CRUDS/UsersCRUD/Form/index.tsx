@@ -58,7 +58,6 @@ const Form = () => {
   }, [isEditing, userId, setValue]);
 
   const onSubmit = (formData: User) => {
-    console.log(formData);
     const data = {
       ...formData,
     };
@@ -92,8 +91,6 @@ const Form = () => {
     const newPassword = document.getElementById('nPassword');
     const confPassword = document.getElementById('cPassword');
 
-    console.log(getValue(confPassword));
-    console.log(getValue(newPassword));
     if (getValue(confPassword) !== '') {
       !(
         (getValue(confPassword) as String) === (getValue(newPassword) as String)

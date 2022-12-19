@@ -32,7 +32,6 @@ const UserFilter = ({ onSubmitFilter }: Props) => {
   }, []);
 
   const onSubmit = (formData: UserFilterData) => {
-    console.log(formData);
     const selectedUser = selectedUsers.find(
       (user) => user.firstName === formData.textInput
     );

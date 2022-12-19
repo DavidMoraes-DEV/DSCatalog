@@ -23,10 +23,9 @@ const CardSignup = () => {
   } = useForm<User>();
 
   const onSubmit = (formData: User) => {
-    console.log(formData);
     const data = {
       ...formData,
-      roles: [{id: 1, role: 'ROLE_OPERATOR'}],
+      roles: [{ id: 1, role: 'ROLE_OPERATOR' }],
     };
 
     const config: AxiosRequestConfig = {
@@ -57,8 +56,6 @@ const CardSignup = () => {
     const newPassword = document.getElementById('nPassword');
     const confPassword = document.getElementById('cPassword');
 
-    console.log(getValue(confPassword));
-    console.log(getValue(newPassword));
     if (getValue(confPassword) !== '') {
       !(
         (getValue(confPassword) as String) === (getValue(newPassword) as String)
