@@ -1,0 +1,90 @@
+.recover-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px;
+  font-size: 16px;
+  height: 100%;
+}
+
+.recover-card-form-container h1 {
+  margin: 60px 0 80px;
+  font-weight: normal;
+  font-size: 1.7em;
+  text-align: center;
+  letter-spacing: -0.015em;
+  color: #263238;
+  text-transform: uppercase;
+}
+
+.recover-card-input-content {
+  margin-bottom: 40px;
+}
+
+.recover-card-input-content input {
+  height: 50px;
+}
+
+.recover-card-buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.recover-card-buttons-container button:first-child {
+  margin-right: 15px;
+}
+
+.recover-card-button {
+  width: 100%;
+  max-width: 270px;
+  height: 50px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+@media (max-height: 600px) {
+  .recover-card-container {
+    height: 100%;
+    justify-content: space-evenly;
+  }
+
+  .recover-card-form-container h1 {
+    margin: 30px 0 20px 0;
+  }
+}
+
+@media (min-width: 576px) {
+  .recover-card-container {
+    padding: 20px 50px;
+    min-height: 100%;
+  }
+
+  .recover-card-form-container h1 {
+    font-size: 2.2em;
+  }
+
+  .recover-card-buttons-container {
+    justify-content: flex-end;
+  }
+
+  .recover-card-buttons-container button:first-child {
+    margin-right: 30px;
+  }
+}
+
+@media (min-width: 768px) {
+  .recover-card-input-content {
+    width: 100%;
+  }
+
+  .recover-card-input-content:first-child {
+    margin-right: 30px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .recover-card-container {
+    min-height: 100%;
+    height: 100%;
+  }
+}
