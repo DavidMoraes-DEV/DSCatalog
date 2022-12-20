@@ -28,6 +28,7 @@
 .recover-card-buttons-container {
   display: flex;
   justify-content: space-between;
+  margin-top: 70px;
 }
 
 .recover-card-buttons-container button:first-child {
