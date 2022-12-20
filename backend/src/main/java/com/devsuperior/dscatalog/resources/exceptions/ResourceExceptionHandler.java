@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.devsuperior.dscatalog.services.exceptions.DataBaseException;
+import com.devsuperior.dscatalog.services.exceptions.InvalidPasswordResetTokenException;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
@@ -62,6 +63,21 @@ public class ResourceExceptionHandler {
 		for( FieldError f : e.getBindingResult().getFieldErrors()) {
 			err.addError(f.getField(), f.getDefaultMessage());
 		}
+		
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(InvalidPasswordResetTokenException.class) 
+	public ResponseEntity<StandardError> invalidToken(InvalidPasswordResetTokenException e, HttpServletRequest request) {
+		
+		HttpStatus status = HttpStatus.FORBIDDEN; 
+		StandardError err = new StandardError();
+		
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Invalid Password Reset Token Exception");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
 		
 		return ResponseEntity.status(status).body(err);
 	}
