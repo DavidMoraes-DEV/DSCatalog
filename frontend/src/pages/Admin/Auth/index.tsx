@@ -2,10 +2,27 @@ import { ReactComponent as AuthImage } from 'assets/images/card-login.svg';
 import { Route, Switch } from 'react-router-dom';
 import CardLogin from './CardLogin';
 import CardSignup from './CardSignup';
-import CardRecover from './CardRecover';
+import CardRecover, { PasswordResetToken } from './CardRecover';
 import './styles.css';
+import CardResetPassword from './CardResetPassword';
+import { useState } from 'react';
+import { savePasswordResetTokenLocalStorage } from 'util/storage';
+
+type ControlPasswordResetToken = {
+  tokenReset: PasswordResetToken;
+};
 
 const Auth = () => {
+  const [controlPasswordResetToken, setControlPasswordResetToken] =
+    useState<ControlPasswordResetToken>({
+      tokenReset: { token: '' },
+    });
+
+  const handlePasswordResetToken = (data: PasswordResetToken) => {
+    setControlPasswordResetToken({ tokenReset: data });
+    savePasswordResetTokenLocalStorage(data);
+  };
+
   return (
     <div className="auth-container">
       <div className="auth-banner-container">
@@ -25,7 +42,12 @@ const Auth = () => {
             <CardSignup />
           </Route>
           <Route path="/admin/auth/recover">
-            <CardRecover />
+            <CardRecover onResetPassword={handlePasswordResetToken} />
+          </Route>
+          <Route path="/admin/auth/reset-password">
+            <CardResetPassword
+              passwordResetToken={controlPasswordResetToken.tokenReset.token}
+            />
           </Route>
         </Switch>
       </div>

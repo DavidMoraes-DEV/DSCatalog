@@ -1,4 +1,7 @@
+import { PasswordResetToken } from "pages/Admin/Auth/CardRecover";
+
 const tokenKey = 'authData';
+const tokenResetPassword = 'token'
 
 type LoginResponse = {
   access_token: string;
@@ -22,4 +25,19 @@ export const getAuthData = () => {
 
 export const removeAuthData = () => {
   localStorage.removeItem(tokenKey);
+};
+
+export const savePasswordResetTokenLocalStorage = (obj: PasswordResetToken) => {
+  localStorage.setItem(tokenResetPassword, JSON.stringify(obj));
+}
+
+export const getPasswordResetTokenLocalStorage = () => {
+  const str = localStorage.getItem(tokenResetPassword) ?? '{}';
+  const obj = JSON.parse(str);
+
+  return obj;
+};
+
+export const removePasswordResetTokenLocalStorage = () => {
+  localStorage.removeItem(tokenResetPassword);
 };
