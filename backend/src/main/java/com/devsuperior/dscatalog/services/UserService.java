@@ -73,6 +73,7 @@ public class UserService implements UserDetailsService {
 	
 	@Transactional
 	public UserDTO update(Long id, UserUpdateDTO dto) {
+		
 		try {
 			User entity = repository.getOne(id); 
 			copyDtoToEntity(dto, entity);
@@ -95,6 +96,33 @@ public class UserService implements UserDetailsService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DataBaseException("Integrity Violation");
 		}
+	}
+	
+	public void updateResetPassword(String token, String email) {
+		
+		User user = repository.findByEmail(email);
+		
+		if (user != null) {
+			user.setPasswordResetToken(token);
+			repository.save(user);
+		} else {
+			throw new ResourceNotFoundException("Could not find any user: " + email);
+		}
+	}
+	
+	public User getPasswordResetToken(String passwordResetToken) {
+		
+		return repository.findByPasswordResetToken(passwordResetToken);
+	}
+	
+	public void updatePassword(User user, String newPassword) {
+		
+		String encodePassword = passwordEncoder.encode(newPassword);
+		
+		user.setPassword(encodePassword);
+		user.setPasswordResetToken(null);
+		
+		repository.save(user);
 	}
 	
 	private void copyDtoToEntity(UserDTO dto, User entity) {
@@ -121,4 +149,5 @@ public class UserService implements UserDetailsService {
 		logger.info("User found: " + username);
 		return user;
 	}
+	
 }

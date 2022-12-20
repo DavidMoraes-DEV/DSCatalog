@@ -39,6 +39,7 @@ public class User implements UserDetails, Serializable {
 	@Column(unique = true)
 	private String email;
 	private String password;
+	private String passwordResetToken;
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant createdAt;
@@ -101,6 +102,14 @@ public class User implements UserDetails, Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getPasswordResetToken() {
+		return passwordResetToken;
+	}
+
+	public void setPasswordResetToken(String passwordResetToken) {
+		this.passwordResetToken = passwordResetToken;
 	}
 
 	public Instant getCreatedAt() {
