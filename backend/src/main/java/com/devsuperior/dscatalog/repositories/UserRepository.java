@@ -16,4 +16,6 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	@Query("SELECT DISTINCT obj FROM User obj WHERE "
 			+ "(LOWER(obj.firstName) LIKE LOWER(CONCAT('%',:firstName,'%'))) ")
 	Page<User> findAllFirstName(String firstName, Pageable pageable);
+
+	public User findByPasswordResetToken(String token);
 }
