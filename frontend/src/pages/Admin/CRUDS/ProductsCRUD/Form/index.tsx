@@ -8,6 +8,7 @@ import { Category } from 'types/category';
 import { Product } from 'types/products';
 import { requestBackend } from 'util/requests';
 import { toast } from 'react-toastify';
+import { ReactComponent as CancelUpImage } from '../../../../../assets/images/cancel-upload-icon.svg';
 import './styles.css';
 
 type UrlParams = {
@@ -111,7 +112,9 @@ const Form = () => {
               </div>
 
               <div className="margin-botton-30">
-                <label htmlFor='categories' className='d-none'>Categorias</label>
+                <label htmlFor="categories" className="d-none">
+                  Categorias
+                </label>
                 <Controller
                   name="categories"
                   rules={{ required: true }}
@@ -161,25 +164,21 @@ const Form = () => {
                 </div>
               </div>
 
-              <div className="margin-botton-30">
-                <input
-                  {...register('imgUrl', {
-                    required: 'Campo Obrigatório',
-                    pattern: {
-                      value: /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm,
-                      message: 'Deve ser uma URL válida',
-                    },
-                  })}
-                  type="text"
-                  className={`form-control base-input ${
-                    errors.name ? 'is-invalid' : ''
-                  }`}
-                  placeholder="URL da imagem do Produto"
-                  name="imgUrl"
-                  data-testid="imgUrl"
-                />
-                <div className="invalid-feedback d-block">
-                  {errors.imgUrl?.message}
+              <div className="margin-botton-20 product-crud-button-add-image">
+                <button className="btn btn-secondary text-white">
+                  ADICIONAR IMAGEM
+                </button>
+                <p>
+                  A imagem deve ser JPG ou PNG e não deve ultrapassar
+                  <b> 5 mb.</b>
+                </p>
+              </div>
+              <div className="product-crud-upload-image-card">
+                <button className="product-crud-cancel-upload">
+                  <CancelUpImage />
+                </button>
+                <div className="product-crud-bar-upload-image">
+                  <div></div>
                 </div>
               </div>
             </div>
