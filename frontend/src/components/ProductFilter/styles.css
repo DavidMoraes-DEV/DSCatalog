@@ -1,6 +1,6 @@
 .product-filter-container {
+  width: 100%;
   padding: 20px;
-  margin-bottom: 20px;
 }
 
 .product-filter-name-container {
@@ -72,8 +72,6 @@
 
 @media (min-width: 768px) {
   .product-filter-container {
-    margin-bottom: 0;
-    margin-left: 20px;
     flex: 1;
     padding: 10px 15px;
   }
