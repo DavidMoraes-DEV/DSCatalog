@@ -1,17 +1,16 @@
-.catalog-container {
-  font-size: 18px;
-}
-
 .catalog-bar-container {
-  margin-bottom: 35px;
-  height: 60px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
 }
 
 .catalog-bar-container h1 {
-  width: auto;
-  margin-right: 30px;
+  width: 100%;
+  margin-bottom:10px;
   font-size: 24px;
   letter-spacing: -0.015em;
   color: #263238;
@@ -23,4 +22,16 @@
 
 .catalog-item-container {
   padding-bottom: 30px;
+}
+
+@media (min-width: 1200px) {
+  .catalog-bar-container {
+    flex-direction: row;
+  }
+
+  .catalog-bar-container h1 {
+    width: max-content;
+    margin-right: 30px;
+    margin-bottom: 0;
+  }
 }
