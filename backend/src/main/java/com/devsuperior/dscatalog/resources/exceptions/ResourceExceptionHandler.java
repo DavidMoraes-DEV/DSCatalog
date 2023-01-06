@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.devsuperior.dscatalog.services.exceptions.DataBaseException;
+import com.devsuperior.dscatalog.services.exceptions.EmailException;
 import com.devsuperior.dscatalog.services.exceptions.InvalidPasswordResetTokenException;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 
@@ -123,6 +124,21 @@ public class ResourceExceptionHandler {
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value()); 
 		err.setError("Bad request");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(EmailException.class) 
+	public ResponseEntity<StandardError> email(EmailException e, HttpServletRequest request) {
+		
+		HttpStatus status = HttpStatus.BAD_REQUEST; 
+		StandardError err = new StandardError();
+		
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value()); 
+		err.setError("Email error");
 		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
 		
